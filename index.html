@@ -379,8 +379,8 @@
 			var ha=document.body.clientHeight-0;
 			var wb=document.documentElement.clientWidth-0;
 			var hb=document.documentElement.clientHeight-0;
-			if(wa>wb){r.push(wa);}else{r.push(wb);}
-			if(ha>hb){r.push(ha);}else{r.push(hb);}
+			if(wa<wb){r.push(wa);}else{r.push(wb);}
+			if(ha<hb){r.push(ha);}else{r.push(hb);}
 			return r;
 		}
 		function _$SetOpacity(ele,val){
