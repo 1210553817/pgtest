@@ -598,6 +598,12 @@
 			opnTbox("青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
 			2000);
 		}	
+		function opnSo(){
+			var fm=new form();
+			fm.target="_blank";
+			fm.action="https://www.so.com";
+			fm.submit();
+		}
 		
     </script>
 </head>
@@ -609,7 +615,7 @@
 	<br style="margin:10px;"/>
 	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="opnSo()" style="margin:10px;">SO</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
 	<a class="btn btn-orange btn-large" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-orange" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-orange btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
@@ -707,6 +713,6 @@
 	</div>
 	<div id="cfmbackLayer" class="cfmbackLayer"></div>
 	
-	<img src="./img/10.jpg" alt="Image" style="max-width:100%;">
+	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
 </body>
 </html>
