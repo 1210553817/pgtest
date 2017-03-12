@@ -391,8 +391,8 @@
 		function _$FadeIn(elem, speed, op) {
 			speed = speed || 20;
 			op = op || 100;
-			elem.style.display = 'block';
 			_$SetOpacity(elem, 0);
+			elem.style.display = 'block';
 			var val = 0;
 			(function() {
 				_$SetOpacity(elem, val);
@@ -546,7 +546,7 @@
 			mctt.style.top="-10000px";
 			//mctt.style.display="none";
 			_$A(mctt,document.body);
-			mctt.style.display="block";
+			//mctt.style.display="block";
 			var mcttw=parseInt(mctt.offsetWidth);
 			var mctth=parseInt(mctt.offsetHeight);
 			mctt.style.left=(pgw/2-(mcttw/2))+"px";
