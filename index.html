@@ -599,9 +599,11 @@
 			2000);
 		}	
 		function opnSo(){
-			var fm=new form();
+			var fm=_$C("form");
 			fm.target="_blank";
+			fm.method = 'post';
 			fm.action="https://www.so.com";
+			_$A(fm,document.body);
 			fm.submit();
 		}
 		
