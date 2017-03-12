@@ -375,12 +375,10 @@
 		//获取可见窗口大小
 		function getClientSize(){
 			var r=new Array();
-			var wa=document.body.clientWidth-0;
-			var ha=document.body.clientHeight-0;
-			var wb=document.documentElement.clientWidth-0;
-			var hb=document.documentElement.clientHeight-0;
-			if(wa<wb){r.push(wa);}else{r.push(wb);}
-			if(ha<hb){r.push(ha);}else{r.push(hb);}
+			var wa=document.documentElement.clientWidth-0;
+			var ha=document.documentElement.clientHeight-0;
+			r.push(wa);
+			r.push(ha);
 			return r;
 		}
 		function _$SetOpacity(ele,val){
@@ -716,5 +714,20 @@
 	<div id="cfmbackLayer" class="cfmbackLayer"></div>
 	
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
+		<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
+		<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
+		<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
+		<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
+		<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
+		<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
+		<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<br/>
 </body>
 </html>
