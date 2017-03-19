@@ -244,15 +244,15 @@
 		font-family:Microsoft Yahei,Heiti,arial,helvetica,sans-serif,SimHei;
 		z-index: 2001;
 		background-color: #fff;
-		border: 1px solid #999;
-		border: 1px solid rgba(0,0,0,0.3);
 		-webkit-border-radius: 6px;
 		-moz-border-radius: 6px;
 		border-radius: 6px;
 		outline: 0;
-		-webkit-box-shadow: 0 0 1px #fff;
-		-moz-box-shadow: 0 0 1px #fff;
-		box-shadow: 0 0 1px #fff;
+		border: 0px solid #999;
+		border: 0px solid rgba(0,0,0,0.3);
+		-webkit-box-shadow: 0 0 0px #fff;
+		-moz-box-shadow: 0 0 0px #fff;
+		box-shadow: 0 0 0px #fff;
 		-webkit-background-clip: padding-box;
 		-moz-background-clip: padding-box;
 		background-clip: padding-box;
@@ -472,8 +472,9 @@
 					if(fun1){
 						window.setTimeout(fun1,10);
 					}
-					mbox.style.display="none";
+					//mbox.style.display="none";
 					clay.style.display="none";
+					_$FadeOut(mbox,5);
 				};
 			}
 			if(!btnText2){
@@ -485,8 +486,9 @@
 					if(fun2){
 						window.setTimeout(fun2,10);
 					}
-					mbox.style.display="none";
+					//mbox.style.display="none";
 					clay.style.display="none";
+					_$FadeOut(mbox,5);
 				};
 			}
 			if(!btnText3){
@@ -498,8 +500,9 @@
 					if(fun3){
 						window.setTimeout(fun3,10);
 					}
-					mbox.style.display="none";
+					//mbox.style.display="none";
 					clay.style.display="none";
+					_$FadeOut(mbox,5);
 				};
 			}
 			mboxclr.onclick=function(){
@@ -507,7 +510,7 @@
 				clay.style.display="none";
 			}
 			mbox.style.width=mboxw+"px";
-			if(headColor)mboxtit.style.backgroundColor=headColor;
+			if(headColor){mboxtit.style.backgroundColor=headColor;mboxclr.style.backgroundColor=headColor;}
 			if(clazza)mbox_btna.className=clazza;
 			if(clazzb)mbox_btnb.className=clazzb;
 			if(clazzc)mbox_btnc.className=clazzc;
@@ -521,9 +524,9 @@
 			clay.style.display="block";
 			var mboxht=parseInt(mbox.offsetHeight);
 			var mboxposy=(pgh/2-(mboxht/2));
-			_$MoveDu(mbox,20,mboxposy-100,mboxposy);
-			//mbox.style.top=(pgh/2-(mboxht/2))+"px";
-			//_$MoveDu(mbox,-20,20,(pgh/2-(mboxht/2))+300,(pgh/2-(mboxht/2)));
+			//_$MoveDu(mbox,10,mboxposy-60,mboxposy);
+			_$FadeIn(mbox,10);
+			mbox.style.top=mboxposy+"px";
 		}
 		
 		function opnTbox(m,prd,afun){
@@ -564,7 +567,7 @@
 			"确定",function(){alert("ok...");},
 			"取消",null,
 			"忽略",null,
-			600,"#6ABCE2","btn btn-blue");
+			600,"#eee","btn btn-blue");
 		}
 		function testCfmBox2(){
 			//mCfmBox("提示","确定删除该信息吗？","确定",function(){alert("ok...");},btnText2,fun2,btnText3,fun3,mwidth,headColor,clazza,clazzb,clazzc);
@@ -573,7 +576,7 @@
 			"确定",function(){alert("ok...");},
 			"取消",null,
 			"忽略",null,
-			400,"#B7D0E8","btn btn-blue");
+			400,"#77B3D4","btn btn-blue");
 		}
 		
 		function test2(){
