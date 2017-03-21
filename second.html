@@ -1,8 +1,8 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
-<title>é¡µé¢æµ‹è¯•</title>
+<title>Ò³Ãæ²âÊÔ</title>
     <!--script src="jquery-1.9.0.js"></script-->
 
     <style type="text/css">
@@ -374,7 +374,7 @@
 		function _$A(c,p){
 			p.appendChild(c);
 		}
-		//è·å–å¯è§çª—å£å¤§å°
+		//»ñÈ¡¿É¼û´°¿Ú´óĞ¡
 		function getClientSize(){
 			var r=new Array();
 			var wa=document.documentElement.clientWidth-0;
@@ -439,16 +439,32 @@
 				}
 			})();
 		}
-		/**common end**/
+		/**common end
+		*options.suffix
+		*options.titleText
+		*options.contentText
+		*options.btnOneText
+		*options.btnOneFunction
+		*options.btnTwoText
+		*options.btnTwoFunction
+		*options.btnThreeText
+		*options.btnThreeFunction
+		*options.minWidth
+		*options.headColor
+		*options.clazzOne
+		*options.clazzTwo
+		*options.clazzThree
+		**/
 
-		function mCfmBox(suffix,titx,msg,btnText1,fun1,btnText2,fun2,btnText3,fun3,mwidth,headColor,clazza,clazzb,clazzc){
-			var mboxw=mwidth?mwidth:600;
+		function mCfmBox(options){
+			if(undefined==options.suffix||!options.suffix)options.suffix="";
+			var mboxw=options.minWidth?options.minWidth:600;
 			var carr=getClientSize();
 			var pgw=carr[0];
 			var pgh=carr[1];
-			var mbox = _$G("cfmBox"+suffix);
+			var mbox = _$G("cfmBox"+options.suffix);
 			var clay,mboxtit,mboxclr,tittxt,mbox_btna,mbox_btnb,mbox_btnc;
-			clay=_$G("cfmbackLayer"+suffix);
+			clay=_$G("cfmbackLayer"+options.suffix);
 			mboxtit=_$G("cfmBox_header",mbox);
 			mboxclr=_$G("cfmBox_closer",mbox);
 			tittxt=_$G("cfmboxTit",mbox);
@@ -456,49 +472,49 @@
 			mbox_btna=_$G("cfmBoxbtna",mbox);
 			mbox_btnb=_$G("cfmBoxbtnb",mbox);
 			mbox_btnc=_$G("cfmBoxbtnc",mbox);
-			if(titx){
-				tittxt.innerHTML=titx;
+			if(options.titleText){
+				tittxt.innerHTML=options.titleText;
 			}
-			if(msg){
-				mboxmsg.innerHTML=msg;
+			if(options.contentText){
+				mboxmsg.innerHTML=options.contentText;
 			}
 
-			if(!btnText1){
+			if(!options.btnOneText){
 				mbox_btna.style.display="none";
 			}else{
-				mbox_btna.innerHTML=btnText1;
+				mbox_btna.innerHTML=options.btnOneText;
 				mbox_btna.style.display="inline-block";
 				mbox_btna.onclick=function(){
-					if(fun1){
-						window.setTimeout(fun1,10);
+					if(options.btnOneFunction){
+						window.setTimeout(options.btnOneFunction,10);
 					}
 					//mbox.style.display="none";
 					_$FadeOut(mbox,5);
 					clay.style.display="none";
 				};
 			}
-			if(!btnText2){
+			if(!options.btnTwoText){
 				mbox_btnb.style.display="none";
 			}else{
-				mbox_btnb.innerHTML=btnText2;
+				mbox_btnb.innerHTML=options.btnTwoText;
 				mbox_btnb.style.display="inline-block";
 				mbox_btnb.onclick=function(){
-					if(fun2){
-						window.setTimeout(fun2,10);
+					if(options.btnTwoFunction){
+						window.setTimeout(options.btnTwoFunction,10);
 					}
 					//mbox.style.display="none";
 					_$FadeOut(mbox,5);
 					clay.style.display="none";
 				};
 			}
-			if(!btnText3){
+			if(!options.btnThreeText){
 				mbox_btnc.style.display="none";
 			}else{
-				mbox_btnc.innerHTML=btnText3;
+				mbox_btnc.innerHTML=options.btnThreeText;
 				mbox_btnc.style.display="inline-block";
 				mbox_btnc.onclick=function(){
-					if(fun3){
-						window.setTimeout(fun3,10);
+					if(options.btnThreeFunction){
+						window.setTimeout(options.btnThreeFunction,10);
 					}
 					//mbox.style.display="none";
 					_$FadeOut(mbox,5);
@@ -513,10 +529,10 @@
 			}
 			_$SetOpacity(mboxclr,100);
 			mbox.style.width=mboxw+"px";
-			if(headColor){mboxtit.style.backgroundColor=headColor;mboxclr.style.backgroundColor=headColor;}
-			if(clazza)mbox_btna.className=clazza;
-			if(clazzb)mbox_btnb.className=clazzb;
-			if(clazzc)mbox_btnc.className=clazzc;
+			if(options.headColor){mboxtit.style.backgroundColor=options.headColor;mboxclr.style.backgroundColor=options.headColor;}
+			if(options.clazzOne)mbox_btna.className=options.clazzOne;
+			if(options.clazzTwo)mbox_btnb.className=options.clazzTwo;
+			if(options.clazzThree)mbox_btnc.className=options.clazzThree;
 
 			clay.style.width=pgw+"px";
 			clay.style.height=pgh+"px";
@@ -532,19 +548,26 @@
 			mbox.style.top=mboxposy+"px";
 		}
 		
-		function opnTbox(suffix,m,prd,afun){
+		/**
+		*options.suffix
+		*options.message
+		*options.period
+		*options.afterFunction
+		*/
+		function opnTbox(options){
+			if(undefined==options.suffix||!options.suffix)options.suffix="";
 			var carr=getClientSize();
 			var pgw=carr[0];
 			var pgh=carr[1];
 			var mctt,mtbox;
-			mctt = _$G("mtbox_ctt"+suffix);
+			mctt = _$G("mtbox_ctt"+options.suffix);
 			if(mctt){
 				mtbox=_$G("mtbox",mctt);
 			}else{
 				mtbox = _$C("a");
 				mtbox.id="mtbox";
 				mctt=_$C("div");
-				mctt.id="mtbox_ctt"+suffix;
+				mctt.id="mtbox_ctt"+options.suffix;
 				mctt.style.position="fixed";
 				mctt.style.zIndex="9999";
 				mctt.style.maxWidth=pgw-200+"px";
@@ -552,9 +575,8 @@
 				_$A(mctt,document.body);
 			}
 			mtbox.className="mtbox";
-			mtbox.innerHTML=m;
+			mtbox.innerHTML=options.message;
 			mctt.style.top="-10000px";
-			//mctt.style.display="none";
 			mctt.style.display="block";
 			_$SetOpacity(mctt,0);
 			var mcttw=parseInt(mctt.offsetWidth);
@@ -564,27 +586,27 @@
 			mctt.style.left=(pgw/2-(mcttw/2))+"px";
 			mctt.style.top=(pgh/2-(mctth/2))+"px";
 			_$FadeIn(mctt);
-			if(!prd)prd=1500;
-			window.setTimeout(function(){if(afun)afun();_$FadeOut(mctt);},prd);
+			if(undefined==options.period||!options.period)options.period=1500;
+			window.setTimeout(function(){if(options.afterFunction)options.afterFunction();_$FadeOut(mctt);},options.period);
 		}
 		
 		function testCfmBox1(){
-			//mCfmBox("","æç¤º","ç¡®å®šåˆ é™¤è¯¥ä¿¡æ¯å—ï¼Ÿ","ç¡®å®š",function(){alert("ok...");},btnText2,fun2,btnText3,fun3,mwidth,headColor,clazza,clazzb,clazzc);
-			mCfmBox("","æç¤º",
-			"å—å†·æš–ç©ºæ°”å…±åŒå½±å“ï¼Œ11æ—¥å¤œé—´è‡³13æ—¥ï¼Œè¥¿åŒ—åœ°åŒºä¸œéƒ¨è‡³æ±Ÿå—ç­‰åœ°å°†å‡ºç°å¤§èŒƒå›´é›¨é›ªå¤©æ°”ã€‚é¢„è®¡ï¼Œ11æ—¥20æ—¶è‡³12æ—¥20æ—¶ï¼Œé’æµ·ã€ç”˜è‚ƒã€å®å¤ã€é™•è¥¿ã€è¥¿è—ä»¥åŠå‰æ—ç­‰åœ°æœ‰å¤§é›ªï¼Œå…¶ä¸­é’æµ·ä¸œåŒ—éƒ¨å’Œå—éƒ¨ã€ç”˜è‚ƒå—éƒ¨ã€å®å¤å—éƒ¨ã€é™•è¥¿ç§¦å²­ã€è¥¿è—å—éƒ¨ç­‰åœ°çš„éƒ¨åˆ†åœ°åŒºæœ‰æš´é›ªï¼Œå±€åœ°æœ‰å¤§æš´é›ªï¼ˆ20æ¯«ç±³è‡³25æ¯«ç±³ï¼‰ã€‚ä¸Šè¿°åœ°åŒºæ–°å¢ç§¯é›ªæ·±åº¦4å˜ç±³è‡³10å˜ç±³ï¼Œå±€åœ°å¯è¾¾12å˜ç±³è‡³16å˜ç±³ã€‚",
-			"ç¡®å®š",function(){alert("ok...");},
-			"å–æ¶ˆ",null,
-			"å¿½ç•¥",null,
-			600,"#eee","btn btn-blue");
+			mCfmBox({
+				titleText:"ÌáÊ¾",
+				contentText:"È·¶¨É¾³ı¸ÃĞÅÏ¢Âğ£¿È·¶¨É¾³ı¸ÃĞÅÏ¢Âğ£¿È·¶¨É¾³ı¸ÃĞÅÏ¢Âğ£¿",
+				btnOneText:"È·¶¨",
+				btnOneFunction:function(){alert(1111111111111111);},
+				btnTwoText:"È¡Ïû"		
+				});
 		}
 		function testCfmBox2(){
-			//mCfmBox("","æç¤º","ç¡®å®šåˆ é™¤è¯¥ä¿¡æ¯å—ï¼Ÿ","ç¡®å®š",function(){alert("ok...");},btnText2,fun2,btnText3,fun3,mwidth,headColor,clazza,clazzb,clazzc);
-			mCfmBox("","æç¤º",
-			"è¥¿åŒ—åœ°åŒºä¸œéƒ¨è‡³æ±Ÿå—ç­‰åœ°å°†å‡ºç°å¤§èŒƒå›´é›¨é›ªå¤©æ°”",
-			"ç¡®å®š",function(){alert("ok...");},
-			"å–æ¶ˆ",null,
-			"å¿½ç•¥",null,
-			400,"#77B3D4","btn btn-blue");
+			mCfmBox({
+				titleText:"ÌáÊ¾",
+				contentText:"Î÷±±µØÇø¶«²¿ÖÁ½­ÄÏµÈµØ½«³öÏÖ´ó·¶Î§ÓêÑ©ÌìÆø",
+				btnOneText:"È·¶¨",
+				btnOneFunction:function(){alert(2222222222222222);},
+				btnTwoText:"È¡Ïû"		
+				});
 		}
 		
 		function test2(){
@@ -606,8 +628,13 @@
 		
 		}
 		function test4(){
-			opnTbox("","é’æµ·ã€ç”˜è‚ƒã€å®å¤ã€é™•è¥¿ã€è¥¿è—ä»¥åŠå‰æ—ç­‰åœ°æœ‰å¤§é›ª",
-			2000);
+			opnTbox({
+				message:"Çàº£¡¢¸ÊËà¡¢ÄşÏÄ¡¢ÉÂÎ÷¡¢Î÷²ØÒÔ¼°¼ªÁÖµÈµØÓĞ´óÑ©",
+				period:1000,
+				afterFunction:function(){
+					alert(333333333333);
+				}
+			});
 		}	
 		function opnSo(){
 			var fm=_$C("form");
@@ -622,80 +649,80 @@
 </head>
 
 <body id="theBody">
-	<a class="btn btn-large" href="javaScript:" onclick="testCfmBox1()" style="margin:10px;">æµ‹è¯•1</a><a class="btn" href="javaScript:" onclick="testCfmBox2()" style="margin:10px;">æµ‹è¯•2</a><a class="btn btn-mini" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a>
+	<a class="btn btn-large" href="javaScript:" onclick="testCfmBox1()" style="margin:10px;">²âÊÔ1</a><a class="btn" href="javaScript:" onclick="testCfmBox2()" style="margin:10px;">²âÊÔ2</a><a class="btn btn-mini" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">æµ‹è¯•</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">ä¿å­˜</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a>
+	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">²âÊÔ</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">±£´æ</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a>
+	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="opnSo()" style="margin:10px;">SO</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a>
+	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="opnSo()" style="margin:10px;">SO</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-orange btn-large" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-orange" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-orange btn-mini" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a>
+	<a class="btn btn-orange btn-large" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-orange" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-orange btn-mini" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-red btn-large" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-red" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-red btn-mini" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a>
+	<a class="btn btn-red btn-large" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-red" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-red btn-mini" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a>
 	<br style="margin:10px;"/>
-	<a id="lsnTesta" class="btn btn-black btn-large" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-black" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a><a class="btn btn-black btn-mini" href="javaScript:" onclick="" style="margin:10px;">ä¿å­˜</a>
+	<a id="lsnTesta" class="btn btn-black btn-large" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-black" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a><a class="btn btn-black btn-mini" href="javaScript:" onclick="" style="margin:10px;">±£´æ</a>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-combLeft" href="javaScript:" style="">å£«å¤§å¤«ä¼¼çš„å¹¿æ³›åœ°</span></a><a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-combLeft" href="javaScript:" style="">Ê¿´ó·òËÆµÄ¹ã·ºµØ</span></a><a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-combLeft" href="javaScript:" style="">ç”µé¥­é”…ç”µé¥­é”…</span></a>
+		<a class="btn btn-combLeft" href="javaScript:" style="">µç·¹¹øµç·¹¹ø</span></a>
 		<a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">å£«å¤§å¤«ä¼¼çš„å¹¿æ³›åœ°</span></a><a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">Ê¿´ó·òËÆµÄ¹ã·ºµØ</span></a><a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">ç”µé¥­é”…ç”µé¥­é”…</span></a>
+		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">µç·¹¹øµç·¹¹ø</span></a>
 		<a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">å£«å¤§å¤«ä¼¼çš„å¹¿æ³›åœ°</span></a><a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">Ê¿´ó·òËÆµÄ¹ã·ºµØ</span></a><a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">ç”µé¥­é”…ç”µé¥­é”…</span></a>
+		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">µç·¹¹øµç·¹¹ø</span></a>
 		<a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">å£«å¤§å¤«ä¼¼çš„å¹¿æ³›åœ°</span></a><a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">Ê¿´ó·òËÆµÄ¹ã·ºµØ</span></a><a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">ç”µé¥­é”…ç”µé¥­é”…</span></a>
+		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">µç·¹¹øµç·¹¹ø</span></a>
 		<a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>	
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">å£«å¤§å¤«ä¼¼çš„å¹¿æ³›åœ°</span></a><a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">Ê¿´ó·òËÆµÄ¹ã·ºµØ</span></a><a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">ç”µé¥­é”…ç”µé¥­é”…</span></a>
+		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">µç·¹¹øµç·¹¹ø</span></a>
 		<a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">å£«å¤§å¤«ä¼¼çš„å¹¿æ³›åœ°</span></a><a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">Ê¿´ó·òËÆµÄ¹ã·ºµØ</span></a><a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">ç”µé¥­é”…ç”µé¥­é”…</span></a>
+		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">µç·¹¹øµç·¹¹ø</span></a>
 		<a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">å£«å¤§å¤«ä¼¼çš„å¹¿æ³›åœ°</span></a><a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">Ê¿´ó·òËÆµÄ¹ã·ºµØ</span></a><a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">ç”µé¥­é”…ç”µé¥­é”…</span></a>
+		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">µç·¹¹øµç·¹¹ø</span></a>
 		<a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
@@ -712,7 +739,7 @@
 	<!--cfm Box-->
 	<div id="cfmBox" class="cfmBox">
 		<div id="cfmBox_header" class="cfmBox_header">
-			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">Ã—</a>
+			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">¡Á</a>
 			<span id="cfmboxTit">Tip</span>
 		</div>
 		<div id="cfmBox_body" class="cfmBox_body">
