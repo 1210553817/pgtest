@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
-<title>ҳ�����</title>
+<title>页面测试</title>
     <!--script src="jquery-1.9.0.js"></script-->
 
     <style type="text/css">
@@ -374,7 +374,7 @@
 		function _$A(c,p){
 			p.appendChild(c);
 		}
-		//��ȡ�ɼ����ڴ�С
+		//获取可见窗口大小
 		function getClientSize(){
 			var r=new Array();
 			var wa=document.documentElement.clientWidth-0;
@@ -592,20 +592,20 @@
 		
 		function testCfmBox1(){
 			mCfmBox({
-				titleText:"��ʾ",
-				contentText:"ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��",
-				btnOneText:"ȷ��",
+				titleText:"提示",
+				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
+				btnOneText:"确定",
 				btnOneFunction:function(){alert(1111111111111111);},
-				btnTwoText:"ȡ��"		
+				btnTwoText:"取消"		
 				});
 		}
 		function testCfmBox2(){
 			mCfmBox({
-				titleText:"��ʾ",
-				contentText:"�����������������ϵȵؽ����ִ�Χ��ѩ����",
-				btnOneText:"ȷ��",
+				titleText:"提示",
+				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
+				btnOneText:"确定",
 				btnOneFunction:function(){alert(2222222222222222);},
-				btnTwoText:"ȡ��"		
+				btnTwoText:"取消"		
 				});
 		}
 		
@@ -629,7 +629,7 @@
 		}
 		function test4(){
 			opnTbox({
-				message:"�ຣ�����ࡢ���ġ������������Լ����ֵȵ��д�ѩ",
+				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
 				period:1000,
 				afterFunction:function(){
 					alert(333333333333);
@@ -649,80 +649,80 @@
 </head>
 
 <body id="theBody">
-	<a class="btn btn-large" href="javaScript:" onclick="testCfmBox1()" style="margin:10px;">����1</a><a class="btn" href="javaScript:" onclick="testCfmBox2()" style="margin:10px;">����2</a><a class="btn btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
+	<a class="btn btn-large" href="javaScript:" onclick="testCfmBox1()" style="margin:10px;">测试1</a><a class="btn" href="javaScript:" onclick="testCfmBox2()" style="margin:10px;">测试2</a><a class="btn btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">����</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">����</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
+	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">测试</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">保存</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
+	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="opnSo()" style="margin:10px;">SO</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
+	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="opnSo()" style="margin:10px;">SO</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-orange btn-large" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-orange" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-orange btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
+	<a class="btn btn-orange btn-large" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-orange" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-orange btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-red btn-large" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-red" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-red btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
+	<a class="btn btn-red btn-large" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-red" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-red btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a id="lsnTesta" class="btn btn-black btn-large" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-black" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-black btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
+	<a id="lsnTesta" class="btn btn-black btn-large" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-black" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-black btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
+		<a class="btn btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
 		<a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
+		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
 		<a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
+		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
 		<a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
+		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
 		<a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>	
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
+		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
 		<a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">�緹���緹��</span></a>
+		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">电饭锅电饭锅</span></a>
 		<a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">�緹���緹��</span></a>
+		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">电饭锅电饭锅</span></a>
 		<a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
@@ -739,7 +739,7 @@
 	<!--cfm Box-->
 	<div id="cfmBox" class="cfmBox">
 		<div id="cfmBox_header" class="cfmBox_header">
-			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">��</a>
+			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">×</a>
 			<span id="cfmboxTit">Tip</span>
 		</div>
 		<div id="cfmBox_body" class="cfmBox_body">
