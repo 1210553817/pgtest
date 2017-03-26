@@ -267,12 +267,13 @@
 		-webkit-border-top-right-radius:5px;
 		-moz-border-top-right-radius:5px;
 		border-top-right-radius:5px;
-		height:20px;
+		min-height:20px;
 	}
 	
 	.cfmBox_header #cfmboxTit{
 		margin: 0;
 		line-height: 20px;
+		overflow:hidden;
 	}
 	.cfmBox_closer {
 		background-color: #efefef;
@@ -308,6 +309,7 @@
 		-webkit-box-shadow: inset 0 1px 0 #fff;
 		-moz-box-shadow: inset 0 1px 0 #fff;
 		box-shadow: inset 0 1px 0 #fff;
+		min-height:20px;
 	}
 	.cfmBox_footer>a{
 		margin-left:10px;
@@ -550,7 +552,7 @@
 		function test5(){
 			ConfirmCase.open({
 				titleText:"提示",
-				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
+				contentText:"西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气",
 				btnOneText:"确定",
 				btnOneFunction:function(){
 					ConfirmCase.open({
@@ -561,7 +563,7 @@
 						contentText:"A西北地区东部至江南等地将出现大范围雨雪天气",
 						btnOneText:"确定",
 						btnOneFunction:function(){
-							ConfirmCase.close("all");
+							ConfirmCase.close("All");
 						},
 						btnTwoText:"取消",
 						btnTwoFunction:function(){
@@ -571,7 +573,7 @@
 				
 				
 				},
-				btnTwoText:"取消"	
+				btnTwoText:"取消"
 			});
 				
 		//	window.setTimeout(function(){
@@ -603,6 +605,7 @@
 			**/
 			innerCase.prototype.open=function(options){
 				var thiz={};
+				thiz.context=this;
 				if(undefined==options.suffix||!options.suffix)options.suffix="";
 				thiz.minWidth=options.minWidth?options.minWidth:600;
 				thiz.holder = _$G("cfmBox"+options.suffix);
@@ -630,14 +633,10 @@
 					thiz.mbox_btna.onclick=function(){
 						if(options.btnOneFunction){
 							if(options.btnOneFunction()){
-								//thiz.holder.style.display="none";
-								_$FadeOut(thiz.holder,5);
-								thiz.backLayer.style.display="none";
+								thiz.context.close(options.suffix);
 							}
 						}else{
-							//thiz.holder.style.display="none";
-							_$FadeOut(thiz.holder,5);
-							thiz.backLayer.style.display="none";
+							thiz.context.close(options.suffix);
 						}
 					};
 				}
@@ -649,14 +648,10 @@
 					thiz.mbox_btnb.onclick=function(){
 						if(options.btnTwoFunction){
 							if(options.btnTwoFunction()){
-								//thiz.holder.style.display="none";
-								_$FadeOut(thiz.holder,5);
-								thiz.backLayer.style.display="none";
+								thiz.context.close(options.suffix);
 							}
 						}else{
-							//thiz.holder.style.display="none";
-							_$FadeOut(thiz.holder,5);
-							thiz.backLayer.style.display="none";
+							thiz.context.close(options.suffix);
 						}
 					};
 				}
@@ -668,22 +663,15 @@
 					thiz.mbox_btnc.onclick=function(){
 						if(options.btnThreeFunction){
 							if(options.btnThreeFunction()){
-								//thiz.holder.style.display="none";
-								_$FadeOut(thiz.holder,5);
-								thiz.backLayer.style.display="none";
+								thiz.context.close(options.suffix);
 							}
 						}else{
-							//thiz.holder.style.display="none";
-							_$FadeOut(thiz.holder,5);
-							thiz.backLayer.style.display="none";
+							thiz.context.close(options.suffix);
 						}
 					};
 				}
 				thiz.mboxclr.onclick=function(){
-					//thiz.holder.style.display="none";
-					_$FadeOut(thiz.holder,5);
-					thiz.backLayer.style.display="none";
-					
+					thiz.context.close(options.suffix);
 				}
 				_$SetOpacity(thiz.mboxclr,100);
 				thiz.holder.style.width=thiz.minWidth+"px";
@@ -697,40 +685,44 @@
 				thiz.backLayer.style.display="block";
 
 				this.container["$"+options.suffix]=thiz;
-				this.pos(thiz.holder,thiz.backLayer,"$"+options.suffix);
+				pos(thiz,thiz.holder,thiz.backLayer);
 			};
 			innerCase.prototype.close=function(suffix){
 				if(undefined==suffix||!suffix)suffix="";
-				if("all"==suffix){
+				if("All"==suffix){
 					var i;
 					for( i in this.container){
 						var cc=this.container[i];
-						_$FadeOut(cc.holder,10);
+						//_$FadeOut(cc.holder,10);
+						cc.holder.style.display="none";
 						cc.backLayer.style.display="none";
 					}
 					
 				}else{
-					_$FadeOut(this.container["$"+suffix].holder,10);
-					this.container["$"+suffix].backLayer.style.display="none";
+					var thiz=this.container["$"+suffix];
+					//_$FadeOut(cc.holder,10);
+					thiz.holder.style.display="none";
+					thiz.backLayer.style.display="none";
 				}
 			};
 			innerCase.prototype.locate=function(suffix){
 				if(undefined==suffix||!suffix)suffix="";
-				if("all"==suffix){
+				if("All"==suffix){
 					var i;
 					for( i in this.container){
 						var cc=this.container[i];
-						this.pos(cc.holder,cc.backLayer,i);
+						pos(cc,cc.holder,cc.backLayer);
 					}
 					
 				}else{
 					var thiz=this.container["$"+suffix];
-					this.pos(thiz.holder,thiz.backLayer,"$"+suffix);
+					pos(thiz,thiz.holder,thiz.backLayer,"$"+suffix);
 				}
 			};
-			
-			innerCase.prototype.pos=function(hd,ly,$suffix){
-				var thiz=this.container[$suffix];
+			/**
+			*private functions
+			*/
+			var pos=function(thiz,hd,ly){
 				var carr=getClientSize();
 				var pgw=carr[0];
 				var pgh=carr[1];
@@ -743,11 +735,12 @@
 				var mboxposy=(pgh/2-(mboxht/2));
 				hd.style.top=mboxposy+"px";
 			};
+	
 			return new innerCase();
 		})();
 		
 		window.onresize=function(){
-			ConfirmCase.locate("all");
+			ConfirmCase.locate("All");
 		};
     </script>
 </head>
