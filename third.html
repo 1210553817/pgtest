@@ -3,7 +3,7 @@
 
 <head>
 <title>页面测试</title>
-    <!--script src="jquery-1.9.0.js"></script-->
+    <!--script src="sdfsdfsdfsdf.js"></script-->
 
     <style type="text/css">
 	.caret {
@@ -487,21 +487,28 @@
 		}
 		
 		function testCfmBox1(){
-			mCfmBox({
+			ConfirmCase.open({
 				titleText:"提示",
 				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
 				btnOneText:"确定",
-				btnOneFunction:function(){alert(1111111111111111);},
-				btnTwoText:"取消"		
+				btnOneFunction:function(){
+					alert(1111111111111111);
+					return true;
+				},
+				btnTwoText:"取消",
+				btnThreeText:"忽略",
+				clazzThree:"btn btn-black"
 				});
 		}
 		function testCfmBox2(){
-			mCfmBox({
+			ConfirmCase.open({
 				titleText:"提示",
 				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
 				btnOneText:"确定",
-				btnOneFunction:function(){alert(2222222222222222);},
-				btnTwoText:"取消"		
+				btnOneFunction:function(){
+					alert(2222222222222222);
+				},
+				btnTwoText:"取消"
 				});
 		}
 		
@@ -528,7 +535,6 @@
 				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
 				period:1000,
 				afterFunction:function(){
-					alert(333333333333);
 				}
 			});
 		}	
@@ -578,7 +584,7 @@
 		}
 		
 		var ConfirmCase=(function(){
-			var innerBox=function(){this.container={};};
+			var innerCase=function(){this.container={};};
 			/**Open
 			*options.suffix
 			*options.titleText
@@ -595,107 +601,105 @@
 			*options.clazzTwo
 			*options.clazzThree
 			**/
-			innerBox.prototype.open=function(options){
+			innerCase.prototype.open=function(options){
+				var thiz={};
 				if(undefined==options.suffix||!options.suffix)options.suffix="";
-				var mboxw=options.minWidth?options.minWidth:600;
-				var mbox = _$G("cfmBox"+options.suffix);
+				thiz.minWidth=options.minWidth?options.minWidth:600;
+				thiz.holder = _$G("cfmBox"+options.suffix);
 				var clay,mboxtit,mboxclr,tittxt,mbox_btna,mbox_btnb,mbox_btnc;
-				clay=_$G("cfmbackLayer"+options.suffix);
-				mboxtit=_$G("cfmBox_header",mbox);
-				mboxclr=_$G("cfmBox_closer",mbox);
-				tittxt=_$G("cfmboxTit",mbox);
-				mboxmsg=_$G("cfmboxMsg",mbox);
-				mbox_btna=_$G("cfmBoxbtna",mbox);
-				mbox_btnb=_$G("cfmBoxbtnb",mbox);
-				mbox_btnc=_$G("cfmBoxbtnc",mbox);
+				thiz.backLayer=_$G("cfmbackLayer"+options.suffix);
+				thiz.mboxtit=_$G("cfmBox_header",thiz.holder);
+				thiz.mboxclr=_$G("cfmBox_closer",thiz.holder);
+				thiz.tittxt=_$G("cfmboxTit",thiz.holder);
+				thiz.mboxmsg=_$G("cfmboxMsg",thiz.holder);
+				thiz.mbox_btna=_$G("cfmBoxbtna",thiz.holder);
+				thiz.mbox_btnb=_$G("cfmBoxbtnb",thiz.holder);
+				thiz.mbox_btnc=_$G("cfmBoxbtnc",thiz.holder);
 				if(options.titleText){
-					tittxt.innerHTML=options.titleText;
+					thiz.tittxt.innerHTML=options.titleText;
 				}
 				if(options.contentText){
-					mboxmsg.innerHTML=options.contentText;
+					thiz.mboxmsg.innerHTML=options.contentText;
 				}
 
 				if(!options.btnOneText){
-					mbox_btna.style.display="none";
+					thiz.mbox_btna.style.display="none";
 				}else{
-					mbox_btna.innerHTML=options.btnOneText;
-					mbox_btna.style.display="inline-block";
-					mbox_btna.onclick=function(){
+					thiz.mbox_btna.innerHTML=options.btnOneText;
+					thiz.mbox_btna.style.display="inline-block";
+					thiz.mbox_btna.onclick=function(){
 						if(options.btnOneFunction){
 							if(options.btnOneFunction()){
-								//mbox.style.display="none";
-								_$FadeOut(mbox,5);
-								clay.style.display="none";
+								//thiz.holder.style.display="none";
+								_$FadeOut(thiz.holder,5);
+								thiz.backLayer.style.display="none";
 							}
 						}else{
-							//mbox.style.display="none";
-							_$FadeOut(mbox,5);
-							clay.style.display="none";
+							//thiz.holder.style.display="none";
+							_$FadeOut(thiz.holder,5);
+							thiz.backLayer.style.display="none";
 						}
 					};
 				}
 				if(!options.btnTwoText){
-					mbox_btnb.style.display="none";
+					thiz.mbox_btnb.style.display="none";
 				}else{
-					mbox_btnb.innerHTML=options.btnTwoText;
-					mbox_btnb.style.display="inline-block";
-					mbox_btnb.onclick=function(){
+					thiz.mbox_btnb.innerHTML=options.btnTwoText;
+					thiz.mbox_btnb.style.display="inline-block";
+					thiz.mbox_btnb.onclick=function(){
 						if(options.btnTwoFunction){
 							if(options.btnTwoFunction()){
-								//mbox.style.display="none";
-								_$FadeOut(mbox,5);
-								clay.style.display="none";
+								//thiz.holder.style.display="none";
+								_$FadeOut(thiz.holder,5);
+								thiz.backLayer.style.display="none";
 							}
 						}else{
-							//mbox.style.display="none";
-							_$FadeOut(mbox,5);
-							clay.style.display="none";
+							//thiz.holder.style.display="none";
+							_$FadeOut(thiz.holder,5);
+							thiz.backLayer.style.display="none";
 						}
 					};
 				}
 				if(!options.btnThreeText){
-					mbox_btnc.style.display="none";
+					thiz.mbox_btnc.style.display="none";
 				}else{
-					mbox_btnc.innerHTML=options.btnThreeText;
-					mbox_btnc.style.display="inline-block";
-					mbox_btnc.onclick=function(){
+					thiz.mbox_btnc.innerHTML=options.btnThreeText;
+					thiz.mbox_btnc.style.display="inline-block";
+					thiz.mbox_btnc.onclick=function(){
 						if(options.btnThreeFunction){
 							if(options.btnThreeFunction()){
-								//mbox.style.display="none";
-								_$FadeOut(mbox,5);
-								clay.style.display="none";
+								//thiz.holder.style.display="none";
+								_$FadeOut(thiz.holder,5);
+								thiz.backLayer.style.display="none";
 							}
 						}else{
-							//mbox.style.display="none";
-							_$FadeOut(mbox,5);
-							clay.style.display="none";
+							//thiz.holder.style.display="none";
+							_$FadeOut(thiz.holder,5);
+							thiz.backLayer.style.display="none";
 						}
 					};
 				}
-				mboxclr.onclick=function(){
-					//mbox.style.display="none";
-					_$FadeOut(mbox,5);
-					clay.style.display="none";
+				thiz.mboxclr.onclick=function(){
+					//thiz.holder.style.display="none";
+					_$FadeOut(thiz.holder,5);
+					thiz.backLayer.style.display="none";
 					
 				}
-				_$SetOpacity(mboxclr,100);
-				mbox.style.width=mboxw+"px";
-				if(options.headColor){mboxtit.style.backgroundColor=options.headColor;mboxclr.style.backgroundColor=options.headColor;}
-				if(options.clazzOne)mbox_btna.className=options.clazzOne;
-				if(options.clazzTwo)mbox_btnb.className=options.clazzTwo;
-				if(options.clazzThree)mbox_btnc.className=options.clazzThree;
+				_$SetOpacity(thiz.mboxclr,100);
+				thiz.holder.style.width=thiz.minWidth+"px";
+				if(options.headColor){thiz.mboxtit.style.backgroundColor=options.headColor;thiz.mboxclr.style.backgroundColor=options.headColor;}
+				if(options.clazzOne)thiz.mbox_btna.className=options.clazzOne;
+				if(options.clazzTwo)thiz.mbox_btnb.className=options.clazzTwo;
+				if(options.clazzThree)thiz.mbox_btnc.className=options.clazzThree;
 				
-				this.container["$"+options.suffix]={};
-				this.container["$"+options.suffix].holder=mbox;
-				this.container["$"+options.suffix].backLayer=clay;
-				this.container["$"+options.suffix].mWidth=mboxw;
-				
-				_$FadeIn(mbox,10);
-				mbox.style.display="block";
-				clay.style.display="block";
-				this.pos(mbox,clay,"$"+options.suffix);
+				//_$FadeIn(thiz.holder,10);
+				thiz.holder.style.display="block";
+				thiz.backLayer.style.display="block";
+
+				this.container["$"+options.suffix]=thiz;
+				this.pos(thiz.holder,thiz.backLayer,"$"+options.suffix);
 			};
-			innerBox.prototype.close=function(suffix){
+			innerCase.prototype.close=function(suffix){
 				if(undefined==suffix||!suffix)suffix="";
 				if("all"==suffix){
 					var i;
@@ -710,7 +714,7 @@
 					this.container["$"+suffix].backLayer.style.display="none";
 				}
 			};
-			innerBox.prototype.locate=function(suffix){
+			innerCase.prototype.locate=function(suffix){
 				if(undefined==suffix||!suffix)suffix="";
 				if("all"==suffix){
 					var i;
@@ -720,26 +724,26 @@
 					}
 					
 				}else{
-					this.pos(this.container["$"+suffix].holder,this.container["$"+suffix].backLayer,"$"+suffix);
+					var thiz=this.container["$"+suffix];
+					this.pos(thiz.holder,thiz.backLayer,"$"+suffix);
 				}
 			};
-			innerBox.prototype.pos=function(hd,ly,$suffix){
+			
+			innerCase.prototype.pos=function(hd,ly,$suffix){
+				var thiz=this.container[$suffix];
 				var carr=getClientSize();
 				var pgw=carr[0];
 				var pgh=carr[1];
 				ly.style.width=pgw+"px";
 				ly.style.height=pgh+"px";
-				hd.style.left=(pgw/2-(this.container[$suffix].mWidth/2))+"px";
+				hd.style.left=(pgw/2-(thiz.minWidth/2))+"px";
 				hd.style.top=-10000+"px";
 				_$G("cfmBox_body",hd).style.maxHeight=pgh-200+"px";
-
 				var mboxht=parseInt(hd.offsetHeight);
 				var mboxposy=(pgh/2-(mboxht/2));
-				//_$MoveDu(hd,10,mboxposy-60,mboxposy);
-				
 				hd.style.top=mboxposy+"px";
 			};
-			return new innerBox();
+			return new innerCase();
 		})();
 		
 		window.onresize=function(){
@@ -847,9 +851,9 @@
 			<p id="cfmboxMsg">Message...</p>
 		</div>
 		<div class="cfmBox_footer">
-			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
-			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
 			<a id="cfmBoxbtnc" class="btn" href="javaScript:">Ignore</a>
+			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
+			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
 		</div>
 	</div>
 
@@ -864,9 +868,9 @@
 			<p id="cfmboxMsg">Message...</p>
 		</div>
 		<div class="cfmBox_footer">
-			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
-			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
 			<a id="cfmBoxbtnc" class="btn" href="javaScript:">Ignore</a>
+			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
+			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
 		</div>
 	</div>
 
