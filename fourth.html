@@ -442,51 +442,6 @@
 				}
 			})();
 		}
-
-
-
-		
-		/**
-		*options.suffix
-		*options.message
-		*options.period
-		*options.afterFunction
-		*/
-		function opnTbox(options){
-			if(undefined==options.suffix||!options.suffix)options.suffix="";
-			var carr=getClientSize();
-			var pgw=carr[0];
-			var pgh=carr[1];
-			var mctt,mtbox;
-			mctt = _$G("mtbox_ctt"+options.suffix);
-			if(mctt){
-				mtbox=_$G("mtbox",mctt);
-			}else{
-				mtbox = _$C("a");
-				mtbox.id="mtbox";
-				mctt=_$C("div");
-				mctt.id="mtbox_ctt"+options.suffix;
-				mctt.style.position="fixed";
-				mctt.style.zIndex="9999";
-				mctt.style.maxWidth=pgw-200+"px";
-				_$A(mtbox,mctt);
-				_$A(mctt,document.body);
-			}
-			mtbox.className="mtbox";
-			mtbox.innerHTML=options.message;
-			mctt.style.top="-10000px";
-			mctt.style.display="block";
-			_$SetOpacity(mctt,0);
-			var mcttw=parseInt(mctt.offsetWidth);
-			var mctth=parseInt(mctt.offsetHeight);
-			mctt.style.display="none";
-			_$SetOpacity(mctt,100);
-			mctt.style.left=(pgw/2-(mcttw/2))+"px";
-			mctt.style.top=(pgh/2-(mctth/2))+"px";
-			_$FadeIn(mctt);
-			if(undefined==options.period||!options.period)options.period=1500;
-			window.setTimeout(function(){if(options.afterFunction)options.afterFunction();_$FadeOut(mctt);},options.period);
-		}
 		
 		function testCfmBox1(){
 			ConfirmCase.open({
@@ -533,7 +488,7 @@
 		
 		}
 		function test4(){
-			opnTbox({
+			TipCase.show({
 				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
 				period:1000,
 				afterFunction:function(){
@@ -738,6 +693,53 @@
 	
 			return new innerCase();
 		})();
+		
+		
+		var TipCase=(function(){
+			var innerCase=function(){};
+			/**
+			*options.suffix
+			*options.message
+			*options.period
+			*options.afterFunction
+			*/
+			innerCase.prototype.show=function(options){
+				if(undefined==options.suffix||!options.suffix)options.suffix="";
+				var carr=getClientSize();
+				var pgw=carr[0];
+				var pgh=carr[1];
+				var mctt,mtbox;
+				mctt = _$G("mtbox_ctt"+options.suffix);
+				if(mctt){
+					mtbox=_$G("mtbox",mctt);
+				}else{
+					mtbox = _$C("a");
+					mtbox.id="mtbox";
+					mctt=_$C("div");
+					mctt.id="mtbox_ctt"+options.suffix;
+					mctt.style.position="fixed";
+					mctt.style.zIndex="9999";
+					mctt.style.maxWidth=pgw-200+"px";
+					_$A(mtbox,mctt);
+					_$A(mctt,document.body);
+				}
+				mtbox.className="mtbox";
+				mtbox.innerHTML=options.message;
+				mctt.style.top="-10000px";
+				mctt.style.display="block";
+				_$SetOpacity(mctt,0);
+				var mcttw=parseInt(mctt.offsetWidth);
+				var mctth=parseInt(mctt.offsetHeight);
+				mctt.style.display="none";
+				_$SetOpacity(mctt,100);
+				mctt.style.left=(pgw/2-(mcttw/2))+"px";
+				mctt.style.top=(pgh/2-(mctth/2))+"px";
+				_$FadeIn(mctt);
+				if(undefined==options.period||!options.period)options.period=1500;
+				window.setTimeout(function(){if(options.afterFunction)options.afterFunction();_$FadeOut(mctt);},options.period);
+			}
+			return new innerCase();
+		})()
 		
 		window.onresize=function(){
 			ConfirmCase.locate("All");
