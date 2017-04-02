@@ -338,7 +338,7 @@
 			if(p){
 				var cs=p.getElementsByTagName("*");
 				var i,c,arr=new Array();
-				for(i in cs){
+				for(i=0;i<cs.length;i++){
 					c=cs[i];
 					if(e){
 						if(e==c.id){
@@ -350,7 +350,7 @@
 							if(cclz){
 								var czs=cclz.split(/\s+/);
 								var j,cz,b=false;
-								for(j in czs){
+								for(j=0;j<czs.length;j++){
 									cz=czs[j];
 									if(cz==clz){
 										b=true;
@@ -365,11 +365,20 @@
 						}
 					}
 				}
-				return arr.length>0?arr:null;
+				return arr;
 			}else{
 				return document.getElementById(e);
 			}
 			return null;
+		}
+		function _$T(t,p){
+			var cs=[];
+			if(p){
+				cs=p.getElementsByTagName(t);
+			}else{
+				cs=document.getElementsByTagName(t);
+			}
+			return cs;
 		}
 		function _$C(e){
 			return document.createElement(e);
@@ -478,13 +487,7 @@
 		}
 		
 		function test3(){
-			var a=_$G("lsnTesta");
-			alert(a.onclick);
-			//if(!a.onclick){
-				a.onclick=function(){
-					alert("lsnTesta clicking...");
-				}
-			//}
+
 		
 		}
 		function test4(){
@@ -839,7 +842,7 @@
 	<div id="cfmbackLayer" class="cfmbackLayer"></div>
 	<div id="cfmBox" class="cfmBox">
 		<div id="cfmBox_header" class="cfmBox_header">
-			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">×</a>
+			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">&times;</a>
 			<span id="cfmboxTit">Tip</span>
 		</div>
 		<div id="cfmBox_body" class="cfmBox_body">
@@ -848,7 +851,7 @@
 		<div class="cfmBox_footer">
 			<a id="cfmBoxbtnc" class="btn" href="javaScript:">Ignore</a>
 			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
-			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
+			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:" title="hehe">Confirm</a>
 		</div>
 	</div>
 
@@ -856,7 +859,7 @@
 	<div id="cfmbackLayer1" class="cfmbackLayer"></div>
 	<div id="cfmBox1" class="cfmBox">
 		<div id="cfmBox_header" class="cfmBox_header">
-			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">×</a>
+			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">&times;</a>
 			<span id="cfmboxTit">Tip</span>
 		</div>
 		<div id="cfmBox_body" class="cfmBox_body">
