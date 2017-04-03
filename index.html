@@ -481,13 +481,20 @@
 		function test2(){
 			var a=_$G("cfmBox");
 			var b=_$G("",a,"btn-green");
+			console.log("-------------1-----------");
 			for(var i=0;i<b.length;i++){
 				console.log(b[i].innerHTML);
 			}
+			console.log("-------------2-----------");
+			var c=_$T("div",a);
+			for(var j=0;j<c.length;j++){
+				console.log(c[j].innerHTML);
+			}
+			
 		}
 		
 		function test3(){
-
+			
 		
 		}
 		function test4(){
@@ -752,7 +759,7 @@
 <body id="theBody">
 	<a class="btn btn-large" href="javaScript:" onclick="testCfmBox1()" style="margin:10px;">测试1</a><a class="btn" href="javaScript:" onclick="testCfmBox2()" style="margin:10px;">测试2</a><a class="btn btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">测试</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">保存</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">测试</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">TEST</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
 	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
 	<br style="margin:10px;"/>
@@ -850,7 +857,7 @@
 		<div class="cfmBox_footer">
 			<a id="cfmBoxbtnc" class="btn" href="javaScript:">Ignore</a>
 			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
-			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:" title="hehe">Confirm</a>
+			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:" name="hehe">Confirm</a>
 		</div>
 	</div>
 
