@@ -387,7 +387,7 @@
 			p.appendChild(c);
 		}
 		//获取可见窗口大小
-		function getClientSize(){
+		function getPgsz(){
 			var r=new Array();
 			var wa=document.documentElement.clientWidth-0;
 			var ha=document.documentElement.clientHeight-0;
@@ -680,7 +680,7 @@
 			*private functions
 			*/
 			var pos=function(thiz,hd,ly){
-				var carr=getClientSize();
+				var carr=getPgsz();
 				var pgw=carr[0];
 				var pgh=carr[1];
 				ly.style.width=pgw+"px";
@@ -707,7 +707,7 @@
 			*/
 			innerCase.prototype.show=function(options){
 				if(undefined==options.suffix||!options.suffix)options.suffix="";
-				var carr=getClientSize();
+				var carr=getPgsz();
 				var pgw=carr[0];
 				var pgh=carr[1];
 				var mctt,mtbox;
