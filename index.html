@@ -333,7 +333,7 @@
     </style>
 
     <script>
-		/**common start**/
+/**common start**/
 		function _$G(e,p,clz){
 			if(p){
 				var cs=p.getElementsByTagName("*");
@@ -451,6 +451,16 @@
 				}
 			})();
 		}
+		function _$Clone(myObj){
+			  if(typeof(myObj) != 'object') return myObj;
+			  if(myObj == null) return myObj;
+			  var newObj = new Object();
+			  for(var i in myObj)
+				newObj[i] = _$Clone(myObj[i]);
+			  return newObj;
+		}
+		
+/***********common end************/
 		
 		function testCfmBox1(){
 			ConfirmCase.open({
