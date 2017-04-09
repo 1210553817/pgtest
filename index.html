@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
 <title>页面测试</title>
     <!--script src="sdfsdfsdfsdf.js"></script-->
@@ -50,10 +49,10 @@
 		font-family:Microsoft Yahei,Heiti,arial,helvetica,sans-serif,SimHei;
 	}
 	.btn:hover {
-      filter:alpha(opacity=80);
-      -moz-opacity:0.8;
-      -khtml-opacity:0.8;
-      opacity:0.8;
+      filter:alpha(opacity=85);
+      -moz-opacity:0.85;
+      -khtml-opacity:0.85;
+      opacity:0.85;
 	}
 	
 	.btn-large {
@@ -386,13 +385,26 @@
 		function _$A(c,p){
 			p.appendChild(c);
 		}
-		//获取可见窗口大小
+		function _$IE(){
+			return !!document.all;
+		}
 		function getPgsz(){
+			var dmd=document.compatMode=="CSS1Compat";
 			var r=new Array();
-			var wa=document.documentElement.clientWidth-0;
-			var ha=document.documentElement.clientHeight-0;
+			var wa=dmd?document.documentElement.clientWidth:document.body.clientWidth;
+			var ha=dmd?document.documentElement.clientHeight:document.body.clientHeight;
 			r.push(wa);
 			r.push(ha);
+			return r;
+		}
+		function getPglen(){
+			var dmd=document.compatMode=="CSS1Compat";
+			var r=new Array();
+			var wa=dmd?document.documentElement.scrollWidth:document.body.scrollWidth;
+			var ha=dmd?document.documentElement.scrollHeight:document.body.scrollHeight;
+			var pgsiz=getPgsz();
+			r.push(Math.max(wa,pgsiz[0]));
+			r.push(Math.max(ha,pgsiz[1]));
 			return r;
 		}
 		function _$SetOpacity(ele,val){
@@ -451,13 +463,13 @@
 				}
 			})();
 		}
-		function _$Clone(myObj){
-			  if(typeof(myObj) != 'object') return myObj;
-			  if(myObj == null) return myObj;
-			  var newObj = new Object();
-			  for(var i in myObj)
-				newObj[i] = _$Clone(myObj[i]);
-			  return newObj;
+		function _$Clone(o){
+			if(typeof(o) != 'object') return o;
+			if(o == null) return o;
+			var n = new Object();
+			for(var i in o)
+			n[i] = _$Clone(o[i]);
+			return n;
 		}
 		
 /***********common end************/
@@ -490,15 +502,15 @@
 		
 		function test2(){
 			var a=_$G("cfmBox");
-			var b=_$G("",a,"btn-green");
+			var b=_$G("",a,"btn");
 			console.log("-------------1-----------");
 			for(var i=0;i<b.length;i++){
-				console.log(b[i].innerHTML);
+				console.log(b[i].outerHTML);
 			}
 			console.log("-------------2-----------");
 			var c=_$T("div",a);
 			for(var j=0;j<c.length;j++){
-				console.log(c[j].innerHTML);
+				console.log(c[j].className);
 			}
 			
 		}
@@ -867,7 +879,7 @@
 		<div class="cfmBox_footer">
 			<a id="cfmBoxbtnc" class="btn" href="javaScript:">Ignore</a>
 			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
-			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:" name="hehe">Confirm</a>
+			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
 		</div>
 	</div>
 
