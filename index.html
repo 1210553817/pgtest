@@ -387,6 +387,22 @@
 		function _$IE(){
 			return !!document.all;
 		}
+		function _$SB() {
+			this._str_ = new Array();
+		}
+		_$SB.prototype.append = function(a) {
+			this._str_.push(a);
+		};
+		_$SB.prototype.toString = function() {
+			return this._str_.join("");
+		};
+		function _$Ava(a) {
+			if (null == a || "" == a || undefined==a) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 		function getPgsz(){
 			var dmd=document.compatMode=="CSS1Compat";
 			var r=new Array();
@@ -486,7 +502,7 @@
 				btnTwoText:"取消",
 				btnThreeText:"忽略",
 				clazzThree:"btn btn-black",
-				rmdom:true
+				rmdom:2
 			});
 		}
 		function testCfmBox2(){
@@ -520,7 +536,7 @@
 		}
 		
 		function test3(){
-			
+
 		
 		}
 		function test4(){
@@ -596,7 +612,8 @@
 				var thiz={};
 				thiz.context=this;
 				thiz.options=options;
-				if(undefined==options.suffix||!options.suffix)options.suffix="";
+				if(undefined==options.suffix||!options.suffix)options.suffix="";debugger;
+				if(!options.rmdom)options.rmdom=1;
 				thiz.minWidth=options.minWidth?options.minWidth:600;
 				thiz.holder = _$G("cfmBox"+options.suffix);
 				if(thiz.holder){
@@ -690,21 +707,22 @@
 						//_$FadeOut(cc.holder,10);
 						cc.holder.style.display="none";
 						cc.backLayer.style.display="none";
-						if(cc.options.rmdom){
+						if(cc.options.rmdom==1){
 							cc.holder.outerHTML="";
 							cc.backLayer.outerHTML="";
 						}
 					}
-					
+					this.container={};
 				}else{
 					var thiz=this.container["$"+suffix];
 					//_$FadeOut(cc.holder,10);
 					thiz.holder.style.display="none";
 					thiz.backLayer.style.display="none";
-					if(thiz.options.rmdom){
+					if(thiz.options.rmdom==1){
 						thiz.holder.outerHTML="";
 						thiz.backLayer.outerHTML="";
 					}
+					delete this.container["$"+suffix];
 				}
 			};
 			innerCase.prototype.locate=function(suffix){
