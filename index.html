@@ -475,6 +475,7 @@
 		
 		function testCfmBox1(){
 			ConfirmCase.open({
+				suffix:11,
 				titleText:"提示",
 				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
 				btnOneText:"确定",
@@ -486,10 +487,11 @@
 				btnThreeText:"忽略",
 				clazzThree:"btn btn-black",
 				rmdom:true
-				});
+			});
 		}
 		function testCfmBox2(){
 			ConfirmCase.open({
+				suffix:12,
 				titleText:"提示",
 				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
 				btnOneText:"确定",
@@ -497,7 +499,7 @@
 					alert(2222222222222222);
 				},
 				btnTwoText:"取消"
-				});
+			});
 		}
 		
 		function test2(){
@@ -524,9 +526,7 @@
 		function test4(){
 			TipCase.show({
 				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
-				period:1000,
-				afterFunction:function(){
-				}
+				period:1500
 			});
 		}	
 		function opnSo(){
