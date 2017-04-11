@@ -484,8 +484,7 @@
 				},
 				btnTwoText:"取消",
 				btnThreeText:"忽略",
-				clazzThree:"btn btn-black",
-				rmdom:true
+				clazzThree:"btn btn-black"
 				});
 		}
 		function testCfmBox2(){
@@ -504,13 +503,11 @@
 			var a=_$G("cfmBox");
 			var b=_$G("",a,"btn");
 			console.log("-------------1-----------");
-			if(b)
 			for(var i=0;i<b.length;i++){
 				console.log(b[i].className);
 			}
 			console.log("-------------2-----------");
 			var c=_$T("div",a);
-			if(c)
 			for(var j=0;j<c.length;j++){
 				console.log(c[j].className);
 			}
@@ -590,28 +587,22 @@
 			*options.clazzOne
 			*options.clazzTwo
 			*options.clazzThree
-			*options.rmdom
 			**/
 			innerCase.prototype.open=function(options){
 				var thiz={};
 				thiz.context=this;
-				thiz.options=options;
 				if(undefined==options.suffix||!options.suffix)options.suffix="";
 				thiz.minWidth=options.minWidth?options.minWidth:600;
 				thiz.holder = _$G("cfmBox"+options.suffix);
-				if(thiz.holder){
-					thiz.backLayer=_$G("cfmbackLayer"+options.suffix);
-					thiz.mboxtit=_$G("cfmBox_header",thiz.holder);
-					thiz.mboxclr=_$G("cfmBox_closer",thiz.holder);
-					thiz.tittxt=_$G("cfmboxTit",thiz.holder);
-					thiz.mboxmsg=_$G("cfmboxMsg",thiz.holder);
-					thiz.mbox_btna=_$G("cfmBoxbtna",thiz.holder);
-					thiz.mbox_btnb=_$G("cfmBoxbtnb",thiz.holder);
-					thiz.mbox_btnc=_$G("cfmBoxbtnc",thiz.holder);
-					thiz.mboxbod=_$G("cfmBox_body",thiz.holder);
-				}else{
-					gen(thiz);
-				}
+				var clay,mboxtit,mboxclr,tittxt,mbox_btna,mbox_btnb,mbox_btnc;
+				thiz.backLayer=_$G("cfmbackLayer"+options.suffix);
+				thiz.mboxtit=_$G("cfmBox_header",thiz.holder);
+				thiz.mboxclr=_$G("cfmBox_closer",thiz.holder);
+				thiz.tittxt=_$G("cfmboxTit",thiz.holder);
+				thiz.mboxmsg=_$G("cfmboxMsg",thiz.holder);
+				thiz.mbox_btna=_$G("cfmBoxbtna",thiz.holder);
+				thiz.mbox_btnb=_$G("cfmBoxbtnb",thiz.holder);
+				thiz.mbox_btnc=_$G("cfmBoxbtnc",thiz.holder);
 				if(options.titleText){
 					thiz.tittxt.innerHTML=options.titleText;
 				}
@@ -690,10 +681,6 @@
 						//_$FadeOut(cc.holder,10);
 						cc.holder.style.display="none";
 						cc.backLayer.style.display="none";
-						if(cc.options.rmdom){
-							cc.holder.outerHTML="";
-							cc.backLayer.outerHTML="";
-						}
 					}
 					
 				}else{
@@ -701,10 +688,6 @@
 					//_$FadeOut(cc.holder,10);
 					thiz.holder.style.display="none";
 					thiz.backLayer.style.display="none";
-					if(thiz.options.rmdom){
-						thiz.holder.outerHTML="";
-						thiz.backLayer.outerHTML="";
-					}
 				}
 			};
 			innerCase.prototype.locate=function(suffix){
@@ -732,60 +715,12 @@
 				ly.style.height=pgh+"px";
 				hd.style.left=(pgw/2-(thiz.minWidth/2))+"px";
 				hd.style.top=-10000+"px";
-				thiz.mboxbod.style.maxHeight=pgh-200+"px";
+				_$G("cfmBox_body",hd).style.maxHeight=pgh-200+"px";
 				var mboxht=parseInt(hd.offsetHeight);
 				var mboxposy=(pgh/2-(mboxht/2));
 				hd.style.top=mboxposy+"px";
 			};
-			var gen=function(thiz){
-				thiz.backLayer=_$C("div");
-				thiz.backLayer.id="cfmbackLayer"+thiz.options.suffix;
-				thiz.backLayer.className="cfmbackLayer";
-				thiz.holder=_$C("div");
-				thiz.holder.id="cfmBox"+thiz.options.suffix;
-				thiz.holder.className="cfmBox";
-				thiz.mboxtit=_$C("div");
-				thiz.mboxtit.id="cfmBox_header";
-				thiz.mboxtit.className="cfmBox_header";
-				thiz.mboxclr=_$C("a");
-				thiz.mboxclr.id="cfmBox_closer";
-				thiz.mboxclr.className="cfmBox_closer";
-				thiz.mboxclr.href="javaScript:void(0)";
-				thiz.mboxclr.innerHTML="&times;";
-				thiz.tittxt=_$C("span");
-				thiz.tittxt.id="cfmboxTit";
-				thiz.mboxbod=_$C("div");
-				thiz.mboxbod.id="cfmBox_body";
-				thiz.mboxbod.className="cfmBox_body";
-				thiz.mboxmsg=_$C("p");
-				thiz.mboxmsg.id="cfmboxMsg";
-				var mboxfter=_$C("div");
-				mboxfter.className="cfmBox_footer";
-				thiz.mbox_btnc=_$C("a");
-				thiz.mbox_btnc.id="cfmBoxbtnc";
-				thiz.mbox_btnc.className="btn";
-				thiz.mbox_btnc.href="javaScript:void(0)";
-				thiz.mbox_btnb=_$C("a");
-				thiz.mbox_btnb.id="cfmBoxbtnb";
-				thiz.mbox_btnb.className="btn";
-				thiz.mbox_btnb.href="javaScript:void(0)";	
-				thiz.mbox_btna=_$C("a");
-				thiz.mbox_btna.id="cfmBoxbtna";
-				thiz.mbox_btna.className="btn btn-green";
-				thiz.mbox_btna.href="javaScript:void(0)";
-				_$A(thiz.mboxclr,thiz.mboxtit);
-				_$A(thiz.tittxt,thiz.mboxtit);
-				_$A(thiz.mboxmsg,thiz.mboxbod);
-				_$A(thiz.mbox_btnc,mboxfter);
-				_$A(thiz.mbox_btnb,mboxfter);
-				_$A(thiz.mbox_btna,mboxfter);
-				_$A(thiz.mboxtit,thiz.holder);
-				_$A(thiz.mboxbod,thiz.holder);
-				_$A(mboxfter,thiz.holder);
-				_$A(thiz.backLayer,document.body);
-				_$A(thiz.holder,document.body);
-				
-			};
+	
 			return new innerCase();
 		})();
 		
@@ -832,9 +767,9 @@
 				_$FadeIn(mctt);
 				if(undefined==options.period||!options.period)options.period=1500;
 				window.setTimeout(function(){if(options.afterFunction)options.afterFunction();_$FadeOut(mctt);},options.period);
-			};
+			}
 			return new innerCase();
-		})();
+		})()
 		
 		window.onresize=function(){
 			ConfirmCase.locate("All");
@@ -930,6 +865,41 @@
 			<li><a href="javaScript:">Separated link</a></li>
 		</ul>
 	</div>
+	<!--cfm Box   -->
+	<div id="cfmbackLayer" class="cfmbackLayer"></div>
+	<div id="cfmBox" class="cfmBox">
+		<div id="cfmBox_header" class="cfmBox_header">
+			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">&times;</a>
+			<span id="cfmboxTit">Tip</span>
+		</div>
+		<div id="cfmBox_body" class="cfmBox_body">
+			<p id="cfmboxMsg">Message...</p>
+		</div>
+		<div class="cfmBox_footer">
+			<a id="cfmBoxbtnc" class="btn" href="javaScript:">Ignore</a>
+			<a id="cfmBoxbtnb" class="btn-black btn" href="javaScript:">Cancel</a>
+			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
+		</div>
+	</div>
+
+	<!--cfm Box 1 -->
+	<div id="cfmbackLayer1" class="cfmbackLayer"></div>
+	<div id="cfmBox1" class="cfmBox">
+		<div id="cfmBox_header" class="cfmBox_header">
+			<a id="cfmBox_closer" href="javaScript:" class="cfmBox_closer">&times;</a>
+			<span id="cfmboxTit">Tip</span>
+		</div>
+		<div id="cfmBox_body" class="cfmBox_body">
+			<p id="cfmboxMsg">Message...</p>
+		</div>
+		<div class="cfmBox_footer">
+			<a id="cfmBoxbtnc" class="btn" href="javaScript:">Ignore</a>
+			<a id="cfmBoxbtnb" class="btn" href="javaScript:">Cancel</a>
+			<a id="cfmBoxbtna" class="btn btn-green" href="javaScript:">Confirm</a>
+		</div>
+	</div>
+
+	
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
