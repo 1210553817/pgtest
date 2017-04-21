@@ -501,7 +501,7 @@
 /***********common end************/
 		
 		function testCfmBox1(){
-			ConfirmCase.open({
+			PanelCase.open({
 				suffix:11,
 				titleText:"提示",
 				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
@@ -512,12 +512,11 @@
 				},
 				btnTwoText:"取消",
 				btnThreeText:"忽略",
-				clazzThree:"btn btn-black",
-				rmdom:true
+				clazzThree:"btn btn-black"
 			});
 		}
 		function testCfmBox2(){
-			ConfirmCase.open({
+			PanelCase.open({
 				suffix:12,
 				titleText:"提示",
 				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
@@ -525,13 +524,12 @@
 				btnOneFunction:function(){
 					alert(2222222222222222);
 				},
-				btnTwoText:"取消",
-				rmdom:true
+				btnTwoText:"取消"
 			});
 		}
 		
 		function test2(){
-			var a=_$G("cfmBox");
+			var a=_$G("cfmBox11");
 			var b=_$G("",a,"btn");
 			console.log("-------------1-----------");
 			if(b)
@@ -567,12 +565,12 @@
 		}
 		
 		function test5(){
-			ConfirmCase.open({
+			PanelCase.open({
 				titleText:"提示",
 				contentText:"西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气",
 				btnOneText:"确定",
 				btnOneFunction:function(){
-					ConfirmCase.open({
+					PanelCase.open({
 						suffix:1,
 						minWidth:400,
 						headColor:"#99CCFF",
@@ -580,11 +578,11 @@
 						contentText:"A西北地区东部至江南等地将出现大范围雨雪天气",
 						btnOneText:"确定",
 						btnOneFunction:function(){
-							ConfirmCase.close("All");
+							PanelCase.close("All");
 						},
 						btnTwoText:"取消",
 						btnTwoFunction:function(){
-							ConfirmCase.close();
+							PanelCase.close();
 						},
 						rmdom:true			
 					});
@@ -595,15 +593,15 @@
 			});
 				
 		//	window.setTimeout(function(){
-		//		ConfirmCase.close(1);
+		//		PanelCase.close(1);
 		//	},5000);
 		}
 		
 		function test6(){
-			ConfirmCase.close();
+			PanelCase.close();
 		}
 		
-		var ConfirmCase=(function(){
+		var PanelCase=(function(){
 			var isdraging=false;
 			var innerCase=function(){this.container={};};
 			/**Open
@@ -722,7 +720,7 @@
 						//_$FadeOut(cc.holder,10);
 						cc.holder.style.display="none";
 						cc.backLayer.style.display="none";
-						if(cc.options.rmdom){
+						if(cc.options.rmdom&&cc.holder){
 							cc.holder.outerHTML="";
 							cc.backLayer.outerHTML="";
 						}
@@ -733,7 +731,7 @@
 					//_$FadeOut(cc.holder,10);
 					thiz.holder.style.display="none";
 					thiz.backLayer.style.display="none";
-					if(thiz.options.rmdom){
+					if(thiz.options.rmdom&&thiz.holder){
 						thiz.holder.outerHTML="";
 						thiz.backLayer.outerHTML="";
 					}
@@ -902,7 +900,7 @@
 		})();
 		
 		window.onresize=function(){
-			ConfirmCase.locate("All");
+			PanelCase.locate("All");
 		};
     </script>
 </head>
