@@ -334,6 +334,12 @@
 		font-family:Microsoft Yahei,Heiti,arial,helvetica,sans-serif,SimHei;
 		max-width:800px;
 	}
+	.disable-select{
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
+    }
     </style>
 
     <script>
@@ -491,6 +497,14 @@
 			n[i] = _$Clone(o[i]);
 			return n;
 		}
+		
+		function _$Selectable(b){
+			if(b){
+				document.body.className = document.body.className.replace(' disable-select', '');
+			}else{
+				document.body.className+=' disable-select';
+			}
+		}
 		function stopBubble(e) {
 			if ( e && e.stopPropagation ) 
 			    e.stopPropagation(); 
@@ -512,7 +526,7 @@
 				},
 				btnTwoText:"取消",
 				btnThreeText:"忽略",
-				clazzThree:"btn btn-black"
+				draggable:true
 			});
 		}
 		function testCfmBox2(){
@@ -551,6 +565,7 @@
 		}
 		function test4(){
 			TipCase.show({
+				suffix:1234,
 				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
 				period:1500
 			});
@@ -619,6 +634,7 @@
 			*options.clazzOne
 			*options.clazzTwo
 			*options.clazzThree
+			*options.draggable
 			*options.rmdom
 			**/
 			innerCase.prototype.open=function(options){
@@ -709,7 +725,7 @@
 
 				this.container["$"+options.suffix]=thiz;
 				pos(thiz);
-				drag(thiz);
+				drag(thiz,options.draggable);
 			};
 			innerCase.prototype.close=function(suffix){
 				if(undefined==suffix||!suffix)suffix="";
@@ -819,7 +835,13 @@
 				_$A(thiz.holder,document.body);
 				
 			};
-			var drag=function (thiz){
+			var drag=function (thiz,b){
+				if(!b){
+					thiz.mboxtit.onmousedown=null;
+					document.body.onmousemove=null;
+					document.body.onmouseup=null;
+					return;
+				}
 				var dx,dy;
 				var dialeft,diatop;
 				thiz.mboxtit.onmousedown=function(ea){
@@ -831,23 +853,21 @@
 					dy = eaa.screenY-0;
 					dialeft = parseInt(thiz.holder.style.left);
 					diatop = parseInt(thiz.holder.style.top);
-					stopBubble(eaa);
+					_$Selectable(false);
 					isdraging=true;
 				}
 				document.body.onmousemove=function (eb){
-						if(!isdraging) return;
-						var ebb=eb;
-						if(!ebb){
-							ebb=window.event;
-						}
-						var mvx = ebb.screenX-dx;
-						var mvy = ebb.screenY-dy;
-						thiz.holder.style.left=(mvx+dialeft)+"px";
-						thiz.holder.style.top=(mvy+diatop)+"px";
-						stopBubble(ebb);
+					if(!isdraging) return;
+					var ebb=eb;
+					if(!ebb){
+						ebb=window.event;
+					}
+					var mvx = ebb.screenX-dx;
+					var mvy = ebb.screenY-dy;
+					thiz.holder.style.left=(mvx+dialeft)+"px";
+					thiz.holder.style.top=(mvy+diatop)+"px";
 				};
-				document.body.onmouseup=function (ec){isdraging=false;stopBubble(ec);};
-				document.body.onmouseout=function (ed){isdraging=false;stopBubble(ed);};
+				document.body.onmouseup=function (ec){isdraging=false;_$Selectable(true);};
 			}
 			return new innerCase();
 		})();
