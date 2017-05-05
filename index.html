@@ -593,7 +593,7 @@
 						contentText:"A西北地区东部至江南等地将出现大范围雨雪天气",
 						btnOneText:"确定",
 						btnOneFunction:function(){
-							PanelCase.close("All");
+							PanelCase.close("all");
 						},
 						btnTwoText:"取消",
 						btnTwoFunction:function(){
@@ -729,7 +729,7 @@
 			};
 			innerCase.prototype.close=function(suffix){
 				if(undefined==suffix||!suffix)suffix="";
-				if("All"==suffix){
+				if("all"==suffix){
 					var i;
 					for( i in this.container){
 						var cc=this.container[i];
@@ -756,7 +756,7 @@
 			};
 			innerCase.prototype.locate=function(suffix){
 				if(undefined==suffix||!suffix)suffix="";
-				if("All"==suffix){
+				if("all"==suffix){
 					var i;
 					for( i in this.container){
 						var cc=this.container[i];
@@ -928,7 +928,7 @@
 		})();
 		
 		window.onresize=function(){
-			PanelCase.locate("All");
+			PanelCase.locate("all");
 		};
     </script>
 </head>
