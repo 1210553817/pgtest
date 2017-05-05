@@ -838,8 +838,7 @@
 			var drag=function (thiz,b){
 				if(!b){
 					thiz.mboxtit.onmousedown=null;
-					document.body.onmousemove=null;
-					document.body.onmouseup=null;
+
 					return;
 				}
 				var dx,dy;
@@ -855,19 +854,28 @@
 					diatop = parseInt(thiz.holder.style.top);
 					_$Selectable(false);
 					isdraging=true;
+					this.style.cursor="move";
+					
+					document.body.onmousemove=function (eb){
+						if(!isdraging) return;
+						var ebb=eb;
+						if(!ebb){
+							ebb=window.event;
+						}
+						var mvx = ebb.screenX-dx;
+						var mvy = ebb.screenY-dy;
+						thiz.holder.style.left=(mvx+dialeft)+"px";
+						thiz.holder.style.top=(mvy+diatop)+"px";
+					};
+					document.body.onmouseup=function (ec){
+						document.body.onmousemove=null;
+						document.body.onmouseup=null;
+						isdraging=false;
+						_$Selectable(true);
+						thiz.mboxtit.style.cursor="pointer";
+					};
 				}
-				document.body.onmousemove=function (eb){
-					if(!isdraging) return;
-					var ebb=eb;
-					if(!ebb){
-						ebb=window.event;
-					}
-					var mvx = ebb.screenX-dx;
-					var mvy = ebb.screenY-dy;
-					thiz.holder.style.left=(mvx+dialeft)+"px";
-					thiz.holder.style.top=(mvy+diatop)+"px";
-				};
-				document.body.onmouseup=function (ec){isdraging=false;_$Selectable(true);};
+
 			}
 			return new innerCase();
 		})();
