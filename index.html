@@ -539,6 +539,7 @@
 					alert(2222222222222222);
 				},
 				btnTwoText:"取消"
+				
 			});
 		}
 		
@@ -599,7 +600,8 @@
 						btnTwoFunction:function(){
 							PanelCase.close();
 						},
-						rmdom:true			
+						rmdom:true,
+						draggable:true						
 					});
 				
 				},
@@ -838,7 +840,6 @@
 			var drag=function (thiz,b){
 				if(!b){
 					thiz.mboxtit.onmousedown=null;
-
 					return;
 				}
 				var dx,dy;
