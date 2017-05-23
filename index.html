@@ -513,111 +513,7 @@
 		}
 		
 /***********common end************/
-		
-		function testCfmBox1(){
-			PanelCase.open({
-				suffix:11,
-				titleText:"提示",
-				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
-				btnOneText:"确定",
-				btnOneFunction:function(){
-					alert(1111111111111111);
-					return true;
-				},
-				btnTwoText:"取消",
-				btnThreeText:"忽略",
-				draggable:true
-			});
-		}
-		function testCfmBox2(){
-			PanelCase.open({
-				suffix:12,
-				titleText:"提示",
-				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
-				btnOneText:"确定",
-				btnOneFunction:function(){
-					alert(2222222222222222);
-				},
-				btnTwoText:"取消"
-				
-			});
-		}
-		
-		function test2(){
-			var a=_$G("cfmBox11");
-			var b=_$G("",a,"btn");
-			console.log("-------------1-----------");
-			if(b)
-			for(var i=0;i<b.length;i++){
-				console.log(b[i].className);
-			}
-			console.log("-------------2-----------");
-			var c=_$T("div",a);
-			if(c)
-			for(var j=0;j<c.length;j++){
-				console.log(c[j].className);
-			}
-			
-		}
-		
-		function test3(){
 
-		
-		}
-		function test4(){
-			TipCase.show({
-				suffix:1234,
-				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
-				period:1500
-			});
-		}	
-		function opnSo(){
-			var fm=_$C("form");
-			fm.target="_blank";
-			fm.method = 'post';
-			fm.action="https://www.so.com";
-			_$A(fm,document.body);
-			fm.submit();
-		}
-		
-		function test5(){
-			PanelCase.open({
-				titleText:"提示",
-				contentText:"西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气",
-				btnOneText:"确定",
-				btnOneFunction:function(){
-					PanelCase.open({
-						suffix:1,
-						minWidth:400,
-						headColor:"#99CCFF",
-						titleText:"A提示",
-						contentText:"A西北地区东部至江南等地将出现大范围雨雪天气",
-						btnOneText:"确定",
-						btnOneFunction:function(){
-							PanelCase.close("all");
-						},
-						btnTwoText:"取消",
-						btnTwoFunction:function(){
-							PanelCase.close();
-						},
-						rmdom:true,
-						draggable:true						
-					});
-				
-				},
-				btnTwoText:"取消",
-				rmdom:true
-			});
-				
-		//	window.setTimeout(function(){
-		//		PanelCase.close(1);
-		//	},5000);
-		}
-		
-		function test6(){
-			PanelCase.close();
-		}
-		
 		var PanelCase=(function(){
 			var isdraging=false;
 			var innerCase=function(){this.container={};};
@@ -770,6 +666,7 @@
 					pos(thiz);
 				}
 			};
+			
 			/**
 			*private functions
 			*/
@@ -927,10 +824,115 @@
 			};
 			return new innerCase();
 		})();
-		
+
+/*******test*******/
 		window.onresize=function(){
 			PanelCase.locate("all");
 		};
+				
+		function testCfmBox1(){
+			PanelCase.open({
+				suffix:11,
+				titleText:"提示",
+				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
+				btnOneText:"确定",
+				btnOneFunction:function(){
+					alert(1111111111111111);
+					return true;
+				},
+				btnTwoText:"取消",
+				btnThreeText:"忽略",
+				draggable:true
+			});
+		}
+		function testCfmBox2(){
+			PanelCase.open({
+				suffix:12,
+				titleText:"提示",
+				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
+				btnOneText:"确定",
+				btnOneFunction:function(){
+					alert(2222222222222222);
+				},
+				btnTwoText:"取消"
+				
+			});
+		}
+		
+		function test2(){
+			var a=_$G("cfmBox11");
+			var b=_$G("",a,"btn-green");
+			console.log("-------------1-----------");
+			if(b)
+			for(var i=0;i<b.length;i++){
+				console.log(b[i]);
+			}
+			console.log("-------------2-----------");
+			var c=_$T("div",a);
+			if(c)
+			for(var j=0;j<c.length;j++){
+				console.log(c[j].className);
+			}
+			
+		}
+		
+		function test3(){
+
+		
+		}
+		function test4(){
+			TipCase.show({
+				suffix:1234,
+				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
+				period:1500
+			});
+		}	
+		function opnSo(){
+			var fm=_$C("form");
+			fm.target="_blank";
+			fm.method = 'post';
+			fm.action="https://www.so.com";
+			_$A(fm,document.body);
+			fm.submit();
+		}
+		
+		function test5(){
+			PanelCase.open({
+				titleText:"提示",
+				contentText:"西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气",
+				btnOneText:"确定",
+				btnOneFunction:function(){
+					PanelCase.open({
+						suffix:1,
+						minWidth:400,
+						headColor:"#99CCFF",
+						titleText:"A提示",
+						contentText:"A西北地区东部至江南等地将出现大范围雨雪天气",
+						btnOneText:"确定",
+						btnOneFunction:function(){
+							PanelCase.close("all");
+						},
+						btnTwoText:"取消",
+						btnTwoFunction:function(){
+							PanelCase.close();
+						},
+						rmdom:true,
+						draggable:true						
+					});
+				
+				},
+				btnTwoText:"取消",
+				rmdom:true
+			});
+				
+		//	window.setTimeout(function(){
+		//		PanelCase.close(1);
+		//	},5000);
+		}
+		
+		function test6(){
+			PanelCase.close();
+		}
     </script>
 </head>
 
