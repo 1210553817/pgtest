@@ -438,7 +438,7 @@
 			ele.style.opacity = val/100;
 		}
 
-		function _$FadeIn(elem, speed, op) {
+		function _$FadeIn(elem, speed, op,fun) {
 			elem.style.display = 'none';
 			speed = speed || 20;
 			op = op || 100;
@@ -450,10 +450,13 @@
 				val += 5;
 				if (val <= op) {
 					setTimeout(arguments.callee, speed)
+				}else{
+					if(fun)fun();
 				}
 			})();
 		}
 
+		function _$FadeOut(elem, speed, op,fun) {
 			speed = speed || 20;
 			op = op || 0;
 			var val = 100;
@@ -465,6 +468,7 @@
 				} else if (val < op) {
 					elem.style.display = 'none';
 					_$SetOpacity(elem,100);
+					if(fun)fun();
 				}
 			})();
 		}
@@ -819,7 +823,11 @@
 				mctt.style.top=(pgh/2-(mctth/2))+"px";
 				_$FadeIn(mctt);
 				if(undefined==options.period||!options.period)options.period=1500;
-				window.setTimeout(function(){if(options.afterFunction)options.afterFunction();_$FadeOut(mctt);},options.period);
+				window.setTimeout(function(){
+						if(options.afterFunction)options.afterFunction();
+						_$FadeOut(mctt,20,0,function(){mctt.outerHTML="";});
+						
+					},options.period);
 			};
 			return new innerCase();
 		})();
@@ -913,7 +921,12 @@
 						},
 						btnTwoText:"取消",
 						btnTwoFunction:function(){
-							PanelCase.close();
+							//PanelCase.close();
+							TipCase.show({
+								suffix:1111,
+								message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
+								period:1500
+							});
 						},
 						rmdom:true,
 						draggable:true						
