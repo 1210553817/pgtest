@@ -342,8 +342,8 @@ function parseQYUrls(){
 			rearr.push(result[1]);
 		}
 	}while (result!=null)
-	return rearr;
-	//return rearr.slice(19,rearr.length<320?rearr.length:320);
+	//return rearr;
+	return rearr.slice(9,rearr.length<330?rearr.length:330);
 }
 function mutiDowner(urls,indx){
 	if(urls.length<1||urls.length==indx){
