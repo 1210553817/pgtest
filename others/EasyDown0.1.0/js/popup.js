@@ -309,7 +309,10 @@ window.onload=function(){
 	});
 	dnbtn = _$G("defpop_mDown");
 	dnbtn.onclick=startDownload;
-
+	var sglbtn = _$G("defpop_single");
+	sglbtn.onclick=function(){
+		window.open("../popup.html", "newwindow");
+	};
 };
 function startDownload(){
 	opnCfmBoxA('нд╪Чобть',
@@ -339,8 +342,8 @@ function parseQYUrls(){
 			rearr.push(result[1]);
 		}
 	}while (result!=null)
-	//return rearr.slice(0,rearr.length<1000?rearr.length:1000);
-	return rearr.slice(19,rearr.length<320?rearr.length:320);
+	return rearr;
+	//return rearr.slice(19,rearr.length<320?rearr.length:320);
 }
 function mutiDowner(urls,indx){
 	if(urls.length<1||urls.length==indx){
