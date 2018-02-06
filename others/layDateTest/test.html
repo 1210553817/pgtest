@@ -156,11 +156,11 @@ function renderSeasonDate(options){
 				
  *   	2) 在beforeInit回调方法中设置值
 			initDateForm({beforeInit:function(param){
-					if(param.first&&"y"==param.type){
-						var cyear = new Date().getFullYear();
-						var dfy = (cyear-2)+"年 ~ "+cyear+"年";
-						this.value = dfy;
-					}
+				if(param.first&&"y"==param.type){
+					var cyear = new Date().getFullYear();
+					var dfy = (cyear-2)+"年 ~ "+cyear+"年";
+					this.value = dfy;
+				}
 			}});
  * @param options.form 要渲染的form的jquery对象，当form为空默认值为全页面
  * @param options.single 有值单个，无值默认范围	
