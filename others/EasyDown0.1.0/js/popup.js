@@ -222,7 +222,7 @@ function opnCfmBox(titx,msg,btnText1,fun1,btnText2,fun2,btnText3,fun3,mwidth,hea
 		mbox_btna.style.display="inline-block";
 		mbox_btna.onclick=function(){
 			if(fun1){
-				fun1.call(mbox,mboxbody);
+				fun1.call(mbox_btna,mboxbody);
 			}
 			//mbox.style.display="none";
 			//clay.style.display="none";
@@ -237,7 +237,7 @@ function opnCfmBox(titx,msg,btnText1,fun1,btnText2,fun2,btnText3,fun3,mwidth,hea
 		mbox_btnb.style.display="inline-block";
 		mbox_btnb.onclick=function(){
 			if(fun2){
-				fun2.call(mbox,mboxbody);
+				fun2.call(mbox_btnb,mboxbody);
 			}
 			// mbox.style.display="none";
 			// clay.style.display="none";
@@ -252,7 +252,7 @@ function opnCfmBox(titx,msg,btnText1,fun1,btnText2,fun2,btnText3,fun3,mwidth,hea
 		mbox_btnc.style.display="inline-block";
 		mbox_btnc.onclick=function(){
 			if(fun3){
-				fun3.call(mbox,mboxbody);
+				fun3.call(mbox_btnc,mboxbody);
 			}
 			// mbox.style.display="none";
 			// clay.style.display="none";
@@ -296,11 +296,15 @@ function opnCfmBoxA(tit,msg,at,ab,bt,bb,ct,cb){
 }
 var dwnFolder="";
 var dwnSubFolder="";
+var dwnStartIndx="";
+var dwnEndIndx="";
 var dwnFname="";
 var dnbtn = null;
 window.onload=function(){
-	dwnFolder = _getStorage("mfolderName");
-	dwnSubFolder = _getStorage("mfileIndex");
+	dwnFolder = _getStorage("dwnFolder");
+	dwnSubFolder = _getStorage("dwnSubFolder");	
+	dwnStartIndx = _getStorage("dwnStartIndx");
+	dwnEndIndx = _getStorage("dwnEndIndx");
 	chrome.downloads.onDeterminingFilename.addListener(function (downloadItem,suggest){
 		suggest({
 			filename:dwnFolder+"\\"+dwnSubFolder+"\\"+dwnFname,
@@ -313,14 +317,27 @@ window.onload=function(){
 };
 function startDownload(){
 	opnCfmBoxA('文件下载',
-	'文件夹: <input id="beforeDownName" type="text" value="'+dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;序号: <input id="beforeDownIndx" type="text" value="'+dwnSubFolder+'" style="width:80px;"/>',
+	'<div style="display:inline-block;width:50px;">文件夹:</div></div><input id="beforeDownName" type="text" value="'+dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;<div style="display:inline-block;width:50px;">序号:</div><input id="beforeDownIndx" type="text" value="'+dwnSubFolder+'" style="width:80px;"/>'
+	+'<br/><br/><div style="display:inline-block;width:50px;">开始:</div><input id="beforeDownStart" type="text" value="'+dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;<div style="display:inline-block;width:50px;">结束:</div><input id="beforeDownEnd" type="text" value="'+dwnEndIndx+'" style="width:80px;"/>',
 	"开始",function(mbdy){
 		var fbf=_$G("beforeDownName",mbdy);
-		var fin=_$G("beforeDownIndx",mbdy);
+		var fin=_$G("beforeDownIndx",mbdy);		
+		var fst=_$G("beforeDownStart",mbdy);
+		var fen=_$G("beforeDownEnd",mbdy);
 		dwnFolder = fbf.value;
 		dwnSubFolder = fin.value;
-		_setStorage("mfolderName", dwnFolder);
-		_setStorage("mfileIndex", dwnSubFolder);
+		_setStorage("dwnFolder", dwnFolder);
+		_setStorage("dwnSubFolder", dwnSubFolder);
+		var dnsr=parseInt(fst.value);
+		var dnen=parseInt(fen.value);
+		if(dnsr>0){
+			dwnStartIndx = dnsr;
+			_setStorage("dwnStartIndx", dwnStartIndx);
+		}
+		if(dnen>1&&dnen>dnsr&&dnen<=rearr.length){
+			dwnEndIndx = dnen;
+			_setStorage("dwnEndIndx", dwnEndIndx);
+		}
 		var parr = parseQYUrls();
 		mutiDowner(parr,0);
 		dnbtn.onclick=null;
@@ -338,9 +355,11 @@ function parseQYUrls(){
 		if(_$Ava(result)&&result[2]=="http"){
 			rearr.push(result[1]);
 		}
-	}while (result!=null)
-	//return rearr.slice(0,rearr.length<1000?rearr.length:1000);
-	return rearr.slice(19,rearr.length<320?rearr.length:320);
+	}while(result!=null)
+	var dnsr=parseInt(dwnStartIndx);
+	var dnen=parseInt(dwnEndIndx);
+	return rearr.slice(dnsr>0?dnsr:0,dnen>1?dnen:rearr.length);
+
 }
 function mutiDowner(urls,indx){
 	if(urls.length<1||urls.length==indx){
@@ -349,7 +368,7 @@ function mutiDowner(urls,indx){
 		return;
 	}
 	var dnurl=urls[indx];
-	dnbtn.innerHTML=(indx+1)+" / "+urls.length;
+	dnbtn.innerHTML=(indx+1)+" / "+urls.length+"("+dwnStartIndx+"~"+dwnEndIndx+")";
 	dwnFname = prefixInteger(indx+1,4)+".ts";
 	chrome.downloads.download({
 		url: dnurl,
