@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>3.js测试六-二</title>
+  </head>
+  <body onload="init()">
+    <div id="mainCvshd" style="border:1px solid #cdcdef;"></div>
+  </body>
+  <script type="text/javascript" src="three.js"></script> 
+  <script type="text/javascript">
+			window.onload=function(){
+				initTwModel();
+			}
+			var dom_intersected,dom_oriColor;
+			function initTwModel(){
+				//Params
+				var layerNum=5;//层数
+				var layerHeight=30;//层高
+				var layerGaps=5;//间隔
+				var areaNum=4;//面数
+				
+				var WIDTH = 400,HEIGHT = 300;
+				
+				var VIEW_ANGLE = 24,//25
+					ASPECT = WIDTH / HEIGHT,
+					NEAR = 0.1,
+					FAR = 10000;
+					
+				/* 初始化 */
+				var scene = new THREE.Scene();
+				var	renderer = new THREE.WebGLRenderer({ alpha: true , antialias: true});
+				renderer.shadowMapType=THREE.PCFSoftShadowMap;
+				renderer.setSize(WIDTH , HEIGHT);
+				document.getElementById("mainCvshd").appendChild(renderer.domElement);
+				/* 灯光 */
+				var ambientLight=new THREE.AmbientLight("#050505");
+				scene.add(ambientLight);
+				var spotLight=new THREE.SpotLight(0xffffff);
+				spotLight.position.set(100,300,400);
+				spotLight.castShadow=true;
+				scene.add(spotLight);
+				/*相机*/
+				var	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR); 
+				camera.position.set(0,80, 600);//(0,0, 600)
+				camera.rotation.x=-0.3;//-0.2
+				scene.add(camera);
+				/* 显示对象 */
+				var verlen,cbarr=[];
+				for(var i=0;i<layerNum;i++){
+					var oriy=i*(-layerHeight-layerGaps);
+					var lenxa=Math.abs(oriy);
+					var lenxb=Math.abs(-oriy+layerHeight);
+					var cylinder = new THREE.CylinderGeometry(lenxa,lenxb,layerHeight,areaNum,1,false,0,Math.PI*2);
+					var material = new THREE.MeshLambertMaterial({color:getRenderColoe(i)});
+					var mesh = new THREE.Mesh(cylinder,material);
+					mesh.position.set(0,oriy,0);
+					mesh.rotation.set(0,-8,0);
+					mesh.castShadow=true;
+					scene.add(mesh);
+					//if(i==0)
+					cbarr.push(mesh);
+
+				}
+				/*init animation*/
+				if(cbarr.length>0){
+					(function anime(){
+						for(var j=0;j<cbarr.length;j++){
+							cbarr[j].rotation.y += 0.01;
+						}
+						renderer.render(scene, camera);
+						return requestAnimationFrame(anime);
+					})()
+				}
+				
+				//init Events
+				var raycaster = new THREE.RayCaster();
+				var mouse = new THREE.Vector2();
+				renderer.domElement.addEventListener("mousemove",mousemove);
+				function mousemove(e){
+					mouse.x = (e.clientX-12) / renderer.domElement.clientWidth*2-1;
+					mouse.y = -((e.clientY-12) / renderer.domElement.clientHeight*2)+1;
+					raycaster.setFromCamera(mouse,camera);
+					var intersects = raycaster.intersectObjects(scene.children);
+					var ndom_intersected,ndom_oriColor;
+					if(intersects.length){
+					    ndom_intersected = intersects[0].object;
+						ndom_oriColor = ndom_intersected.material.color.getHex();
+						ndom_intersected.material.color.set(0xfffafa);
+						if(dom_intersected!=ndom_intersected){
+							if(dom_intersected)dom_intersected.material.color.set(dom_oriColor);
+							dom_intersected=ndom_intersected;
+							dom_oriColor=ndom_oriColor;
+						}
+					}else{
+						if(dom_intersected){
+							dom_intersected.material.color.set(dom_oriColor);
+							dom_intersected=null;
+						}
+					}
+					
+				}
+				//init texts
+
+			}
+			
+			function getRenderColoe(ind){
+				var renderColors=[0xFFFF00,0xFE6161,0x92D050,0x00B0F0,0xFFFFCC,0xE2C6FD];
+				if(ind<renderColors.length) return renderColors[ind];
+				return renderColors[ind%renderColors.length];
+				
+			}
+			
+  </script>
+</html>
