@@ -360,7 +360,7 @@ function parseQYUrls(){
 	}while(result!=null)
 	var dnsr=parseInt(dwnStartIndx);
 	var dnen=parseInt(dwnEndIndx);
-	return rearr.slice(dnsr>=0?(dnsr+1):0,dnsr>=0?(rearr.length-dnen-1):(rearr.length-1));
+	return rearr.slice(dnsr>=0?(dnsr+1):0,dnsr>=0?(rearr.length-dnen):(rearr.length));
 
 }
 function mutiDowner(urls,indx){
@@ -370,7 +370,7 @@ function mutiDowner(urls,indx){
 		return;
 	}
 	var dnurl=urls[indx];
-	dnbtn.innerHTML=(indx+1)+" / "+urls.length+"("+dwnStartIndx+" ~ "+dwnEndIndx+")";
+	dnbtn.innerHTML=(indx+1)+" / "+urls.length+" ( "+dwnStartIndx+" ~ "+dwnEndIndx+" )";
 	dwnFname = prefixInteger(indx+1,4)+".ts";
 	chrome.downloads.download({
 		url: dnurl,
