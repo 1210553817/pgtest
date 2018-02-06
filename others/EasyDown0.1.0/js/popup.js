@@ -312,13 +312,15 @@ window.onload=function(){
 		});
 	});
 	dnbtn = _$G("defpop_mDown");
-	dnbtn.onclick=startDownload;
+	dnbtn.onclick=startDownload;	
+	var sglbtn = _$G("defpop_single");
+	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
 
 };
 function startDownload(){
 	opnCfmBoxA('文件下载',
 	'<div style="display:inline-block;width:50px;">文件夹:</div></div><input id="beforeDownName" type="text" value="'+dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;<div style="display:inline-block;width:50px;">序号:</div><input id="beforeDownIndx" type="text" value="'+dwnSubFolder+'" style="width:80px;"/>'
-	+'<br/><br/><div style="display:inline-block;width:50px;">开始:</div><input id="beforeDownStart" type="text" value="'+dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;<div style="display:inline-block;width:50px;">结束:</div><input id="beforeDownEnd" type="text" value="'+dwnEndIndx+'" style="width:80px;"/>',
+	+'<br/><br/><div style="display:inline-block;width:50px;">去头数:</div><input id="beforeDownStart" type="text" value="'+dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="'+dwnEndIndx+'" style="width:80px;"/>',
 	"开始",function(mbdy){
 		var fbf=_$G("beforeDownName",mbdy);
 		var fin=_$G("beforeDownIndx",mbdy);		
@@ -330,11 +332,11 @@ function startDownload(){
 		_setStorage("dwnSubFolder", dwnSubFolder);
 		var dnsr=parseInt(fst.value);
 		var dnen=parseInt(fen.value);
-		if(dnsr>0){
+		if(dnsr>=0){
 			dwnStartIndx = dnsr;
 			_setStorage("dwnStartIndx", dwnStartIndx);
 		}
-		if(dnen>1&&dnen>dnsr&&dnen<=rearr.length){
+		if(dnen>=0){
 			dwnEndIndx = dnen;
 			_setStorage("dwnEndIndx", dwnEndIndx);
 		}
@@ -358,7 +360,7 @@ function parseQYUrls(){
 	}while(result!=null)
 	var dnsr=parseInt(dwnStartIndx);
 	var dnen=parseInt(dwnEndIndx);
-	return rearr.slice(dnsr>0?dnsr:0,dnen>1?dnen:rearr.length);
+	return rearr.slice(dnsr>=0?(dnsr+1):0,dnsr>=0?(rearr.length-dnen-1):(rearr.length-1));
 
 }
 function mutiDowner(urls,indx){
@@ -368,7 +370,7 @@ function mutiDowner(urls,indx){
 		return;
 	}
 	var dnurl=urls[indx];
-	dnbtn.innerHTML=(indx+1)+" / "+urls.length+"("+dwnStartIndx+"~"+dwnEndIndx+")";
+	dnbtn.innerHTML=(indx+1)+" / "+urls.length+"("+dwnStartIndx+" ~ "+dwnEndIndx+")";
 	dwnFname = prefixInteger(indx+1,4)+".ts";
 	chrome.downloads.download({
 		url: dnurl,
