@@ -129,14 +129,14 @@ div{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index:9997;
+	z-index:9999;
 }
 .cfmBox {
 	display:none;
 	position:fixed;
 	width:30%;
 	font-family:Microsoft Yahei,Heiti,arial,helvetica,sans-serif,SimHei;
-	z-index: 9998;
+	z-index: 9999;
 	background-color: #fff;
 	border: 1px solid #cdcdcd;
 	-webkit-border-radius: 4px;
@@ -225,6 +225,7 @@ div{
 					<textarea id="defpop_txts" style="resize:none;width:100%;height:200px;margin-top:2px;"></textarea><br>
 					<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
 						<td align="center">
+							<a id="defpop_single"  class="btn btn-mini btn-green" style="margin-left:2px;">独立页面</a>
 							<a id="defpop_mDown"  class="btn btn-mini btn-green" style="margin-left:2px;">开始下载</a>
 						</td>
 					</td></tr></tbody></table>
@@ -234,6 +235,7 @@ div{
 	</table>
 </div>
 <!--confirm Box-->
+<div id="cfmbackLayer" class="cfmbackLayer"></div>
 <div id="cfmBox" class="cfmBox">
 	<div id="cfmBox_header" class="cfmBox_header">
 		<a id="cfmBox_closer" class="cfmBox_closer">×</a>
@@ -248,4 +250,3 @@ div{
 		<a id="cfmBoxbtnc" class="btn btn-mini">Ignore</a>
 	</div>
 </div>
-<div id="cfmbackLayer" class="cfmbackLayer"></div>

@@ -1,19 +1,15 @@
 ﻿{
-	"name":"EasyDown",
-	"version":"0.1.0",
+	"name":"EasyMark",
+	"version":"0.2.1",
 	"manifest_version":2,
-	"description":"视频下载。Email:mymbox@126.com",
+	"description":"书签备份/还原、书签集备份/还原、不同书签集之间切换。Email:mymbox@126.com",
 	"icons":{"16":"imgs/icon48.png","48":"imgs/icon48.png","128":"imgs/icon48.png"},
-	"permissions":["contextMenus","tabs","downloads"],
+	"permissions":["contextMenus","tabs","bookmarks","downloads"],
 	"browser_action":{
 		"default_icon":"imgs/icon48.png",
-		"default_title":"EasyDown",
+		"default_title":"同步书签",
 		"default_popup":"popup.html"
 	},
-	"options_ui":{
-        "page": "popup.html",
-        "chrome_style": true
-    },
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 
 }
