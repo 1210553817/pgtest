@@ -448,6 +448,6 @@ function getYkDownUrl(stms,indx,txs,aft){
 	var iurl = itm.m3u8_url;
 	Ajax.get(iurl,function(rst){
 		txs.push(rst);
-		getYkDownUrl(stms,indx+1,txs,aft)
+		getYkDownUrl(stms,indx+1,txs,aft);
 	});
 }
