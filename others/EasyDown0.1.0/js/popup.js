@@ -294,6 +294,48 @@ function opnCfmBoxA(tit,msg,at,ab,bt,bb,ct,cb){
 	msg,at,ab,bt,bb,ct,cb,
 	null,"#efefef","btn btn-mini btn-green",bcl);
 }
+/*tool fun*/
+function prefixInteger(num, n) {
+	return (Array(n).join(0) + num).slice(-n);
+}
+var Ajax = function(){};
+Ajax.getHttpRequest = function () {
+    if (window.XMLHttpRequest) {
+        return new XMLHttpRequest();
+    } else if (window.createRequest) {
+        return window.createRequest();
+    }
+    var prefixes = ["MSXML2", "Microsoft", "MSXML", "MSXML3"];
+    for (var i = 0; i < prefixes.length; i++) {
+        try { return new ActiveXObject(prefixes[i] + ".XmlHttp"); }
+        catch (ex) { }
+    }
+    throw new Error("Could not find an installed XML parser.");
+};
+
+Ajax.get = function (url, callback) {
+    var req = Ajax.getHttpRequest();
+    req.open("GET", url, true);
+    req.onreadystatechange = function () {
+        if (req.readyState == 4) {
+            if (callback) callback(req.responseText);
+        }
+    };
+    req.send(null);
+};
+
+Ajax.post = function (url, data, callback) {
+    var req = Ajax.getHttpRequest();
+    req.open("POST", url, true);
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.onreadystatechange = function () {
+        if (req.readyState == 4) {
+            if (callback) callback(req.responseText);
+        }
+    };
+    req.send(data);
+};
+/**downStart**/
 var dwnFolder="";
 var dwnSubFolder="";
 var dwnStartIndx="";
@@ -315,6 +357,8 @@ window.onload=function(){
 	dnbtn.onclick=startDownload;	
 	var sglbtn = _$G("defpop_single");
 	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
+	var ykbtn = _$G("defpop_ykpaz");
+	ykbtn.onclick=parseYkUrls;
 
 };
 function startDownload(){
@@ -340,14 +384,14 @@ function startDownload(){
 			dwnEndIndx = dnen;
 			_setStorage("dwnEndIndx", dwnEndIndx);
 		}
-		var parr = parseQYUrls();
+		var parr = parseUrls();
 		mutiDowner(parr,0);
 		dnbtn.onclick=null;
 	},
 	"È¡Ïû");
 }
 
-function parseQYUrls(){
+function parseUrls(){
 	var dtxt = _$G("defpop_txts").value;
 	var rearr=[];
 	var reg = new RegExp("((http).*)","g");
@@ -382,6 +426,28 @@ function mutiDowner(urls,indx){
 		},200);
 	});
 }
-function prefixInteger(num, n) {
-	return (Array(n).join(0) + num).slice(-n);
+/**youku url parse**/
+function parseYkUrls(){
+	var txtarea = _$G("defpop_txts");
+	var dtxt = txtarea.value;
+	dtxt=dtxt.replace(/json\d+\(\{/,"{").replace(/\}\}\)/,"}}");
+	var dato = eval("("+dtxt+")");
+	var stms = dato.data.stream;
+	var dtxts=[];
+	getYkDownUrl(stms,0,dtxts,function(){
+		txtarea.value=dtxts.join("");
+	});
+	
+}
+function getYkDownUrl(stms,indx,txs,aft){
+	if(indx==stms.length){
+		aft.call(null);
+		return;
+	}
+	var itm = stms[indx];
+	var iurl = itm.m3u8_url;
+	Ajax.get(iurl,function(rst){
+		txs.push(rst);
+		getYkDownUrl(stms,indx+1,txs,aft)
+	});
 }

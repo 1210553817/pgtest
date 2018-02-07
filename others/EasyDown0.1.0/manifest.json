@@ -4,7 +4,12 @@
 	"manifest_version":2,
 	"description":"视频下载。Email:mymbox@126.com",
 	"icons":{"16":"imgs/icon48.png","48":"imgs/icon48.png","128":"imgs/icon48.png"},
-	"permissions":["contextMenus","tabs","downloads"],
+	"permissions":[
+		"contextMenus",
+		"tabs",
+		"downloads",
+		"http://*/"
+	],
 	"browser_action":{
 		"default_icon":"imgs/icon48.png",
 		"default_title":"EasyDown",
