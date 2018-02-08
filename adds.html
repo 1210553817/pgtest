@@ -529,7 +529,7 @@
 		}
 		
 	/***********common end************/
-
+	var $PNLOFFY;
 	var PanelCase = (function() {
 		var isdraging = false;
 		var innerCase = function() {
@@ -862,7 +862,13 @@
 				mboxht = pgh;
 				document.body.style.overflow="hidden";
 			}
-			var mboxposy = (pgh/2 - mboxht/2);
+			var mboxposy = pgh/2 - mboxht/2;
+			if(_$Ava($PNLOFFY)){
+				if(mboxposy>$PNLOFFY)mboxposy=mboxposy-$PNLOFFY;
+			}else{
+				$PNLOFFY = mboxposy*0.4;
+				mboxposy = mboxposy*0.6
+			}
 			hd.style.top = mboxposy + "px";
 		};
 		var drag = function(thiz, b) {
