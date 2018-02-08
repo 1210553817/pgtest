@@ -860,7 +860,6 @@
 			if(mboxht>pgh){
 				thiz.mboxbod.style.height=(pgh-132)+"px";
 				mboxht = pgh;
-				document.body.style.overflow="hidden";
 			}
 			var mboxposy = pgh/2 - mboxht/2;
 			if(_$Ava($PNLOFFY)){
@@ -870,6 +869,7 @@
 				mboxposy = mboxposy*0.6
 			}
 			hd.style.top = mboxposy + "px";
+			document.body.style.overflow="hidden";
 		};
 		var drag = function(thiz, b) {
 			if (!b) {
