@@ -566,13 +566,7 @@
 			thiz.options = options;
 			if (_$Null(options.suffix))
 				options.suffix = "";
-			if (isPercent(options.minWidth)) { //百分比支持了
-				var carr = getPgsz();
-				var pgw = carr[0];
-				thiz.minWidth = parseFloat(options.minWidth) / 100 * pgw;
-			} else {
-				thiz.minWidth = options.minWidth ? parseInt(options.minWidth) : 600;
-			}
+
 			thiz.holder = _$G("cfmBox" + options.suffix);
 			if (_$Null(thiz.holder)) {
 				thiz.backLayer = _$C("div");
@@ -764,7 +758,6 @@
 			thiz.mboxclr.style.textDecoration = "none";
 			thiz.mboxclr.style.background = "";
 			_$SetOpacity(thiz.mboxclr, 100);
-			thiz.holder.style.width = thiz.minWidth + "px";
 			if(options.headColor){thiz.mboxtit.style.backgroundColor=options.headColor;thiz.mboxclr.style.backgroundColor=options.headColor;}
 			if (options.clazzOne)
 				thiz.mbox_btna.className = options.clazzOne;
@@ -850,15 +843,24 @@
 			var pgh = carr[1];
 			ly.style.width = pgw + "px";
 			ly.style.height = pgh + "px";
+			thiz.mboxbod.style.height="auto";
+			if (isPercent(thiz.options.minWidth)) { //百分比支持了
+				var carr = getPgsz();
+				var pgw = carr[0];
+				thiz.minWidth = parseFloat(thiz.options.minWidth) / 100 * pgw;
+				if(thiz.minWidth<300)thiz.minWidth=300;
+			} else {
+				thiz.minWidth = thiz.options.minWidth ? parseInt(thiz.options.minWidth) : 600;
+			}
+			thiz.holder.style.width = thiz.minWidth + "px";
 			hd.style.left = (pgw/2 - thiz.minWidth/2) + "px";
-			hd.style.top = -10000 + "px";
-			thiz.mboxbod.style.maxHeight = pgh - 100 + "px";
 			if(thiz.options.bodyHeight){
 				thiz.mboxbod.style.height = thiz.options.bodyHeight + "px";
 			}
 			var mboxht = parseInt(hd.offsetHeight);
+			console.log(mboxht);
 			if(mboxht>pgh-20){
-				thiz.mboxbod.style.height=pgh-120;
+				thiz.mboxbod.style.height=(pgh-144)+"px";
 				mboxht = pgh-10;
 			}
 			var mboxposy = (pgh/2 - mboxht/2);
@@ -1015,9 +1017,9 @@
 			PanelCase.open({
 				suffix:11,
 				minWidth:"50%",//宽度
-				bodyHeight:200,//高度
+				//bodyHeight:200,//高度
 				titleText:"提示",
-				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
+				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
 				btnOneText:"确定",
 				btnOneFunction:function(){
 					alert("Button one clicked...");
