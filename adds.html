@@ -702,18 +702,12 @@
 			thiz.mboxclr.style.background = "";
 			_$SetOpacity(thiz.mboxclr, 100);
 			if(options.headColor){thiz.mboxtit.style.backgroundColor=options.headColor;thiz.mboxclr.style.backgroundColor=options.headColor;}
-			if (options.clazzOne)
-				thiz.mbox_btna.className = options.clazzOne;
-			if (options.clazzTwo)
-				thiz.mbox_btnb.className = options.clazzTwo;
-			if (options.clazzThree)
-				thiz.mbox_btnc.className = options.clazzThree;
-			if (options.clazzFour)
-				thiz.mbox_btnd.className = options.clazzFour;
-
+			if (options.clazzOne)thiz.mbox_btna.className = options.clazzOne;
+			if (options.clazzTwo)thiz.mbox_btnb.className = options.clazzTwo;
+			if (options.clazzThree)thiz.mbox_btnc.className = options.clazzThree;
+			if (options.clazzFour)thiz.mbox_btnd.className = options.clazzFour;
 			thiz.holder.style.display = "block";
 			thiz.backLayer.style.display = "block";
-
 			this.container["$" + options.suffix] = thiz;
 			pos(thiz);
 			drag(thiz, options.draggable);
@@ -770,8 +764,7 @@
 			}
 		};
 		innerCase.prototype.getContent = function(suffix) {
-			if (_$Null(suffix))
-				suffix = "";
+			if (_$Null(suffix))suffix = "";
 			var thiz = this.container["$" + suffix];
 			return thiz.mboxbod;
 		};
