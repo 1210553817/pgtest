@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -65,7 +65,7 @@ initDateForm({beforeInit:function(params){
 		this.value = dfy;
 	}
 },afterInit:function(apm){//初始化完成后调
-	if(apm.first&&"worldId"==apm.id){
+	if("worldId"==apm.id){
 		console.log("------------worldId inited------------");
 		console.log(apm);
 		console.log("------------worldId inited------------");
@@ -90,7 +90,7 @@ function renderSeasonDate(options){
 		options.beforeInit.call(ohd,{});
 		if(!isNull(ohd.value))dfs=ohd.value;
 	}
-   $Date.render({  
+   $Date.render({
 	elem: ohd,
 	type: 'month',
 	value: dfs,
@@ -99,15 +99,15 @@ function renderSeasonDate(options){
 	btns: ['clear', 'confirm'],
 	ready: function(value, date, endDate){
 		var hd = $("#layui-laydate"+ele.attr("lay-key"));  
-		if(hd.length>0){  
-			hd.click(function(){  
+		if(hd.length>0){
+			hd.click(function(){
 				ren($(this));  
 			});  
-		}  
+		}
 		ren(hd);				
 	},  
 	done: function(value, date, endDate){
-		if(!isNull(date)&&date.month>0&&date.month<5){  
+		if(!isNull(date)&&date.month>0&&date.month<5){
 			ele.attr("startDate",date.year+"-"+date.month);  
 		}else{ele.attr("startDate","");}
 		if(!isNull(endDate)&&endDate.month>0&&endDate.month<5){  
@@ -115,10 +115,10 @@ function renderSeasonDate(options){
 		}else{ele.attr("endDate","");} 
 	},
 	inited: function(value, date, endDate){
-		if(!isNull(dfs)&&!isNull(date)&&date.month>0&&date.month<5){  
+		if(!isNull(dfs)&&!isNull(date)&&date.month>0&&date.month<5){
 			ele.attr("startDate",date.year+"-"+date.month);  
 		}else{ele.attr("startDate","");}
-		if(!isNull(dfs)&&!isNull(endDate)&&endDate.month>0&&endDate.month<5){  
+		if(!isNull(dfs)&&!isNull(endDate)&&endDate.month>0&&endDate.month<5){
 			ele.attr("endDate",endDate.year+"-"+endDate.month)  
 		}else{ele.attr("endDate","");}
 		if(!optn&&!isNull(options.afterInit)){
@@ -128,12 +128,12 @@ function renderSeasonDate(options){
   });  
   var ren=function(thiz){
 		var mls=thiz.find(".laydate-month-list");  
-		mls.each(function(i,e){ 
-			$(this).find("li").each(function(inx,ele){  
+		mls.each(function(i,e){
+			$(this).find("li").each(function(inx,ele){
 				var cx = ele.innerHTML;  
-				if(inx<4){  
+				if(inx<4){
 					ele.innerHTML=cx.replace(/月/g,"季度");  
-				}else{ 
+				}else{
 					ele.style.display="none";  
 				}  
 			});  

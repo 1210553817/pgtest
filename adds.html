@@ -308,7 +308,7 @@
 	.cfmBox_footer{
 		padding:10px;
 		margin-bottom: 0;
-		text-align: right;
+		text-align: center;
 		background-color: #f5f5f5;
 		border-top: 1px solid #ddd;
 		-webkit-border-radius: 0 0 6px 6px;
@@ -347,186 +347,166 @@
     </style>
 
     <script>
-/**common start**/
-		function _$G(e,p,clz){
-			if(p){
-				var cs=p.getElementsByTagName("*");
-				var i,c,arr=new Array();
-				for(i=0;i<cs.length;i++){
-					c=cs[i];
-					if(e){
-						if(e==c.id){
-							return c;
-						}
-					}else{
-						if(clz){
-							var cclz=c.className;
-							if(cclz){
-								var czs=cclz.split(/\s+/);
-								var j,cz,b=false;
-								for(j=0;j<czs.length;j++){
-									cz=czs[j];
-									if(cz==clz){
-										b=true;
-									}
-								}
-								if(b){
-									arr.push(c);
-								}
-							}
-						}else{
-							return null;
-						}
-					}
-				}
-				return arr;
-			}else{
-				return document.getElementById(e);
-			}
-		}
-		function _$T(t,p){
-			var cs=[];
-			if(p){
-				cs=p.getElementsByTagName(t);
-			}else{
-				cs=document.getElementsByTagName(t);
-			}
-			return cs;
-		}
-		function _$C(e){
-			return document.createElement(e);
-		}
-		function _$A(c,p){
-			p.appendChild(c);
-		}
-		function _$IE() {
-			if (!!window.ActiveXObject || "ActiveXObject" in window)
-				return true;
-			else
-				return false;
-		}
-		function _$Ava(a) {
-			if ( typeof(a)=="undefined" || null==a || ""==a || a==undefined) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-		function _$Null(a) {
-			return !_$Ava(a);
-		}
-		function isPercent(str) {
-			var reg = new RegExp("^\\d+\\.?\\d*%$");
-			return reg.test(str);
-		}
-		function isInt(str) {
-			var reg = new RegExp("^[1-9][0-9]*$");
-			return reg.test(str);
-		}
-		function isNum(str) {
-			var reg = new RegExp("^\\d+\\.?\\d*$");
-			return reg.test(str);
-		}
-		function getPgsz(){
-			var dmd=document.compatMode=="CSS1Compat";
-			var r=new Array();
-			var wa=dmd?document.documentElement.clientWidth:document.body.clientWidth;
-			var ha=dmd?document.documentElement.clientHeight:document.body.clientHeight;
-			r.push(wa);
-			r.push(ha);
-			return r;
-		}
-		function getPglen(){
-			var dmd=document.compatMode=="CSS1Compat";
-			var r=new Array();
-			var wa=dmd?document.documentElement.scrollWidth:document.body.scrollWidth;
-			var ha=dmd?document.documentElement.scrollHeight:document.body.scrollHeight;
-			var pgsiz=getPgsz();
-			r.push(Math.max(wa,pgsiz[0]));
-			r.push(Math.max(ha,pgsiz[1]));
-			return r;
-		}
-		function _$SetOpacity(ele,val){
-			ele.style.filter="alpha(opacity="+val+")";
-			ele.style.opacity = val/100;
-		}
-
-		function _$FadeIn(elem, speed, op,fun) {
-			elem.style.display = 'none';
-			speed = speed || 20;
-			op = op || 100;
-			_$SetOpacity(elem, 0);
-			elem.style.display = 'block';
-			var val = 0;
-			(function() {
-				_$SetOpacity(elem, val);
-				val += 5;
-				if (val <= op) {
-					setTimeout(arguments.callee, speed)
+	/**common start**/
+	function _$G(e){
+		return document.getElementById(e);
+	}
+	function _$C(e){
+		return document.createElement(e);
+	}
+	function _$A(c,p){
+		p.appendChild(c);
+	}
+	var _$P=function(g,p,s){
+		var oid;
+		try{
+			if(_$Ava(p)){
+				if(typeof p == "object"&&p.tagName){
+					var id = "TMPQUERYID"+new Date().getTime()+p.tagName+p.innerHTML.length;
+					oid = p?p.getAttribute("id"):null,nid = oid || id;
+					p.id=nid;
+					if(s) return document.querySelector("[id='"+nid+"'] "+g);
+					else return document.querySelectorAll("[id='"+nid+"'] "+g);
 				}else{
-					if(fun)fun();
+					return s?null:[];
 				}
-			})();
+			}else{
+				if(s) return document.querySelector(g);
+				else return document.querySelectorAll(g);
+			}
+		}catch(err){return s?null:[];}finally{
+			if(typeof p == "object"&&p.tagName&&!oid)p.removeAttribute("id");
 		}
+	};
+	var _$Q=function(g,p){return _$P(g,p,1);}
+	function _$IE() {
+		if (!!window.ActiveXObject || "ActiveXObject" in window)
+			return true;
+		else
+			return false;
+	}
+	function _$Ava(a) {
+		if ( typeof(a)=="undefined" || null==a || ""==a || a==undefined) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	function _$Null(a) {
+		return !_$Ava(a);
+	}
+	function isPercent(str) {
+		var reg = new RegExp("^\\d+\\.?\\d*%$");
+		return reg.test(str);
+	}
+	function isInt(str) {
+		var reg = new RegExp("^[1-9][0-9]*$");
+		return reg.test(str);
+	}
+	function isNum(str) {
+		var reg = new RegExp("^\\d+\\.?\\d*$");
+		return reg.test(str);
+	}
+	function getPgsz(){
+		var dmd=document.compatMode=="CSS1Compat";
+		var r=new Array();
+		var wa=dmd?document.documentElement.clientWidth:document.body.clientWidth;
+		var ha=dmd?document.documentElement.clientHeight:document.body.clientHeight;
+		r.push(wa);
+		r.push(ha);
+		return r;
+	}
+	function getPglen(){
+		var dmd=document.compatMode=="CSS1Compat";
+		var r=new Array();
+		var wa=dmd?document.documentElement.scrollWidth:document.body.scrollWidth;
+		var ha=dmd?document.documentElement.scrollHeight:document.body.scrollHeight;
+		var pgsiz=getPgsz();
+		r.push(Math.max(wa,pgsiz[0]));
+		r.push(Math.max(ha,pgsiz[1]));
+		return r;
+	}
+	function _$SetOpacity(ele,val){
+		ele.style.filter="alpha(opacity="+val+")";
+		ele.style.opacity = val/100;
+	}
 
-		function _$FadeOut(elem, speed, op,fun) {
-			speed = speed || 20;
-			op = op || 0;
-			var val = 100;
-			( function() {
-				_$SetOpacity(elem, val);
-				val -= 5;
-				if (val >= op) {
-					setTimeout(arguments.callee, speed);
-				} else if (val < op) {
-					elem.style.display = 'none';
-					_$SetOpacity(elem,100);
-					if(fun)fun();
-				}
-			})();
-		}
-		function _$MoveDu(elem,step,fpos,tpos,speed) {
-			if(0==step)return;
-			speed = speed || 20; 
-			tpos = tpos || 0;
-			var val = fpos-0;
+	function _$FadeIn(elem, speed, op,fun) {
+		elem.style.display = 'none';
+		speed = speed || 20;
+		op = op || 100;
+		_$SetOpacity(elem, 0);
+		elem.style.display = 'block';
+		var val = 0;
+		(function() {
+			_$SetOpacity(elem, val);
+			val += 5;
+			if (val <= op) {
+				setTimeout(arguments.callee, speed)
+			}else{
+				if(fun)fun();
+			}
+		})();
+	}
+
+	function _$FadeOut(elem, speed, op,fun) {
+		speed = speed || 20;
+		op = op || 0;
+		var val = 100;
+		( function() {
+			_$SetOpacity(elem, val);
+			val -= 5;
+			if (val >= op) {
+				setTimeout(arguments.callee, speed);
+			} else if (val < op) {
+				elem.style.display = 'none';
+				_$SetOpacity(elem,100);
+				if(fun)fun();
+			}
+		})();
+	}
+	function _$MoveDu(elem,step,fpos,tpos,speed) {
+		if(0==step)return;
+		speed = speed || 20; 
+		tpos = tpos || 0;
+		var val = fpos-0;
+		elem.style.top=val+"px";
+		( function() {
 			elem.style.top=val+"px";
-			( function() {
-				elem.style.top=val+"px";
-				val += step;
-				if(step<0){
-					if (val > tpos) {
-						setTimeout(arguments.callee, speed);
-					}
-				}else{
-					if (val < tpos) {
-						setTimeout(arguments.callee, speed);
-					}
+			val += step;
+			if(step<0){
+				if (val > tpos) {
+					setTimeout(arguments.callee, speed);
 				}
-			})();
-		}
-		function _$Clone(o){
-			if(typeof(o) != 'object') return o;
-			if(o == null) return o;
-			var n = new Object();
-			for(var i in o)
-			n[i] = _$Clone(o[i]);
-			return n;
-		}
-		
-		function _$Selectable(b){
-			if(b){
-				document.body.className = document.body.className.replace(' disable-select', '');
 			}else{
-				document.body.className+=' disable-select';
+				if (val < tpos) {
+					setTimeout(arguments.callee, speed);
+				}
 			}
+		})();
+	}
+	function _$Clone(o){
+		if(typeof(o) != 'object') return o;
+		if(o == null) return o;
+		var n = new Object();
+		for(var i in o)
+		n[i] = _$Clone(o[i]);
+		return n;
+	}
+	
+	function _$Selectable(b){
+		if(b){
+			document.body.className = document.body.className.replace(' disable-select', '');
+		}else{
+			document.body.className+=' disable-select';
 		}
-		function stopBubble(e) {
-			if ( e && e.stopPropagation ) 
-			    e.stopPropagation(); 
-			else 
-			    window.event.cancelBubble = true;
-		}
+	}
+	function stopBubble(e) {
+		if ( e && e.stopPropagation ) 
+			e.stopPropagation(); 
+		else 
+			window.event.cancelBubble = true;
+	}
 		
 	/***********common end************/
 	var $PNLOFFY;
@@ -566,7 +546,6 @@
 			thiz.options = options;
 			if (_$Null(options.suffix))
 				options.suffix = "";
-
 			thiz.holder = _$G("cfmBox" + options.suffix);
 			if (_$Null(thiz.holder)) {
 				thiz.backLayer = _$C("div");
@@ -617,62 +596,22 @@
 				_$A(thiz.mboxclr, thiz.mboxtit);
 				_$A(thiz.tittxt, thiz.mboxtit);
 				_$A(thiz.mboxmsg, thiz.mboxbod);
-				if (_$IE() && options.btnFourText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
 				_$A(thiz.mbox_btnd, thiz.mbox_fter);
-				if (_$IE() && options.btnFourText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
-				if (_$IE() && options.btnThreeText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
 				_$A(thiz.mbox_btnc, thiz.mbox_fter);
-				if (_$IE() && options.btnThreeText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
-				if (_$IE() && options.btnTwoText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
 				_$A(thiz.mbox_btnb, thiz.mbox_fter);
-				if (_$IE() && options.btnTwoText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
-				if (_$IE() && options.btnOneText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
 				_$A(thiz.mbox_btna, thiz.mbox_fter);
-				if (_$IE() && options.btnOneText) {
-					var spcd = _$C("span");
-					spcd.innerHTML = "&nbsp;&nbsp;";
-					_$A(spcd, thiz.mbox_fter);
-				}
 
 			} else {
 				thiz.backLayer = _$G("cfmbackLayer" + options.suffix);
-				thiz.mboxtit = _$G("cfmBox_header", thiz.holder);
-				thiz.mboxclr = _$G("cfmBox_closer", thiz.holder);
-				thiz.tittxt = _$G("cfmboxTit", thiz.holder);
-				thiz.mboxmsg = _$G("cfmboxMsg", thiz.holder);
-				thiz.mbox_btna = _$G("cfmBoxbtna", thiz.holder);
-				thiz.mbox_btnb = _$G("cfmBoxbtnb", thiz.holder);
-				thiz.mbox_btnc = _$G("cfmBoxbtnc", thiz.holder);
-				thiz.mbox_btnd = _$G("cfmBoxbtnd", thiz.holder);
-				thiz.mboxbod = _$G("cfmBox_body", thiz.holder);
+				thiz.mboxtit = _$Q("#cfmBox_header", thiz.holder);
+				thiz.mboxclr = _$Q("#cfmBox_closer", thiz.holder);
+				thiz.tittxt = _$Q("#cfmboxTit", thiz.holder);
+				thiz.mboxmsg = _$Q("#cfmboxMsg", thiz.holder);
+				thiz.mbox_btna = _$Q("#cfmBoxbtna", thiz.holder);
+				thiz.mbox_btnb = _$Q("#cfmBoxbtnb", thiz.holder);
+				thiz.mbox_btnc = _$Q("#cfmBoxbtnc", thiz.holder);
+				thiz.mbox_btnd = _$Q("#cfmBoxbtnd", thiz.holder);
+				thiz.mboxbod = _$Q("#cfmBox_body", thiz.holder);
 			}
 			if (options.titleText) {
 				thiz.tittxt.innerHTML = options.titleText;
@@ -752,8 +691,12 @@
 			} else {
 				thiz.mbox_btna.parentNode.style.display = "block";
 			}
-			thiz.mboxclr.onclick = function() {
+			thiz.mboxclr.onclick = function(e) {
+				stopBubble(e);
 				thiz.context.close(thiz.options.suffix);
+			}
+			thiz.mboxclr.onmousedown =function(e){
+				stopBubble(e);
 			}
 			thiz.mboxclr.style.textDecoration = "none";
 			thiz.mboxclr.style.background = "";
@@ -979,7 +922,7 @@
 				mtbox;
 			mctt = _$G("mtbox_ctt" + options.suffix);
 			if (_$Ava(mctt)) {
-				mtbox = _$G("mtbox", mctt);
+				mtbox = _$Q("#mtbox", mctt);
 			} else {
 				mtbox = _$C("a");
 				mtbox.id = "mtbox";
@@ -1001,7 +944,7 @@
 			mctt.style.display = "none";
 			_$SetOpacity(mctt, 100);
 			mctt.style.left = (pgw/2 - mcttw/2) + "px";
-			mctt.style.top = (pgh/2 - mctth/2) + "px";
+			mctt.style.top = (pgh/2 - mctth/2)*0.6 + "px";
 			_$FadeIn(mctt);
 			if(_$Null(options.period))options.period=1500;
 			window.setTimeout(function(){
@@ -1053,19 +996,14 @@
 		}
 		
 		function test2(){
-			var a=_$G("cfmBox11");
-			var b=_$G("",a,"btn-green");
+			var a=_$G("dropdown-menu");
+			var b=_$P(".green_link",a);
 			console.log("-------------1-----------");
 			if(b)
 			for(var i=0;i<b.length;i++){
 				console.log(b[i]);
 			}
 			console.log("-------------2-----------");
-			var c=_$T("div",a);
-			if(c)
-			for(var j=0;j<c.length;j++){
-				console.log(c[j].className);
-			}
 			
 		}
 		
@@ -1216,15 +1154,15 @@
 	<!--dropdown menu-->
 	<div style="position:absolute;left:500px;top:300px;">
 		<ul id="dropdown-menu" class="dropdown-menu">
-			<li><a href="javaScript:">Action</a></li>
-			<li><a href="javaScript:">Another action</a></li>
-			<li><a href="javaScript:">Something else heresdfsdfsfsfsdsf</a></li>
+			<li><a href="javaScript:" class="green_link">Action</a></li>
+			<li><a href="javaScript:" class="green_link">Another action</a></li>
+			<li><a href="javaScript:" class="green_link">Something else heresdfsdfsfsfsdsf</a></li>
 			<li class="divider"></li>
 			<li><a href="javaScript:">Separated link</a></li>
 		</ul>
 	</div>
-	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
-	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
+	<img src="./img/10.jpg" alt="Image" style="max-width:100px;" class="green_link">
+	<img src="./img/10.jpg" alt="Image" style="max-width:100px;" class="green_link">
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
 </body>
