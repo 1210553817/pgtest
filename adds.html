@@ -189,7 +189,6 @@
 		position: absolute;
 		top: 100%;
 		left: 0;
-		z-index: 1000;
 		display: block;
 		float: left;
 		min-width: 160px;
@@ -235,14 +234,12 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		z-index: 9999;
 	}
 	.cfmBox {
 		display:none;
 		position:fixed;
 		width:30%;
 		font-family:Microsoft Yahei,Heiti,arial,helvetica,sans-serif,SimHei;
-		z-index: 9999;
 		background-color: #fff;
 		-webkit-border-radius: 6px;
 		-moz-border-radius: 6px;
@@ -548,6 +545,9 @@
 				options.suffix = "";
 			thiz.holder = _$G("cfmBox" + options.suffix);
 			if (_$Null(thiz.holder)) {
+				thiz.allholder = _$C("div");
+				thiz.allholder.zIndex=9999;
+				thiz.allholder.id = "cfmAllHolder" + thiz.options.suffix;
 				thiz.backLayer = _$C("div");
 				thiz.backLayer.id = "cfmbackLayer" + thiz.options.suffix;
 				thiz.backLayer.className = "cfmbackLayer";
@@ -588,8 +588,9 @@
 				thiz.mbox_btna.id = "cfmBoxbtna";
 				thiz.mbox_btna.className = "btn btn-blue";
 				thiz.mbox_btna.href = "javaScript:void(0)";
-				_$A(thiz.backLayer, document.body);
-				_$A(thiz.holder, document.body);
+				_$A(thiz.allholder, document.body);
+				_$A(thiz.backLayer, thiz.allholder);
+				_$A(thiz.holder, thiz.allholder);
 				_$A(thiz.mboxtit, thiz.holder);
 				_$A(thiz.mboxbod, thiz.holder);
 				_$A(thiz.mbox_fter, thiz.holder);
@@ -602,6 +603,7 @@
 				_$A(thiz.mbox_btna, thiz.mbox_fter);
 
 			} else {
+				thiz.allholder = _$C("cfmAllHolder" + options.suffix);
 				thiz.backLayer = _$G("cfmbackLayer" + options.suffix);
 				thiz.mboxtit = _$Q("#cfmBox_header", thiz.holder);
 				thiz.mboxclr = _$Q("#cfmBox_closer", thiz.holder);
@@ -780,6 +782,8 @@
 			var pgh = carr[1];
 			ly.style.width = pgw + "px";
 			ly.style.height = pgh + "px";
+			thiz.allholder.style.width = pgw + "px";
+			thiz.allholder.style.height = pgh + "px";
 			thiz.mboxbod.style.height="auto";
 			if (isPercent(thiz.options.minWidth)) { //百分比支持了
 				thiz.minWidth = parseFloat(thiz.options.minWidth) / 100 * pgw;
@@ -827,9 +831,7 @@
 				diatop = parseInt(thiz.holder.style.top);
 				_$Selectable(false);
 				isdraging = true;
-				this.style.cursor = "move";
-
-				document.body.onmousemove = function(eb) {
+				thiz.allholder.onmousemove = function(eb) {
 					if (!isdraging) return;
 					var ebb = eb;
 					if (!ebb) {
@@ -840,12 +842,11 @@
 					thiz.holder.style.left = (mvx + dialeft) + "px";
 					thiz.holder.style.top = (mvy + diatop) + "px";
 				};
-				document.body.onmouseup = function(ec) {
-					document.body.onmousemove = null;
-					document.body.onmouseup = null;
+				thiz.allholder.onmouseup = function(ec) {
+					thiz.allholder.onmousemove = null;
+					thiz.allholder.onmouseup = null;
 					isdraging = false;
 					_$Selectable(true);
-					thiz.mboxtit.style.cursor = "pointer";
 				};
 			}
 
