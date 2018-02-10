@@ -831,24 +831,24 @@
 				diatop = parseInt(thiz.holder.style.top);
 				_$Selectable(false);
 				isdraging = true;
+				thiz.allholder.onmousemove = function(eb) {
+					if (!isdraging) return;
+					var ebb = eb;
+					if (!ebb) {
+						ebb = window.event;
+					}
+					var mvx = ebb.screenX - dx;
+					var mvy = ebb.screenY - dy;
+					thiz.holder.style.left = (mvx + dialeft) + "px";
+					thiz.holder.style.top = (mvy + diatop) + "px";
+				};
+				thiz.allholder.onmouseup = function(ec) {
+					this.onmousemove = null;
+					this.onmouseup = null;
+					isdraging = false;
+					_$Selectable(true);
+				};
 			}
-			thiz.allholder.onmousemove = function(eb) {
-				if (!isdraging) return;
-				var ebb = eb;
-				if (!ebb) {
-					ebb = window.event;
-				}
-				var mvx = ebb.screenX - dx;
-				var mvy = ebb.screenY - dy;
-				thiz.holder.style.left = (mvx + dialeft) + "px";
-				thiz.holder.style.top = (mvy + diatop) + "px";
-			};
-			thiz.allholder.onmouseup = function(ec) {
-				this.onmousemove = null;
-				this.onmouseup = null;
-				isdraging = false;
-				_$Selectable(true);
-			};
 
 		}
 		return new innerCase();
