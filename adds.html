@@ -603,7 +603,7 @@
 				_$A(thiz.mbox_btna, thiz.mbox_fter);
 
 			} else {
-				thiz.allholder = _$C("cfmAllHolder" + options.suffix);
+				thiz.allholder = _$G("cfmAllHolder" + options.suffix);
 				thiz.backLayer = _$G("cfmbackLayer" + options.suffix);
 				thiz.mboxtit = _$Q("#cfmBox_header", thiz.holder);
 				thiz.mboxclr = _$Q("#cfmBox_closer", thiz.holder);
@@ -814,6 +814,8 @@
 		var drag = function(thiz, b) {
 			if (!b) {
 				thiz.mboxtit.onmousedown = null;
+				thiz.allholder.onmousemove = null;
+				thiz.allholder.onmouseup = null;
 				return;
 			}
 			var dx,
@@ -822,33 +824,31 @@
 				diatop;
 			thiz.mboxtit.onmousedown = function(ea) {
 				var eaa = ea;
-				if (!eaa) {
-					eaa = window.event;
-				}
+				if (!eaa)eaa = window.event;
 				dx = eaa.screenX - 0;
 				dy = eaa.screenY - 0;
 				dialeft = parseInt(thiz.holder.style.left);
 				diatop = parseInt(thiz.holder.style.top);
 				_$Selectable(false);
 				isdraging = true;
-				thiz.allholder.onmousemove = function(eb) {
-					if (!isdraging) return;
-					var ebb = eb;
-					if (!ebb) {
-						ebb = window.event;
-					}
-					var mvx = ebb.screenX - dx;
-					var mvy = ebb.screenY - dy;
-					thiz.holder.style.left = (mvx + dialeft) + "px";
-					thiz.holder.style.top = (mvy + diatop) + "px";
-				};
-				thiz.allholder.onmouseup = function(ec) {
-					thiz.allholder.onmousemove = null;
-					thiz.allholder.onmouseup = null;
-					isdraging = false;
-					_$Selectable(true);
-				};
 			}
+			thiz.allholder.onmousemove = function(eb) {
+				if (!isdraging) return;
+				var ebb = eb;
+				if (!ebb) {
+					ebb = window.event;
+				}
+				var mvx = ebb.screenX - dx;
+				var mvy = ebb.screenY - dy;
+				thiz.holder.style.left = (mvx + dialeft) + "px";
+				thiz.holder.style.top = (mvy + diatop) + "px";
+			};
+			thiz.allholder.onmouseup = function(ec) {
+				this.onmousemove = null;
+				this.onmouseup = null;
+				isdraging = false;
+				_$Selectable(true);
+			};
 
 		}
 		return new innerCase();
