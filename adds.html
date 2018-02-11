@@ -699,7 +699,7 @@
 			}
 			thiz.mboxclr.onmousedown =function(e){
 				stopBubble(e);
-			}
+			}			
 			thiz.mboxclr.style.textDecoration = "none";
 			thiz.mboxclr.style.background = "";
 			_$SetOpacity(thiz.mboxclr, 100);
@@ -842,12 +842,13 @@
 					thiz.holder.style.left = (mvx + dialeft) + "px";
 					thiz.holder.style.top = (mvy + diatop) + "px";
 				};
-				thiz.allholder.onmouseup = function(ec) {
+				var dismov = function(ec) {
 					this.onmousemove = null;
 					this.onmouseup = null;
 					isdraging = false;
 					_$Selectable(true);
 				};
+				thiz.allholder.onmouseup = dismov;
 			}
 
 		}
