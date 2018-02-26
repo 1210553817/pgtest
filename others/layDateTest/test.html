@@ -52,6 +52,7 @@ renderSeasonDate({holder: $G('test1'),single: 1});
 renderSeasonDate({holder: $G('test2')});
 
 //联动测试
+//initDateForm();
 //initDateForm({single:1});
 initDateForm({beforeInit:function(params){
 	if(params.first&&"y"==params.type){//第一次年份初始化
@@ -71,7 +72,7 @@ initDateForm({beforeInit:function(params){
 		console.log("------------worldId inited------------");
 	}
 }});
-		
+
 /** 
  * 季度初始化 
  * @param options.holder 季度input dom对象非jquery对象 
