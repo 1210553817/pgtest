@@ -133,9 +133,12 @@ function renderSeasonDate(options){
 			$(this).find("li").each(function(inx,ele){
 				var cx = ele.innerHTML;  
 				if(inx<4){
-					ele.innerHTML=cx.replace(/月/g,"季度");  
+					ele.innerHTML=cx.replace(/月/g,"季度");
+					ele.style.width="99%";
+					ele.style.margin="8px 0";
 				}else{
-					ele.style.display="none";  
+					ele.style.display="none";
+					ele.innerHTML="";					
 				}  
 			});  
 		});  
