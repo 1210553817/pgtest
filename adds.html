@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>页面测试</title>
+<title>ҳ�����</title>
     <!--script src="sdfsdfsdfsdf.js"></script-->
 
     <style type="text/css">
@@ -513,29 +513,29 @@
 			this.container = {};
 		};
 		/**Open
-		 * 参数
+		 * ����
 		*options.suffix
 		*options.titleText
 		*options.contentText
 		*options.btnOneText
-		*options.btnOneFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.btnOneFunction(content,holder)����������content->��������dom����holder->����������dom����
 		*options.btnTwoText
-		*options.btnTwoFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.btnTwoFunction(content,holder)����������content->��������dom����holder->����������dom����
 		*options.btnThreeText
-		*options.btnThreeFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.btnThreeFunction(content,holder)����������content->��������dom����holder->����������dom����
 		*options.btnFourText
-		*options.btnFourFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.btnFourFunction(content,holder)����������content->��������dom����holder->����������dom����
 		*options.minWidth
 		*options.bodyHeight
 		*options.headColor
 		*options.clazzOne
 		*options.clazzTwo
 		*options.clazzThree
-		*options.draggable是否可拖动，默认false
-		*options.rmdom是否移除dom对象，默认false
-		*options.closed关闭后回调
+		*options.draggable�Ƿ���϶���Ĭ��false
+		*options.rmdom�Ƿ��Ƴ�dom����Ĭ��false
+		*options.closed�رպ�ص�
 		*
-		*返回值：panel对象:panel.content为内容dom对象，panel.title为标题dom对象
+		*����ֵ��panel����:panel.contentΪ����dom����panel.titleΪ����dom����
 		**/
 		innerCase.prototype.open = function(options) {
 			var thiz = {};
@@ -785,7 +785,7 @@
 			thiz.allholder.style.width = pgw + "px";
 			thiz.allholder.style.height = pgh + "px";
 			thiz.mboxbod.style.height="auto";
-			if (isPercent(thiz.options.minWidth)) { //百分比支持了
+			if (isPercent(thiz.options.minWidth)) { //�ٷֱ�֧����
 				thiz.minWidth = parseFloat(thiz.options.minWidth) / 100 * pgw;
 				if(thiz.minWidth<300)thiz.minWidth=300;
 			} else {
@@ -860,9 +860,9 @@
 			suffix : "_alertCase",
 			minWidth : 400,
 			headColor : "#40c1e5",
-			titleText : "提示",
+			titleText : "��ʾ",
 			contentText : msg,
-			btnOneText : "确定",
+			btnOneText : "ȷ��",
 			btnOneFunction : function() {
 				return true;
 			},
@@ -873,23 +873,23 @@
 	}
 
 	/**
-	 * msg:提示信息
-	 * funa：确定按钮回调方法
-	 * funb：取消按钮回调方法
+	 * msg:��ʾ��Ϣ
+	 * funa��ȷ����ť�ص�����
+	 * funb��ȡ����ť�ص�����
 	 */
 	function confirmCase(msg, funa, funb) {
 		PanelCase.open({
 			suffix : "_confirmCase",
 			minWidth : 400,
 			headColor : "#40c1e5",
-			titleText : "提示",
+			titleText : "��ʾ",
 			contentText : msg,
-			btnOneText : "确定",
+			btnOneText : "ȷ��",
 			btnOneFunction : function() {
 				if (funa) funa();
 				return true;
 			},
-			btnTwoText : "取消",
+			btnTwoText : "ȡ��",
 			btnTwoFunction : function() {
 				if (funb) funb();
 				return true;
@@ -902,10 +902,10 @@
 	var TipCase = (function() {
 		var innerCase = function() {};
 		/**
-		*options.suffix	标示
-		*options.message 信息
-		*options.period	持续时间
-		*options.closed 关闭后回调
+		*options.suffix	��ʾ
+		*options.message ��Ϣ
+		*options.period	����ʱ��
+		*options.closed �رպ�ص�
 		*/
 		innerCase.prototype.show = function(options) {
 			if (undefined == options.suffix || !options.suffix)
@@ -959,19 +959,19 @@
 		function testCfmBox1(){
 			PanelCase.open({
 				suffix:11,
-				minWidth:"600",//宽度
-				bodyHeight:"200",//高度
-				titleText:"提示",
-				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
-				btnOneText:"确定",
+				minWidth:"600",//����
+				bodyHeight:"200",//�߶�
+				titleText:"��ʾ",
+				contentText:"ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��ȷ��ɾ������Ϣ��",
+				btnOneText:"ȷ��",
 				btnOneFunction:function(){
 					alert("Button one clicked...");
 					return true;
 				},
-				btnTwoText:"取消",
-				btnThreeText:"忽略",
+				btnTwoText:"ȡ��",
+				btnThreeText:"����",
 				draggable:true,
-				closed:function(){//关闭后回调
+				closed:function(){//�رպ�ص�
 					console.log("closed........");
 				}
 			});
@@ -979,13 +979,13 @@
 		function testCfmBox2(){
 			PanelCase.open({
 				suffix:12,
-				titleText:"提示",
-				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
-				btnOneText:"确定",
+				titleText:"��ʾ",
+				contentText:"�����������������ϵȵؽ����ִ�Χ��ѩ����",
+				btnOneText:"ȷ��",
 				btnOneFunction:function(){
 					alert(2222222222222222);
 				},
-				btnTwoText:"取消"
+				btnTwoText:"ȡ��"
 				
 			});
 		}
@@ -1009,7 +1009,7 @@
 		function test4(){
 			TipCase.show({
 				suffix:1234,
-				message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
+				message:"�ຣ�����ࡢ���ġ������������Լ����ֵȵ��д�ѩ",
 				period:1500
 			});
 		}	
@@ -1024,26 +1024,26 @@
 		
 		function test5(){
 			PanelCase.open({
-				titleText:"提示",
-				contentText:"西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气",
-				btnOneText:"确定",
+				titleText:"��ʾ",
+				contentText:"�����������������ϵȵؽ����ִ�Χ��ѩ����,�����������������ϵȵؽ����ִ�Χ��ѩ����,�����������������ϵȵؽ����ִ�Χ��ѩ����,�����������������ϵȵؽ����ִ�Χ��ѩ����,�����������������ϵȵؽ����ִ�Χ��ѩ����",
+				btnOneText:"ȷ��",
 				btnOneFunction:function(){
 					PanelCase.open({
 						suffix:1,
 						minWidth:400,
 						headColor:"#99CCFF",
-						titleText:"A提示",
-						contentText:"A西北地区东部至江南等地将出现大范围雨雪天气",
-						btnOneText:"确定",
+						titleText:"A��ʾ",
+						contentText:"A�����������������ϵȵؽ����ִ�Χ��ѩ����",
+						btnOneText:"ȷ��",
 						btnOneFunction:function(){
 							PanelCase.close("all");
 						},
-						btnTwoText:"取消",
+						btnTwoText:"ȡ��",
 						btnTwoFunction:function(){
 							//PanelCase.close();
 							TipCase.show({
 								suffix:1111,
-								message:"青海、甘肃、宁夏、陕西、西藏以及吉林等地有大雪",
+								message:"�ຣ�����ࡢ���ġ������������Լ����ֵȵ��д�ѩ",
 								period:1500
 							});
 							return true;
@@ -1053,7 +1053,7 @@
 					});
 				
 				},
-				btnTwoText:"取消",
+				btnTwoText:"ȡ��",
 				rmdom:true
 			});
 				
@@ -1069,62 +1069,62 @@
 </head>
 
 <body id="theBody">
-	<a class="btn btn-large" href="javaScript:" onclick="testCfmBox1()" style="margin:10px;">测试1</a><a class="btn" href="javaScript:" onclick="testCfmBox2()" style="margin:10px;">测试2</a><a class="btn btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-large" href="javaScript:" onclick="testCfmBox1()" style="margin:10px;">����1</a><a class="btn" href="javaScript:" onclick="testCfmBox2()" style="margin:10px;">����2</a><a class="btn btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">测试</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">TEST</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-green btn-large" href="javaScript:" onclick="test2()" style="margin:10px;">����</a><a class="btn btn-green" href="javaScript:" onclick="test3()" style="margin:10px;">TEST</a><a class="btn btn-green btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-blue btn-large" href="javaScript:" onclick="test4()" style="margin:10px;">TipPop</a><a class="btn btn-blue" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-blue btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="opnSo()" style="margin:10px;">SO</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-lightBlue btn-large" href="javaScript:" onclick="opnSo()" style="margin:10px;">SO</a><a class="btn btn-lightBlue" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-lightBlue btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-orange btn-large" href="javaScript:" onclick="test5()" style="margin:10px;">打开</a><a class="btn btn-orange" href="javaScript:" onclick="test6()" style="margin:10px;">关闭</a><a class="btn btn-orange btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-orange btn-large" href="javaScript:" onclick="test5()" style="margin:10px;">��</a><a class="btn btn-orange" href="javaScript:" onclick="test6()" style="margin:10px;">�ر�</a><a class="btn btn-orange btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
 	<br style="margin:10px;"/>
-	<a class="btn btn-red btn-large" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-red" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-red btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a class="btn btn-red btn-large" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-red" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-red btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
 	<br style="margin:10px;"/>
-	<a id="lsnTesta" class="btn btn-black btn-large" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-black" href="javaScript:" onclick="" style="margin:10px;">保存</a><a class="btn btn-black btn-mini" href="javaScript:" onclick="" style="margin:10px;">保存</a>
+	<a id="lsnTesta" class="btn btn-black btn-large" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-black" href="javaScript:" onclick="" style="margin:10px;">����</a><a class="btn btn-black btn-mini" href="javaScript:" onclick="" style="margin:10px;">����</a>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
+		<a class="btn btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
 		<a class="btn btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
+		<a class="btn btn-green btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
 		<a class="btn btn-green btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
+		<a class="btn btn-blue btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
 		<a class="btn btn-blue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 		
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
+		<a class="btn btn-lightBlue btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
 		<a class="btn btn-lightBlue btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>	
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">电饭锅电饭锅</span></a>
+		<a class="btn btn-orange btn-combLeft" href="javaScript:" style="">�緹���緹��</span></a>
 		<a class="btn btn-orange btn-combRight" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
@@ -1132,18 +1132,17 @@
 	<div style="display:inline-block;margin:10px;">
 		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="" onclick="window.open('./others/layDateTest/test.html','newwindow')">LayDateTest</span></a><a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
-	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">电饭锅电饭锅</span></a>
+	<div class="btn-comb" style="display:inline-block;margin:10px;">
+		<a class="btn btn-red btn-combLeft btn-large" href="javaScript:" style="">�緹���緹��</span></a>
 		<a class="btn btn-red btn-combRight btn-large" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 	
 	<div style="display:inline-block;margin:10px;">
-		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">士大夫似的广泛地</span></a><a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">ʿ����ƵĹ㷺��</span></a><a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<div class="btn-comb" style="margin:10px;">
-		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">电饭锅电饭锅</span></a>
-		<a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
+		<a class="btn btn-black btn-combLeft btn-mini" href="javaScript:" style="">�緹���緹��</span></a><a class="btn btn-black btn-combRight btn-mini" href="javaScript:" style=""><span class="caret"></span></span></a>
 	</div>
 	<br style="margin:10px;"/>
 	<!--dropdown menu-->
