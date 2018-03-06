@@ -55,14 +55,14 @@ renderSeasonDate({holder: $G('test2')});
 //initDateForm();
 //initDateForm({single:1});
 initDateForm({beforeInit:function(params){
-	if(params.first&&"y"==params.type){//第一次年份初始化
+	if("y"==params.type){//第一次年份初始化
 		var cyear = new Date().getFullYear();
 		var dfy = (cyear-3)+"年 ~ "+cyear+"年";
 		this.value = dfy;
 	}
-	if("s"==params.type){
+	if(params.first&&"s"==params.type){
 		var cyear = new Date().getFullYear();
-		var dfy = (cyear-3)+"年2季度 ~ "+cyear+"年3季度";
+		var dfy = (cyear-3)+"年1季度 ~ "+cyear+"年4季度";
 		this.value = dfy;
 	}
 },afterInit:function(apm){//初始化完成后调
