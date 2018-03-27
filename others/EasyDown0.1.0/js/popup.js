@@ -365,13 +365,16 @@ function startDownload(){
 
 function parseUrls(){
 	var dtxt = _$G("defpop_txts").value;
+	var dprm = _$G("defprm_txts").value;
 	var rearr=[];
-	var reg = new RegExp("((http).*)","g");
+	//var reg = new RegExp("((http).*)","g");
+	//.replace(/[\r\n]/g, "")
+	var reg = new RegExp("(.*\.ts)","g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
-		if(_$Ava(result)&&result[2]=="http"){
-			rearr.push(result[1]);
+		if(result!=null){
+			rearr.push(dprm+result[1]);
 		}
 	}while(result!=null)
 	var dnsr=parseInt(dwnStartIndx);
