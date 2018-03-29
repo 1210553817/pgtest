@@ -30,7 +30,7 @@ var _$P=function(g,p,s){
 };
 var _$Q=function(g,p){return _$P(g,p,1);}
 function _$Ava(a) {
-	if ( a==undefined || typeof(a)=="undefined" || null==a || ""==a ) {
+	if ( null==a || typeof(a)=="undefined" || ""==a ) {
 		return false;
 	} else {
 		return true;
@@ -147,20 +147,8 @@ function opnTbox(m,prd,afun){
 }
 /**
 *option{
-* code 编号,
-* title 标题,
-* content 内容,
-* btn1 按钮1,
-* fun1 回调1,
-* btn2 按钮2,
-* fun2 回调2,
-* btn3 按钮3,
-* fun3 回调3,
-* width 宽度,
-* headColor 颜色,
-* claza ClassA,
-* clazb ClassB,
-* clazc ClassC,
+* code 编号, title 标题, content 内容, btn1 按钮1, fun1 回调1, btn2 按钮2, fun2 回调2, btn3 按钮3, fun3 回调3,
+* width 宽度, headColor 颜色, claza ClassA, clazb ClassB, clazc ClassC
 *}
 */
 function opnCfmBox(option){
@@ -169,9 +157,33 @@ function opnCfmBox(option){
 	var pgw=carr[0];
 	var pgh=carr[1];
 	if(_$Null(option.code))option.code="";
-	var mbox = _$G("cfmBox"+option.code);
-	var clay,mboxtit,mboxclr,mboxbody,tittxt,mbox_btna,mbox_btnb,mbox_btnc;
-	clay=_$G("cfmbackLayer"+option.code);
+	var mhld,mbox,clay,mboxtit,mboxclr,mboxbody,tittxt,mbox_btna,mbox_btnb,mbox_btnc;
+	mhld = _$G("cfmhd"+option.code);
+	if(_$Null(mhld)){
+		var html=[
+			'<div id="cfmbackLayer',option.code,'" class="cfmbackLayer"></div>',
+			'<div id="cfmBox',option.code,'" class="cfmBox">',
+				'<div id="cfmBox_header" class="cfmBox_header">',
+					'<a id="cfmBox_closer" class="cfmBox_closer">×</a>',
+					'<span id="cfmboxTit"></span>',
+				'</div>',
+				'<div id="cfmBox_body" class="cfmBox_body">',
+					'<p id="cfmboxMsg"></p>',
+				'</div>',
+				'<div class="cfmBox_footer">',
+					'<a id="cfmBoxbtna" class="btn btn-mini btn-green">Confirm</a>',
+					'<a id="cfmBoxbtnb" class="btn btn-mini">Cancel</a>',
+					'<a id="cfmBoxbtnc" class="btn btn-mini">Ignore</a>',
+				'</div>',
+			'</div>'
+		].join("");
+		mhld = _$C("div");
+		mhld.id="cfmhd"+option.code;
+		_$A(mhld,document.body);
+		mhld.innerHTML=html;
+	}
+	mbox = _$Q("#cfmBox"+option.code,mhld);
+	clay=_$Q("#cfmbackLayer"+option.code,mhld);
 	mboxtit=_$Q("#cfmBox_header",mbox);
 	mboxclr=_$Q("#cfmBox_closer",mbox);
 	mboxbody=_$Q("#cfmBox_body",mbox);
@@ -227,10 +239,10 @@ function opnCfmBox(option){
 			}
 		};
 	}
-	if(!option.btn1){
+	if(!option.btn3){
 		mbox_btnc.style.display="none";
 	}else{
-		mbox_btnc.innerHTML=option.btn1;
+		mbox_btnc.innerHTML=option.btn3;
 		mbox_btnc.style.display="inline-block";
 		mbox_btnc.onclick=function(){
 			if(option.fun3){
@@ -277,7 +289,7 @@ function opnCfmBox(option){
 function opnCfmBoxA(opt){
 	opnCfmBox({code:opt.code,title:opt.title,content:opt.content,btn1:opt.btn1,fun1:opt.fun1,btn2:opt.btn2,fun2:opt.fun2,btn3:opt.btn3,fun3:opt.fun3,headColor:"#efefef",claza:"btn btn-mini btn-green"});
 }
-/*tool fun*/
+
 function prefixInteger(num, n) {
 	return (Array(n).join(0) + num).slice(-n);
 }
@@ -317,22 +329,20 @@ Ajax.post = function (url, data, callback) {
     };
     req.send(data);
 };
-function mutiDowner(urls,indx){
+function multDowner(urls,indx,ing,bkf){
 	if(urls.length<1||urls.length==indx){
-		dnbtn.onclick=startDownload;
-		dnbtn.innerHTML="开始下载";
+		if(bkf)bkf.call(null);
 		return;
 	}
+	if(ing)ing.call(null,indx,urls.length);
 	var dnurl=urls[indx];
-	dnbtn.innerHTML=(indx+1)+" / "+urls.length+" ( "+dwnStartIndx+" ~ "+dwnEndIndx+" )";
-	dwnFname = prefixInteger(indx+1,4)+".ts";
 	chrome.downloads.download({
 		url: dnurl,
 		conflictAction: 'uniquify',
 		saveAs: false
 	},function(){
 		window.setTimeout(function(){
-			mutiDowner(urls,indx+1);
+			multDowner(urls,indx+1,ing,bkf);
 		},200);
 	});
 }

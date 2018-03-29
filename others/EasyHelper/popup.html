@@ -234,12 +234,16 @@ div{
 	border-top-right-radius:4px;
 	border-left:0;
 	cursor:pointer;
-	padding:1px 5px;
+	padding:1px 10px;
 	margin:0px 1px;
 	font-family:'Microsoft Yahei';
+	color:#eee;
 }
 .mtab_tit:hover{
-	background:#51b251;
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity:0.8;
+	opacity:0.8;
 }
 .mtab_titgry{
 	float:left;
@@ -253,100 +257,72 @@ div{
 	border-top-right-radius:4px;
 	border-left:0;
 	cursor:pointer;
-	padding:1px 5px;
+	padding:1px 10px;
 	margin:0px 1px;
 	font-family:'Microsoft Yahei';
+	color:#eee;
 }
 .mtab_titgry:hover{
-	background:#51c051;
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity:0.8;
+	opacity:0.8;
 }
 </style>
 <script type="text/javascript" src="./js/tools.js"></script>
 <script type="text/javascript" src="./js/popup.js"></script>
-<div id="mainCtner" style="width:400px;height:205px;margin:0px;padding:0px;">
+<div id="mainCtner" style="width:600px;margin:0px;padding:0px;">
 	<table id="mdlg_tit_tb" class="mdlg_tit_tb" cellpadding="0"	cellspacing="0" border="0" style="width:100%">
 		<tbody>
 			<tr>
 				<td style="height:30px;">
-					<div id="tabtit1" class="mtabb mtab_tit">书签集1</div>
-					<div id="tabtit2" class="mtabb mtab_titgry">书签集2</div>
-					<div id="tabtit3" class="mtabb mtab_titgry">书签集3</div>
+					<div id="tabtit1" class="mtabb mtab_tit">解析下载</div>
+					<div id="tabtit2" class="mtabb mtab_titgry">测试2</div>
+					<div id="tabtit3" class="mtabb mtab_titgry">测试3</div>
 				</td>
 			</tr>
 			<tr> 
-				<td id="mactn" colspan="4" style="border-top:2px solid #51a351;">
-				<div id="mdlg_cctner" class="mdlg_cctner" style="width:396px;">
+				<td id="mactn" colspan="4" style="border-top:2px solid #51a351;padding:2px;">
 				<div class="mdlg_ctt" align="center">
 				<table class="mdlg_table" style="border:0px;margin:0px;padding:0px;width:100%;" >
 					<tbody>
 						<tr>
 							<td>									
 								<div id="tabctt_tabtit1">
-									<textarea id="defpop_txts" style="resize:none;width:100%;height:140px;margin-top:2px;"></textarea><br>
+									<textarea id="down_urls" style="resize:none;width:100%;height:150px;" placeHolder="URL列表"></textarea><br>
+									<textarea id="down_prms" style="resize:none;width:100%;height:50px;margin-top:2px;" placeHolder="前置参数"></textarea><br>
 									<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
 										<td align="center">
-											<a id="defpop_getBkmks" class="btn btn-mini btn-green" style="margin-right:2px;">备份1</a>
-											<a id="defpop_setBkmks"  class="btn btn-mini btn-green" style="margin-left:2px;">还原1</a>
+											<a id="taba_single" class="btn btn-mini btn-green" style="margin-right:2px;">页面</a>
+											<a id="tabb_down"  class="btn btn-mini btn-green" style="margin-left:2px;">下载</a>
 										</td>
 									</tr></tbody></table>
 								</div>									
 								<div id="tabctt_tabtit2" style="display:none;">
-									<textarea id="defpop_txts" style="resize:none;width:100%;height:140px;margin-top:2px;"></textarea><br>
+									<textarea id="defpop_txts" style="resize:none;width:100%;height:202px;"></textarea><br>
 									<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
 										<td align="center">
-											<a id="defpop_getBkmks2" class="btn btn-mini btn-green" style="margin-right:2px;">备份2</a>
-											<a id="defpop_setBkmks2"  class="btn btn-mini btn-green" style="margin-left:2px;">还原2</a>
+											<a id="taba_single2" class="btn btn-mini btn-green" style="margin-right:2px;">按钮21</a>
+											<a id="tabb_down2"  class="btn btn-mini btn-green" style="margin-left:2px;">按钮22</a>
 										</td>
 									</tr></tbody></table>
 								</div>									
 								<div id="tabctt_tabtit3" style="display:none;">
-									<textarea id="defpop_txts" style="resize:none;width:100%;height:140px;margin-top:2px;"></textarea><br>
+									<textarea id="defpop_txts" style="resize:none;width:100%;height:202px;"></textarea><br>
 									<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
 										<td align="center">
-											<a id="defpop_getBkmks3" class="btn btn-mini btn-green" style="margin-right:2px;">备份3</a>
-											<a id="defpop_setBkmks3"  class="btn btn-mini btn-green" style="margin-left:2px;">还原3</a>
+											<a id="taba_single3" class="btn btn-mini btn-green" style="margin-right:2px;">按钮31</a>
+											<a id="tabb_down3"  class="btn btn-mini btn-green" style="margin-left:2px;">按钮32</a>
 										</td>
 									</tr></tbody></table>
-								</div>
+								</div>									
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				</div>
-				</div>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-</div>
-<!--confirm Box-->
-<div id="cfmbackLayer" class="cfmbackLayer"></div>
-<div id="cfmBox" class="cfmBox">
-	<div id="cfmBox_header" class="cfmBox_header">
-		<a id="cfmBox_closer" class="cfmBox_closer">×</a>
-		<span id="cfmboxTit">Tip</span>
-	</div>
-	<div id="cfmBox_body" class="cfmBox_body">
-		<p id="cfmboxMsg">Message...</p>
-	</div>
-	<div class="cfmBox_footer">
-		<a id="cfmBoxbtna" class="btn btn-mini btn-green">Confirm</a>
-		<a id="cfmBoxbtnb" class="btn btn-mini">Cancel</a>
-		<a id="cfmBoxbtnc" class="btn btn-mini">Ignore</a>
-	</div>
-</div>
-<div id="cfmbackLayer1" class="cfmbackLayer"></div>
-<div id="cfmBox1" class="cfmBox">
-	<div id="cfmBox_header" class="cfmBox_header">
-		<a id="cfmBox_closer" class="cfmBox_closer">×</a>
-		<span id="cfmboxTit">Tip</span>
-	</div>
-	<div id="cfmBox_body" class="cfmBox_body">
-		<p id="cfmboxMsg">Message...</p>
-	</div>
-	<div class="cfmBox_footer">
-		<a id="cfmBoxbtna" class="btn btn-mini btn-green">Confirm</a>
-		<a id="cfmBoxbtnb" class="btn btn-mini">Cancel</a>
-		<a id="cfmBoxbtnc" class="btn btn-mini">Ignore</a>
-	</div>
 </div>
