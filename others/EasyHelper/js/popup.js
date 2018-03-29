@@ -79,7 +79,7 @@ function startDown(){
 				downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
 			},
 			function(){
-				downbtn.onclick=startDownload;
+				downbtn.onclick=startDown;
 				downbtn.innerHTML="¿ªÊ¼ÏÂÔØ";
 			});
 			downbtn.onclick=null;
