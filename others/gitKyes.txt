@@ -1,0 +1,74 @@
+-----------------------------
+git status					检查状态 
+
+-----------------------------
+git add hello.txt
+
+git add .    				他会监控工作区的状态树，使用它会把工作时的所有变化提交到暂存区，
+							包括文件内容修改(modified)以及新文件(new)，但不包括被删除的文件。
+							
+git add -u					他仅监控已经被add的文件（即tracked file），他会将被修改的文件提交到暂存区。
+							add -u 不会提交新文件（untracked file）。（git add --update的缩写）
+							
+git add -A					是上面两个功能的合集（git add --all的缩写）
+
+---------------提交--------------
+git commit -m "Initial commit."
+
+
+---------------上传--------------
+git push origin master		命令会有两个参数，远端仓库的名字，以及分支的名字
+
+
+---------------拉取--------------
+git pull origin master
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+----------------clone-------------
+git clone https://github.com/tutorialzine/awesome-project.git 	本地也会创建一个新的仓库，并自动将github上的分支设为远端分支。
+
+
+--------------init---------------
+git init														会创建一个隐藏的文件夹.git，所有的信息都储存在其中
+
+--------------Config---------------
+$ git config --global user.name "My Name" 						配置好这两项，用户就能知道谁做了什么
+$ git config --global user.email myEmail@example.com
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+----------------branch-------------
+git branch 														单独使用git branch，可以查看分支状态							
+git branch amazing_new_feature									创建新分支
+git merge														合并分支
+													如：		git add feature.txt
+																git commit -m "New feature complete."
+																git checkout master
+																git merge amazing_new_feature
+																git branch -d amazing_new_feature	删除已合并到主分支的分支
+																
+---------------比较--------------
+git log
+git show b10cc123												id 很长，但是你并不需要复制整个字符串，前一小部分就够了
+git diff 09bd8cc..ba25c0ff										查看两次提交的不同
+
+---------------回滚版本--------------
+git checkout 09bd8cc1 hello.txt									将某个特定的文件回滚到特定的提交
+
+---------------回滚提交--------------
+
+git commit —amend												它会把最新的提交打回暂存区，并尝试重新提交。
+git revert b10cc123												如果是更复杂的情况，比如不是最新的提交了，那你可以使用git revert。
+																最新的一次提交别名也叫HEAD：git revert HEAD
+
+---------------配置 .gitignore--------------
+		1)在项目根目录创建.gitignore文件
+		2)在文件中列出不需要提交的文件名，文件夹名，每个一行
+		3).gitignore文件需要提交，就像普通文件一样
+		如： 
+			*.log
+			build/
+			node_modules/
+			.idea/
+			my_notes.txt
