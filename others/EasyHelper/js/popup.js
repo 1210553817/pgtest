@@ -38,10 +38,9 @@ function initEvents(){
 	btn22.onclick=function(){
 		opnCfmBoxA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
 			fun1: function(mbdy){
-				opnTbox("Confirmed...");
 				return true;
-			},fun3: function(){
-				opnTbox("Ignored...");
+			},closed: function(){
+				opnTbox("FROM: "+this.innerHTML);
 			}
 		});
 	};

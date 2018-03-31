@@ -147,7 +147,7 @@ function opnTbox(m,prd,afun){
 }
 /**
 *option{
-* code 编号, title 标题, content 内容, btn1 按钮1, fun1 回调1, btn2 按钮2, fun2 回调2, btn3 按钮3, fun3 回调3,
+* code 编号, title 标题, content 内容, btn1 按钮1, fun1 回调1, btn2 按钮2, fun2 回调2, btn3 按钮3, fun3 回调3,closed 关闭回调
 * width 宽度, headColor 颜色, claza ClassA, clazb ClassB, clazc ClassC
 *}
 */
@@ -198,7 +198,13 @@ function opnCfmBox(option){
 	if(option.content){
 		mboxmsg.innerHTML=option.content;
 	}
-
+	mboxclr.onclick=function(){
+		// mbox.style.display="none";
+		// clay.style.display="none";
+		_$FadeOut(mbox,15);
+		_$FadeOut(clay,20,0,70);
+		if(option.closed)option.closed.call(this);
+	}
 	if(!option.btn1){
 		mbox_btna.style.display="none";
 	}else{
@@ -208,14 +214,10 @@ function opnCfmBox(option){
 			if(option.fun1){
 				var b=option.fun1.call(mbox_btnc,mboxbody);
 				if(b){
-					_$FadeOut(mbox,15);
-					_$FadeOut(clay,20,0,70);
+					mboxclr.onclick.call(this);
 				}
 			}else{
-				// mbox.style.display="none";
-				// clay.style.display="none";
-				_$FadeOut(mbox,15);
-				_$FadeOut(clay,20,0,70);
+				mboxclr.onclick.call(this);
 			}
 		};
 	}
@@ -228,14 +230,10 @@ function opnCfmBox(option){
 			if(option.fun2){
 				var b=option.fun2.call(mbox_btnc,mboxbody);
 				if(b){
-					_$FadeOut(mbox,15);
-					_$FadeOut(clay,20,0,70);
+					mboxclr.onclick.call(this);
 				}
 			}else{
-				// mbox.style.display="none";
-				// clay.style.display="none";
-				_$FadeOut(mbox,15);
-				_$FadeOut(clay,20,0,70);
+				mboxclr.onclick.call(this);
 			}
 		};
 	}
@@ -248,23 +246,14 @@ function opnCfmBox(option){
 			if(option.fun3){
 				var b=option.fun3.call(mbox_btnc,mboxbody);
 				if(b){
-					_$FadeOut(mbox,15);
-					_$FadeOut(clay,20,0,70);
+					mboxclr.onclick.call(this);
 				}
 			}else{
-				// mbox.style.display="none";
-				// clay.style.display="none";
-				_$FadeOut(mbox,15);
-				_$FadeOut(clay,20,0,70);
+				mboxclr.onclick.call(this);
 			}
 		};
 	}
-	mboxclr.onclick=function(){
-		// mbox.style.display="none";
-		// clay.style.display="none";
-		_$FadeOut(mbox,15);
-		_$FadeOut(clay,20,0,70);
-	}
+
 	mbox.style.width=mboxw+"px";
 	if(option.headColor)mboxtit.style.backgroundColor=option.headColor;
 	if(option.claza)mbox_btna.className=option.claza;
@@ -287,7 +276,7 @@ function opnCfmBox(option){
 	
 }
 function opnCfmBoxA(opt){
-	opnCfmBox({code:opt.code,title:opt.title,content:opt.content,btn1:opt.btn1,fun1:opt.fun1,btn2:opt.btn2,fun2:opt.fun2,btn3:opt.btn3,fun3:opt.fun3,width:opt.width,headColor:"#efefef",claza:"btn btn-mini btn-green"});
+	opnCfmBox({code:opt.code,title:opt.title,content:opt.content,btn1:opt.btn1,fun1:opt.fun1,btn2:opt.btn2,fun2:opt.fun2,btn3:opt.btn3,fun3:opt.fun3,closed:opt.closed,width:opt.width,headColor:"#efefef",claza:"btn btn-mini btn-green"});
 }
 
 function prefixInteger(num, n) {
