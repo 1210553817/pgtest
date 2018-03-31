@@ -196,7 +196,11 @@ function opnCfmBox(option){
 		tittxt.innerHTML=option.title;
 	}
 	if(option.content){
-		mboxmsg.innerHTML=option.content;
+		if(typeof(option.content)=="string"){
+			mboxmsg.innerHTML=option.content;
+		}else if(typeof(option.content)=="object"&&option.content.tagName){
+			_$A(option.content,mboxmsg);
+		}
 	}
 	mboxclr.onclick=function(){
 		// mbox.style.display="none";
