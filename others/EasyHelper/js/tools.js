@@ -126,17 +126,17 @@ function opnTbox(m,prd,afun){
 		mctt=_$G("mtbox");
 	}else{
 		mtbox = _$C("a");
+		mtbox.className="mtbox";
+		mtbox.innerHTML=m;
 		mctt=_$C("div");
 		mctt.style.display="block";
 		mctt.style.position="fixed";
 		mctt.style.zIndex="9999";
-		mctt.style.maxWidth=pgw-10+"px";
+		_$A(mtbox,mctt);
+		_$A(mctt,document.body);
 	}
-	mtbox.className="mtbox";
-	mtbox.innerHTML=m;
 	mctt.style.display="block";
-	_$A(mtbox,mctt);
-	_$A(mctt,document.body);
+	mctt.style.maxWidth=pgw-10+"px";
 	var mcttw=parseInt(mctt.offsetWidth);
 	var mctth=parseInt(mctt.offsetHeight);
 	mctt.style.left=(pgw/2-(mcttw/2))+"px";
@@ -287,7 +287,7 @@ function opnCfmBox(option){
 	
 }
 function opnCfmBoxA(opt){
-	opnCfmBox({code:opt.code,title:opt.title,content:opt.content,btn1:opt.btn1,fun1:opt.fun1,btn2:opt.btn2,fun2:opt.fun2,btn3:opt.btn3,fun3:opt.fun3,headColor:"#efefef",claza:"btn btn-mini btn-green"});
+	opnCfmBox({code:opt.code,title:opt.title,content:opt.content,btn1:opt.btn1,fun1:opt.fun1,btn2:opt.btn2,fun2:opt.fun2,btn3:opt.btn3,fun3:opt.fun3,width:opt.width,headColor:"#efefef",claza:"btn btn-mini btn-green"});
 }
 
 function prefixInteger(num, n) {

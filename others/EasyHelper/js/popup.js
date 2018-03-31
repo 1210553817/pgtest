@@ -31,6 +31,21 @@ function initEvents(){
 	downbtn.onclick=startDown;	
 	var sglbtn = _$G("taba_single");
 	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
+	//test...
+	var btn21 = _$G("tabb_btn1");
+	btn21.onclick=function(){opnTbox("tip test...");};
+	var btn22 = _$G("tabb_btn2");
+	btn22.onclick=function(){
+		opnCfmBoxA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
+			fun1: function(mbdy){
+				opnTbox("Confirmed...");
+				return true;
+			},fun3: function(){
+				opnTbox("Ignored...");
+			}
+		});
+	};
+
 }
 function initDatas(){
 	downParam.dwnFolder = _getStorage("dwnFolder");
