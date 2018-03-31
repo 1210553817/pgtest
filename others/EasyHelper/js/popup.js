@@ -120,7 +120,7 @@ function parseUrls(){
 	}while(result!=null)
 	var dnsr=parseInt(downParam.dwnStartIndx);
 	var dnen=parseInt(downParam.dwnEndIndx);
-	return rearr.slice(dnsr>=0?(dnsr+1):0,dnsr>=0?(rearr.length-dnen):(rearr.length));
+	return rearr.slice(dnsr>=0?(dnsr+1):0,dnen>=0?(rearr.length-dnen):(rearr.length));
 
 }
 
