@@ -106,6 +106,7 @@ function startDown(){
 function parseUrls(){
 	var dtxt = _$G("down_urls").value;
 	var dprm = _$G("down_prms").value;
+	dprm = _$Ava(dprm)?dprm:"";
 	var rearr=[];
 	//var reg = new RegExp("((http).*)","g");
 	//.replace(/[\r\n]/g, "")
