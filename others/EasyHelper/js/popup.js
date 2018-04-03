@@ -33,7 +33,7 @@ function initEvents(){
 	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
 	//test...
 	var btn21 = _$G("tabb_btn1");
-	btn21.onclick=function(){opnTbox('<img src="../imgs/icon48.png"/>');};
+	btn21.onclick=function(){opnTbox('<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>');};
 	var btn22 = _$G("tabb_btn2");
 	btn22.onclick=function(){
 		opnCfmBoxA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
