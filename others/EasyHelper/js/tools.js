@@ -119,7 +119,7 @@ function _$MoveDu(elem,step,fpos,tpos,speed) {
 /**
 *option{ suffix:后缀, msg:消息, period:持续时间, closed:关闭后 }
 */
-var $TipCaseInx;
+var $TipCaseInx=null;
 function tipCase(option){
 	var carr=getPgsz();
 	var pgw=carr[0];
