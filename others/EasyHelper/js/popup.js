@@ -33,14 +33,14 @@ function initEvents(){
 	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
 	//test...
 	var btn21 = _$G("tabb_btn1");
-	btn21.onclick=function(){opnTbox('<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>');};
+	btn21.onclick=function(){tipCase({msg:'<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>'});};
 	var btn22 = _$G("tabb_btn2");
 	btn22.onclick=function(){
-		opnCfmBoxA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
+		panelCaseA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
 			fun1: function(mbdy){
 				return true;
 			},closed: function(){
-				opnTbox("FROM: "+this.innerHTML);
+				tipCase({msg:"FROM: "+this.innerHTML});
 			}
 		});
 	};
@@ -66,7 +66,7 @@ function startDown(){
 		'<div style="display:inline-block;width:50px;">去头数:</div><input id="beforeDownStart" type="text" value="',downParam.dwnStartIndx,'" style="width:80px;"/>&nbsp;&nbsp;',
 		'<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="',downParam.dwnEndIndx,'" style="width:80px;"/>'
 	].join("");
-	opnCfmBoxA({ title: '文件下载', content:ctt, btn1:"开始", btn2: "取消",
+	panelCaseA({ title: '文件下载', content:ctt, btn1:"开始", btn2: "取消",
 		fun1: function(mbdy){
 			var fbf=_$G("beforeDownName",mbdy);
 			var fin=_$G("beforeDownIndx",mbdy);		
