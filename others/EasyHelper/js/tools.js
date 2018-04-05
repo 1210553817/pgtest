@@ -73,7 +73,7 @@ function _$FadeIn(elem, speed,op,fp) {
 	var val = fp||0;
 	(function() {
 		_$SetOpacity(elem, val);
-		val += 5;
+		val += 10;
 		if (val <= op) {
 			setTimeout(arguments.callee, speed)
 		}
@@ -86,7 +86,7 @@ function _$FadeOut(elem, speed,op,fp) {
 	var val = fp||100;
 	( function() {
 		_$SetOpacity(elem, val);
-		val -= 5;
+		val -= 10;
 		if (val >= op) {
 			setTimeout(arguments.callee, speed);
 		} else if (val < op) {
@@ -303,11 +303,7 @@ Ajax.getHttpRequest = function () {
     } else if (window.createRequest) {
         return window.createRequest();
     }
-    var prefixes = ["MSXML2", "Microsoft", "MSXML", "MSXML3"];
-    for (var i = 0; i < prefixes.length; i++) {
-        try { return new ActiveXObject(prefixes[i] + ".XmlHttp"); }
-        catch (ex) { }
-    }
+	var prefixes = ["MSXML2","Microsoft","MSXML","MSXML3"];for (var i=0;i<prefixes.length;i++){try { return new ActiveXObject(prefixes[i]+".XmlHttp");}catch (ex) {}}
     throw new Error("Could not find an installed XML parser.");
 };
 

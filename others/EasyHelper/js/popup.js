@@ -33,7 +33,7 @@ function initEvents(){
 	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
 	//test...
 	var btn21 = _$G("tabb_btn1");
-	btn21.onclick=function(){tipCase({msg:'<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>'});};
+	btn21.onclick=function(){tipCase({suffix:"A",msg:'<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>'});};
 	var btn22 = _$G("tabb_btn2");
 	btn22.onclick=function(){
 		panelCaseA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
@@ -108,9 +108,9 @@ function parseUrls(){
 	var dprm = _$G("down_prms").value;
 	dprm = _$Ava(dprm)?dprm:"";
 	var rearr=[];
-	//var reg = new RegExp("((http).*)","g");
+	var reg = new RegExp("((http).*)","g");
 	//.replace(/[\r\n]/g, "")
-	var reg = new RegExp("(.*\.ts)","g");
+	//var reg = new RegExp("(.*\.ts)","g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
