@@ -65,33 +65,38 @@ function _$SetOpacity(ele,val){
 		ele.style.filter="alpha(opacity="+val+")";
 		ele.style.opacity = val/100;
 }
-function _$FadeIn(elem, speed,op,fp) {
-	speed = speed || 20;
-	op = op || 100;
-	elem.style.display = 'block';
-	_$SetOpacity(elem, 0);
-	var val = fp||0;
+/**
+*option{ele: Dom元素, prd:周期, from:开始, to:结束, afun:结束callback}
+*/
+function _$FadeIn(option) {
+	option.prd = option.prd || 20;
+	option.to = option.to || 100;
+	option.ele.style.display = 'block';
+	_$SetOpacity(option.ele, 0);
+	var val = option.from||0;
 	(function() {
-		_$SetOpacity(elem, val);
+		_$SetOpacity(option.ele, val);
 		val += 10;
-		if (val <= op) {
-			setTimeout(arguments.callee, speed)
+		if (val <= option.to) {
+			setTimeout(arguments.callee, option.prd)
+		}else{
+			if(option.afun)option.afun();
 		}
 	})();
 }
-
-function _$FadeOut(elem, speed,op,fp) {
-	speed = speed || 20;
-	op = op || 0;
-	var val = fp||100;
+function _$FadeOut(option) {
+	option.prd = option.prd || 20;
+	option.to = option.to || 0;
+	var val = option.from||100;
 	( function() {
-		_$SetOpacity(elem, val);
+		_$SetOpacity(option.ele, val);
 		val -= 10;
-		if (val >= op) {
-			setTimeout(arguments.callee, speed);
-		} else if (val < op) {
-			elem.style.display = 'none';
-			_$SetOpacity(elem,100);
+		if (val >= option.to) {
+			setTimeout(arguments.callee, option.prd);
+		} else if (val < option.to) {
+			option.ele.style.display = 'none';
+			_$SetOpacity(option.ele,100);
+			if(option.afun)option.afun();
 		}
 	})();
 }
@@ -119,27 +124,24 @@ function _$MoveDu(elem,step,fpos,tpos,speed) {
 /**
 *option{ suffix:后缀, msg:消息, period:持续时间, closed:关闭后 }
 */
-var $TipCaseInx=null;
 function tipCase(option){
 	var carr=getPgsz();
 	var pgw=carr[0];
 	var pgh=carr[1];
 	if(_$Null(option.suffix))option.suffix="";
-	var mctt=_$G("mctt"+option.suffix);
-	var mtbox;
-	if(mctt){
-		mtbox=_$Q("#mtbox",mctt);
-	}else{
-		mtbox = _$C("a");
-		mtbox.id="mtbox";
-		mtbox.className="mtbox";
-		mctt=_$C("div");
-		mctt.id="mctt"+option.suffix
-		mctt.style.position="fixed";
-		mctt.style.zIndex="9999";
-		_$A(mtbox,mctt);
-		_$A(mctt,document.body);
-	}
+	$TipCaseIndex=window.$TipCaseIndex||0;
+	var eid=[option.suffix,"_",$TipCaseIndex].join("");
+	$TipCaseIndex++;
+	var mctt,mtbox;
+	mtbox = _$C("a");
+	mtbox.id="mtbox"+eid;
+	mtbox.className="mtbox";
+	mctt=_$C("div");
+	mctt.id="mctt"+eid;
+	mctt.style.position="fixed";
+	mctt.style.zIndex="9999";
+	_$A(mtbox,mctt);
+	_$A(mctt,document.body);
 	mtbox.innerHTML=option.msg;
 	mctt.style.display="block";
 	mctt.style.maxWidth=pgw-10+"px";
@@ -147,18 +149,14 @@ function tipCase(option){
 	var mctth=parseInt(mctt.offsetHeight);
 	mctt.style.left=(pgw/2-(mcttw/2))+"px";
 	mctt.style.top=(pgh/2-(mctth/2))+"px";
+	_$FadeIn({ele:mctt});
 	if(_$Null(option.period))option.period=1500;
-	if($TipCaseInx){window.clearTimeout($TipCaseInx);}else{_$FadeIn(mctt);}
-	$TipCaseInx=window.setTimeout(function(){
-		if(option.closed)option.closed(option.suffix);
-		_$FadeOut(mctt);
-		$TipCaseInx=null;
-	},option.period);
+	window.setTimeout(function(){if(option.closed)option.closed(eid);_$FadeOut({ele:mctt,afun:function(){if(_$Ava(mctt.parentNode))mctt.outerHTML="";}});},option.period);
 }
 /**
 *option{
 * code 编号, title 标题, content 内容, btn1 按钮1, fun1 回调1, btn2 按钮2, fun2 回调2, btn3 按钮3, fun3 回调3,closed 关闭回调
-* width 宽度, headColor 颜色, claza ClassA, clazb ClassB, clazc ClassC
+* width 宽度, headColor 颜色, claza ClassA, clazb ClassB, clazc ClassC 
 *}
 */
 function panelCase(option){
@@ -215,8 +213,8 @@ function panelCase(option){
 	mboxclr.onclick=function(){
 		// mbox.style.display="none";
 		// clay.style.display="none";
-		_$FadeOut(mbox,15);
-		_$FadeOut(clay,20,0,70);
+		_$FadeOut({ele:mbox});
+		_$FadeOut({ele:clay,from:70});
 		if(option.closed)option.closed.call(this);
 	}
 	if(!option.btn1){
@@ -285,12 +283,12 @@ function panelCase(option){
 	var mboxposy=(pgh/2-(mboxht/2));
 	//_$MoveDu(mbox,20,mboxposy-50,mboxposy);
 	mbox.style.top=mboxposy+"px";
-	_$FadeIn(clay,15,70);
-	_$FadeIn(mbox,20);
+	_$FadeIn({ele:clay,to:70});
+	_$FadeIn({ele:mbox});
 	
 }
 function panelCaseA(opt){
-	panelCase({code:opt.code,title:opt.title,content:opt.content,btn1:opt.btn1,fun1:opt.fun1,btn2:opt.btn2,fun2:opt.fun2,btn3:opt.btn3,fun3:opt.fun3,closed:opt.closed,width:opt.width,headColor:"#efefef",claza:"btn btn-mini btn-green"});
+	panelCase({code:opt.code,title:opt.title,content:opt.content,btn1:opt.btn1,fun1:opt.fun1,btn2:opt.btn2,fun2:opt.fun2,btn3:opt.btn3,fun3:opt.fun3,closed:opt.closed,width:opt.width,headColor:"#f5f5f5",claza:"btn btn-mini btn-green"});
 }
 
 function prefixInteger(num, n) {
