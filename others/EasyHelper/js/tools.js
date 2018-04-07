@@ -122,15 +122,15 @@ function _$MoveDu(elem,step,fpos,tpos,speed) {
 }
 
 /**
-*option{ suffix:后缀, msg:消息, period:持续时间, closed:关闭后 }
+*option{ code:编号, msg:消息, period:持续时间, closed:关闭后 }
 */
 function tipCase(option){
 	var carr=getPgsz();
 	var pgw=carr[0];
 	var pgh=carr[1];
-	if(_$Null(option.suffix))option.suffix="";
+	if(_$Null(option.code))option.code="";
 	$TipCaseIndex=window.$TipCaseIndex||0;
-	var eid=[option.suffix,"_",$TipCaseIndex].join("");
+	var eid=[option.code,"_",$TipCaseIndex].join("");
 	$TipCaseIndex++;
 	var mctt,mtbox;
 	mtbox = _$C("a");
@@ -151,7 +151,7 @@ function tipCase(option){
 	mctt.style.top=(pgh/2-(mctth/2))+"px";
 	_$FadeIn({ele:mctt});
 	if(_$Null(option.period))option.period=1500;
-	window.setTimeout(function(){if(option.closed)option.closed(eid);_$FadeOut({ele:mctt,afun:function(){if(_$Ava(mctt.parentNode))mctt.outerHTML="";}});},option.period);
+	window.setTimeout(function(){_$FadeOut({ele:mctt,afun:function(){if(_$Ava(mctt.parentNode))mctt.outerHTML="";}});if(option.closed)option.closed(eid);},option.period);
 }
 /**
 *option{
