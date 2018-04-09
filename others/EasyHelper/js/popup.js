@@ -60,10 +60,10 @@ function initDatas(){
 }
 
 function startDown(){
-	var ctt = '<div style="display:inline-block;width:50px;">文件夹:</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'
-		+'<div style="display:inline-block;width:50px;">序号:</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'
-		+'<div style="display:inline-block;width:50px;">去头数:</div><input id="beforeDownStart" type="text" value="'+downParam.dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;'
-		+'<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/>';
+	var ctt = '<div style="display:inline-block;width:50px;">文件夹:</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">序号:</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;">去头数:</div><input id="beforeDownStart" type="text" value="'+downParam.dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/>';
 	panelCaseA({ title: '文件下载', content:ctt, btn1:"开始", btn2: "取消",
 		fun1: function(mbdy){
 			var fbf=_$G("beforeDownName",mbdy);
