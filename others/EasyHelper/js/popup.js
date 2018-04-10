@@ -1,5 +1,6 @@
 var downParam={};
 window.onload=function(){
+	Date.prototype.toStr =dateFmt;
 	initTabs();
 	initEvents();
 	//$BG = chrome.extension.getBackgroundPage();
@@ -31,11 +32,11 @@ function initEvents(){
 	downbtn.onclick=startDown;	
 	var sglbtn = _$G("taba_single");
 	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
-	//test...
-	var btn21 = _$G("tabb_btn1");
-	btn21.onclick=function(){tipCase({code:"A",msg:'<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>'});};
-	var btn22 = _$G("tabb_btn2");
-	btn22.onclick=function(){
+	pdnBtn = _$G("tabb_btn1");
+	pdnBtn.onclick=function(){picDownUrl();};
+	//testC...
+	_$G("tabc_btn1").onclick=function(){tipCase({code:"A",msg:'<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>'});};
+	_$G("tabc_btn2").onclick=function(){
 		panelCaseA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
 			fun1: function(mbdy){
 				return true;
@@ -86,14 +87,14 @@ function startDown(){
 			}
 			var parr = parseUrls();
 			multDowner(parr,0,
-			function(indx,len){
-				downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
-				downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
-			},
-			function(){
-				downbtn.onclick=startDown;
-				downbtn.innerHTML="开始下载";
-			});
+				function(indx,len){
+					downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
+					downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
+				},
+				function(){
+					downbtn.onclick=startDown;
+					downbtn.innerHTML="开始下载";
+				});
 			downbtn.onclick=null;
 			return true;
 		}
@@ -145,5 +146,47 @@ function getYkDownUrl(stms,indx,txs,aft){
 	Ajax.get(iurl,function(rst){
 		txs.push(rst);
 		getYkDownUrl(stms,indx+1,txs,aft);
+	});
+}
+/*mulpic*/
+function picDownUrl(){
+	var setStr = _$G("picdn_url").value;
+	var reg = new RegExp("^((http)[s]*://.*)(\\[(\\d+)\-(\\d+)#(\\d)\\])(.*)$");
+	var group = reg.exec(setStr); 
+	if(!_$Ava(group)||group[2]!="http"){
+		tipCase({msg:"请输入url,通配符,如:[1-23#2]"});
+		return;
+	}
+	var lenInt=parseInt(group[6]);
+	var startInt=parseInt(group[4]);
+	var endInt=parseInt(group[5]);
+	if(endInt<startInt){
+		tipCase({msg:"通配符不正确，如：[1-23#2]"});
+		return;
+	}
+	var now = new Date()
+	downParam.dwnFolder=now.toStr('yyyy-MM-dd');
+	downParam.dwnSubFolder=now.toStr('hh_mm_ss');
+	picDowner(group[1],group[7],startInt,endInt,lenInt);
+	pdnBtn.onclick=null;
+}
+function picDowner(urlpre,urlsuf,now,end,lenInt){
+	if(now>end){
+		pdnBtn.onclick=function(){picDownUrl();};
+		pdnBtn.innerHTML="开始下载";
+		return;
+	}
+	pdnBtn.innerHTML=now+" / "+end;
+	var rindx=(lenInt>1)?prefixInteger(now, lenInt):now;
+	downParam.dwnFname=rindx+urlsuf;
+	var dnurl=urlpre+downParam.dwnFname;
+	chrome.downloads.download({
+		url: dnurl,
+		conflictAction: 'uniquify',
+		saveAs: false
+	},function(){
+		window.setTimeout(function(){
+			picDowner(urlpre,urlsuf,now+1,end,lenInt);
+		},1000);
 	});
 }
