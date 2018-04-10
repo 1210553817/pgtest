@@ -1,0 +1,24 @@
+﻿{
+  "ver":"3.0",
+  "tlb":[
+    {
+      "power":1,
+      "name":"自定义防护规则",
+      "policies":{
+        "*":[
+          {
+            "mt":2,
+            "at":13,
+            "res_path":"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\*"
+          },
+          {
+            "mt":2,
+            "at":13,
+            "res_path":"HKEY_CLASSES_ROOT\\http\\shell\\open\\*"
+          }
+        ]
+      },
+      "verdict":1
+    }
+  ]
+}
