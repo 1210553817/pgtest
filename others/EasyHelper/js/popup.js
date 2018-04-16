@@ -36,7 +36,7 @@ function initEvents(){
 	pdnBtn.onclick=function(){picDownUrl();};
 	//testC...
 	_$G("tabc_btn1").onclick=function(){
-		var tip = tipCase({code:"A",msg:'<img src="../imgs/loading.gif" style="width:30px;height:30px;"/>',abs:1});
+		var tip = tipCase({code:"A",msg:'<img src="../imgs/loading.gif" style="width:26px;height:26px;"/>',abs:1});
 		window.setTimeout(function(){tip.close();},10000)
 	};
 	_$G("tabc_btn2").onclick=function(){
