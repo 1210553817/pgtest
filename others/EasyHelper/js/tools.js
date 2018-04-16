@@ -122,7 +122,7 @@ function _$MoveDu(elem,step,fpos,tpos,speed) {
 }
 
 /**
-*option{ code:编号, msg:消息, period:持续时间, closed:关闭后 }
+*option{ code:编号, msg:消息, period:持续时间, closed:关闭后, abs: 不会消失 }
 */
 function tipCase(option){
 	var carr=getPgsz();
@@ -151,7 +151,9 @@ function tipCase(option){
 	mctt.style.top=(pgh/2-(mctth/2))+"px";
 	_$FadeIn({ele:mctt});
 	if(_$Null(option.period))option.period=1500;
-	window.setTimeout(function(){_$FadeOut({ele:mctt,afun:function(){if(_$Ava(mctt.parentNode))mctt.outerHTML="";}});if(option.closed)option.closed(eid);},option.period);
+	var cls=function(){_$FadeOut({ele:mctt,afun:function(){if(_$Ava(mctt.parentNode))mctt.outerHTML="";}});if(option.closed)option.closed(eid);}
+	if(_$Null(option.abs))window.setTimeout(cls,option.period);
+	else{return {dom:mctt,close:cls};}
 }
 /**
 *option{

@@ -35,7 +35,10 @@ function initEvents(){
 	pdnBtn = _$G("tabb_btn1");
 	pdnBtn.onclick=function(){picDownUrl();};
 	//testC...
-	_$G("tabc_btn1").onclick=function(){tipCase({code:"A",msg:'<img src="../imgs/icon48.png" style="width:30px;height:30px;"/>'});};
+	_$G("tabc_btn1").onclick=function(){
+		var tip = tipCase({code:"A",msg:'<img src="../imgs/loading.gif" style="width:30px;height:30px;"/>',abs:1});
+		window.setTimeout(function(){tip.close();},10000)
+	};
 	_$G("tabc_btn2").onclick=function(){
 		panelCaseA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
 			fun1: function(mbdy){
