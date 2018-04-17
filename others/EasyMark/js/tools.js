@@ -122,7 +122,7 @@ function _$MoveDu(elem,step,fpos,tpos,speed) {
 }
 
 /**
-*option{ code:编号, msg:消息, period:持续时间, closed:关闭后 }
+*option{ code:编号, msg:消息, period:持续时间, closed:关闭后,cover: 遮罩, abs: 不会消失 }
 */
 function tipCase(option){
 	var carr=getPgsz();
@@ -130,9 +130,9 @@ function tipCase(option){
 	var pgh=carr[1];
 	if(_$Null(option.code))option.code="";
 	$TipCaseIndex=window.$TipCaseIndex||0;
-	var eid=[option.code,"_",$TipCaseIndex].join("");
+	var eid=option.code+"_"+$TipCaseIndex;
 	$TipCaseIndex++;
-	var mctt,mtbox;
+	var mctt,mtbox,mcov;
 	mtbox = _$C("a");
 	mtbox.id="mtbox"+eid;
 	mtbox.className="mtbox";
@@ -140,6 +140,17 @@ function tipCase(option){
 	mctt.id="mctt"+eid;
 	mctt.style.position="fixed";
 	mctt.style.zIndex="9999";
+	if(option.cover){
+		mcov=_$C("div");
+		mcov.id="mcov"+eid;
+		mcov.className="cfmbackLayer";
+		mcov.style.position="fixed";
+		mcov.style.zIndex="9999";
+		_$A(mcov,document.body);
+		mcov.style.display="block";
+		mcov.style.width=pgw+"px";
+		mcov.style.height=pgh+"px";
+	}
 	_$A(mtbox,mctt);
 	_$A(mctt,document.body);
 	mtbox.innerHTML=option.msg;
@@ -149,9 +160,13 @@ function tipCase(option){
 	var mctth=parseInt(mctt.offsetHeight);
 	mctt.style.left=(pgw/2-(mcttw/2))+"px";
 	mctt.style.top=(pgh/2-(mctth/2))+"px";
+	if(mcov)_$FadeIn({ele:mcov,to:70});
 	_$FadeIn({ele:mctt});
 	if(_$Null(option.period))option.period=1500;
-	window.setTimeout(function(){_$FadeOut({ele:mctt,afun:function(){if(_$Ava(mctt.parentNode))mctt.outerHTML="";}});if(option.closed)option.closed(eid);},option.period);
+	var cls=function(){_$FadeOut({ele:mctt,afun:function(){if(_$Ava(mctt.parentNode))mctt.outerHTML="";}});
+	if(mcov)_$FadeOut({ele:mcov,from:70,afun:function(){if(_$Ava(mcov.parentNode))mcov.outerHTML="";}});if(option.closed)option.closed(eid);}
+	if(_$Null(option.abs))window.setTimeout(cls,option.period);
+	else{return {dom:mctt,close:cls};}
 }
 /**
 *option{

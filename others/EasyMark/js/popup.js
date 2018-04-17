@@ -44,7 +44,7 @@ function initDatas(){
 }
 
 function getBkmks() {
-	tipCase({msg:"正在获取数据，请稍后...",closed:function(){
+	tipCase({msg:'<img src="../imgs/loading.gif" style="width:24px;height:24px;"/>',cover:1,closed:function(){
 		chrome.bookmarks.getTree( function(b) {
 			var a = getBkmk(b);
 			setBkmkJson(a);
@@ -83,7 +83,7 @@ function setAllBkmk(){
 function setAllBkmkA(str,doFun){
 	var setStr = str;
 	if (!_$Ava(setStr)) {
-		tipCase({msg:"没有要还原的数据!"});
+		tipCase({msg:"没有要还原的数据!",cover:1});
 		return;
 	}
 	var tdt;
@@ -174,7 +174,7 @@ function addBkmk2dm(){
 		var a = getBkmk(b);
 		var setStr = _$G("defpop_txts").value;
 		if(!_$Ava(setStr)||setStr.trim()==""){setStr=date2Str();}
-		if(20<setStr.length){tipCase({msg:"名字太长了"});return;}
+		if(20<setStr.length){tipCase({msg:"名字太长了",cover:1});return;}
 		var anew="{\"bkmknm\":\""+escape(setStr)+"\",\"bkmkdata\":\""+encrypt(a,"EasyMark")+"\",\"ckd\":\"1\"}";
 		var dmstr=getBkmkdm();
 		if(!dmstr){
@@ -194,7 +194,7 @@ function addBkmk2dm(){
 				_setStorage("bkmkDomain","["+anew+"]");
 			}
 		}
-		tipCase({msg:setStr+"  已添加成功！"});
+		tipCase({msg:setStr+"  已添加成功！",cover:1});
 	});
 }
 function getBkmkdm(){
@@ -204,7 +204,7 @@ function setBkmkdm(str){
  _setStorage("bkmkDomain",str);
 }
 function showBkmkdm(){
-	tipCase({msg:"正在获取数据，请稍后...",closed:function(){
+	tipCase({msg:'<img src="../imgs/loading.gif" style="width:24px;height:24px;"/>',cover:1,closed:function(){
 		var b = _$G("defpop_domain_txts");
 		b.value=getBkmkdm();
 	}});

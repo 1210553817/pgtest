@@ -44,7 +44,7 @@ function initEvents(){
 			fun1: function(mbdy){
 				return true;
 			},closed: function(){
-				tipCase({msg:"FROM: "+this.innerHTML});
+				tipCase({msg:"FROM: "+this.innerHTML,cover:1});
 			}
 		});
 	};
