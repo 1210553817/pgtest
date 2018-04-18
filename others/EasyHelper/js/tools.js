@@ -183,23 +183,21 @@ function panelCase(option){
 	var mhld,mbox,clay,mboxtit,mboxclr,mboxbody,tittxt,mbox_btna,mbox_btnb,mbox_btnc;
 	mhld = _$G("cfmhd"+option.code);
 	if(_$Null(mhld)){
-		var html=[
-			'<div id="cfmbackLayer',option.code,'" class="cfmbackLayer"></div>',
-			'<div id="cfmBox',option.code,'" class="cfmBox">',
-				'<div id="cfmBox_header" class="cfmBox_header">',
-					'<a id="cfmBox_closer" class="cfmBox_closer">×</a>',
-					'<span id="cfmboxTit"></span>',
-				'</div>',
-				'<div id="cfmBox_body" class="cfmBox_body">',
-					'<p id="cfmboxMsg"></p>',
-				'</div>',
-				'<div class="cfmBox_footer">',
-					'<a id="cfmBoxbtna" class="btn btn-mini btn-green">Confirm</a>',
-					'<a id="cfmBoxbtnb" class="btn btn-mini">Cancel</a>',
-					'<a id="cfmBoxbtnc" class="btn btn-mini">Ignore</a>',
-				'</div>',
-			'</div>'
-		].join("");
+		var html='<div id="cfmbackLayer'+option.code+'" class="cfmbackLayer"></div>'+
+			'<div id="cfmBox'+option.code+'" class="cfmBox">'+
+				'<div id="cfmBox_header" class="cfmBox_header">'+
+					'<a id="cfmBox_closer" class="cfmBox_closer">×</a>'+
+					'<span id="cfmboxTit"></span>'+
+				'</div>'+
+				'<div id="cfmBox_body" class="cfmBox_body">'+
+					'<p id="cfmboxMsg"></p>'+
+				'</div>'+
+				'<div class="cfmBox_footer">'+
+					'<a id="cfmBoxbtna" class="btn btn-mini btn-green">Confirm</a>'+
+					'<a id="cfmBoxbtnb" class="btn btn-mini">Cancel</a>'+
+					'<a id="cfmBoxbtnc" class="btn btn-mini">Ignore</a>'+
+				'</div>'+
+			'</div>';
 		mhld = _$C("div");
 		mhld.id="cfmhd"+option.code;
 		_$A(mhld,document.body);
