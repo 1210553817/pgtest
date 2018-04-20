@@ -112,7 +112,8 @@ function parseUrls(){
 	var rearr=[];
 	//var reg = new RegExp("((http).*)","g");
 	//.replace(/[\r\n]/g, "")
-	var reg = new RegExp("(.*\.ts)","g");
+	//var reg = new RegExp("(.*\.ts)","g");
+	var reg = new RegExp("(.*\.mp4.*)","g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
