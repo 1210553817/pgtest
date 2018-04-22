@@ -3,13 +3,18 @@
   "tlb":[
     {
       "power":1,
-      "name":"自定义防护规则",
+      "name":"StartUp-ProtectRule",
       "policies":{
         "*":[
           {
             "mt":2,
             "at":13,
             "res_path":"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\*"
+          },          
+		  {
+            "mt":2,
+            "at":13,
+            "res_path":"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\*"
           },
           {
             "mt":2,
