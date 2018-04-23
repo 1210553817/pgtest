@@ -3,7 +3,7 @@
   "tlb":[
     {
       "power":1,
-      "name":"ContextMenu-ProtectRule",
+      "name":"鼠标右键上下文菜单",
       "policies":{
         "*":[
           {
