@@ -37,7 +37,7 @@ function initEvents(){
 	//testC...
 	_$G("tabc_btn1").onclick=function(){
 		var tip = tipCase({code:"A",msg:'<img src="../imgs/loading.gif" style="width:26px;height:26px;"/>',cover:1,abs:1});
-		window.setTimeout(function(){tip.close();},10000)
+		window.setTimeout(function(){tip.close();},5000)
 	};
 	_$G("tabc_btn2").onclick=function(){
 		panelCaseA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"确定", btn2:"取消", btn3:"忽略",
