@@ -370,6 +370,6 @@ function multDowner(urls,indx,ing,bkf){
 	},function(){
 		window.setTimeout(function(){
 			multDowner(urls,indx+1,ing,bkf);
-		},200);
+		},400);
 	});
 }
