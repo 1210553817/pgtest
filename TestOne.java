@@ -15,9 +15,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.RegionUtil;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -189,7 +190,7 @@ public class TestOne {
 
 	public static Map<String, CellStyle> styles(Workbook wb) {
 		short bwth1 = 1;
-		short bwth2 = 2;
+		short bwth2 = 1;
 		Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
 		CellStyle style;
 		Font titleFont = wb.createFont();
@@ -202,6 +203,7 @@ public class TestOne {
 		styles.put("title", style);
 
 		Font hf = wb.createFont();
+		hf.setFontName("微软雅黑");
 		hf.setBoldweight(Font.BOLDWEIGHT_BOLD);
 
 		style = wb.createCellStyle();
@@ -265,13 +267,16 @@ public class TestOne {
 		return dir.delete();
 	}
 
-	private static final String expJson = "[{\"elem\":\"#yourTableHolderId\",\"width\":\"100%\",\"cellMinWidth\":100,\"limit\":1000,\"data\":[{\"timep\":\"2016年\",\"VAL01\":\"0\",\"VAR01\":\"0.0\",\"VAL02\":\"0\",\"VAR02\":\"0.0\",\"VAL03\":\"0\",\"VAR03\":\"0.0\",\"VAL04\":\"0\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2017年\",\"VAL01\":\"2400\",\"VAR01\":\"0.0\",\"VAL02\":\"700\",\"VAR02\":\"0.0\",\"VAL03\":\"800\",\"VAR03\":\"0.0\",\"VAL04\":\"900\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2018年\",\"VAL01\":\"6000\",\"VAR01\":\"150.0\",\"VAL02\":\"1000\",\"VAR02\":\"42.86\",\"VAL03\":\"2000\",\"VAR03\":\"150.0\",\"VAL04\":\"3000\",\"VAR04\":\"233.33\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"}],\"cols\":[[{\"title\":\"电源投资\",\"align\":\"center\",\"colspan\":14}],[{\"title\":\"时间\",\"align\":\"center\",\"field\":\"timep\",\"rowspan\":\"2\",\"colspan\":\"2\"},{\"title\":\"全部\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"火电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"水电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"核电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"风电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"光伏\",\"align\":\"center\",\"colspan\":\"2\"}],[{\"field\":\"VAL01\",\"title\":\"电源投资\",\"align\":\"left\"},{\"field\":\"VAR01\",\"title\":\"同比增速\",\"align\":\"left\"},{\"field\":\"VAL02\",\"title\":\"电源投资\",\"align\":\"left\"},{\"field\":\"VAR02\",\"title\":\"同比增速\",\"align\":\"left\"},{\"field\":\"VAL03\",\"title\":\"电源投资\",\"align\":\"left\"},{\"field\":\"VAR03\",\"title\":\"同比增速\",\"align\":\"left\"},{\"field\":\"VAL04\",\"title\":\"电源投资\",\"align\":\"left\"},{\"field\":\"VAR04\",\"title\":\"同比增速\",\"align\":\"left\"},{\"field\":\"VAL05\",\"title\":\"电源投资\",\"align\":\"left\"},{\"field\":\"VAR05\",\"title\":\"同比增速\",\"align\":\"left\"},{\"field\":\"VAL06\",\"title\":\"电源投资\",\"align\":\"left\"},{\"field\":\"VAR06\",\"title\":\"同比增速\",\"align\":\"left\"}]]}]";
+	//private static final String expJson = "[{\"elem\":\"#yourTableHolderId\",\"width\":\"100%\",\"cellMinWidth\":100,\"limit\":1000,\"data\":[{\"timep\":\"2016年\",\"VAL01\":\"0\",\"VAR01\":\"0.0\",\"VAL02\":\"0\",\"VAR02\":\"0.0\",\"VAL03\":\"0\",\"VAR03\":\"0.0\",\"VAL04\":\"0\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2017年\",\"VAL01\":\"2400\",\"VAR01\":\"0.0\",\"VAL02\":\"700\",\"VAR02\":\"0.0\",\"VAL03\":\"800\",\"VAR03\":\"0.0\",\"VAL04\":\"900\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2018年\",\"VAL01\":\"6000\",\"VAR01\":\"150.0\",\"VAL02\":\"1000\",\"VAR02\":\"42.86\",\"VAL03\":\"2000\",\"VAR03\":\"150.0\",\"VAL04\":\"3000\",\"VAR04\":\"233.33\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"}],\"cols\":[[{\"title\":\"电源投资\",\"align\":\"center\",\"colspan\":13}],[{\"title\":\"时间\",\"align\":\"center\",\"field\":\"timep\",\"rowspan\":\"2\"},{\"title\":\"全部\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"火电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"水电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"核电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"风电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"光伏\",\"align\":\"center\",\"colspan\":\"2\"}],[{\"field\":\"VAL01\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR01\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL02\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR02\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL03\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR03\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL04\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR04\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL05\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR05\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL06\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR06\",\"title\":\"同比增速\",\"align\":\"right\"}]]}]";
+	private static final String expJson = "{\"elem\":\"#yourTableHolderId\",\"sheetName\":\"电源投资\",\"width\":\"100%\",\"cellMinWidth\":100,\"limit\":1000,\"data\":[{\"timep\":\"2016年\",\"VAL01\":\"0\",\"VAR01\":\"0.0\",\"VAL02\":\"0\",\"VAR02\":\"0.0\",\"VAL03\":\"0\",\"VAR03\":\"0.0\",\"VAL04\":\"0\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2017年\",\"VAL01\":\"2400\",\"VAR01\":\"0.0\",\"VAL02\":\"700\",\"VAR02\":\"0.0\",\"VAL03\":\"800\",\"VAR03\":\"0.0\",\"VAL04\":\"900\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2018年\",\"VAL01\":\"6000\",\"VAR01\":\"150.0\",\"VAL02\":\"1000\",\"VAR02\":\"42.86\",\"VAL03\":\"2000\",\"VAR03\":\"150.0\",\"VAL04\":\"3000\",\"VAR04\":\"233.33\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"}],\"cols\":[[{\"title\":\"电源投资\",\"align\":\"center\",\"colspan\":13}],[{\"title\":\"时间\",\"align\":\"center\",\"field\":\"timep\",\"rowspan\":\"2\"},{\"title\":\"全部\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"火电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"水电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"核电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"风电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"光伏\",\"align\":\"center\",\"colspan\":\"2\"}],[{\"field\":\"VAL01\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR01\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL02\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR02\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL03\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR03\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL04\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR04\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL05\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR05\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL06\",\"title\":\"电源投资\",\"align\":\"right\"},{\"field\":\"VAR06\",\"title\":\"同比增速\",\"align\":\"right\"}]]}";
+	private static final String expJson1 = "{\"elem\":\"#yourTableHolderId\",\"sheetName\":\"发电量\",\"width\":\"100%\",\"cellMinWidth\":100,\"limit\":1000,\"data\":[{\"timep\":\"2016年\",\"VAL01\":\"0\",\"VAR01\":\"0.0\",\"VAL02\":\"0\",\"VAR02\":\"0.0\",\"VAL03\":\"0\",\"VAR03\":\"0.0\",\"VAL04\":\"0\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2017年\",\"VAL01\":\"2400\",\"VAR01\":\"0.0\",\"VAL02\":\"700\",\"VAR02\":\"0.0\",\"VAL03\":\"800\",\"VAR03\":\"0.0\",\"VAL04\":\"900\",\"VAR04\":\"0.0\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"},{\"timep\":\"2018年\",\"VAL01\":\"6000\",\"VAR01\":\"150.0\",\"VAL02\":\"1000\",\"VAR02\":\"42.86\",\"VAL03\":\"2000\",\"VAR03\":\"150.0\",\"VAL04\":\"3000\",\"VAR04\":\"233.33\",\"VAL05\":\"0\",\"VAR05\":\"0.0\",\"VAL06\":\"0\",\"VAR06\":\"0.0\"}],\"cols\":[[{\"title\":\"发电量\",\"align\":\"center\",\"colspan\":13}],[{\"title\":\"时间\",\"align\":\"center\",\"field\":\"timep\",\"rowspan\":\"2\"},{\"title\":\"全部\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"火电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"水电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"核电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"风电\",\"align\":\"center\",\"colspan\":\"2\"},{\"title\":\"光伏\",\"align\":\"center\",\"colspan\":\"2\"}],[{\"field\":\"VAL01\",\"title\":\"发电量\",\"align\":\"right\"},{\"field\":\"VAR01\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL02\",\"title\":\"发电量\",\"align\":\"right\"},{\"field\":\"VAR02\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL03\",\"title\":\"发电量\",\"align\":\"right\"},{\"field\":\"VAR03\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL04\",\"title\":\"发电量\",\"align\":\"right\"},{\"field\":\"VAR04\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL05\",\"title\":\"发电量\",\"align\":\"right\"},{\"field\":\"VAR05\",\"title\":\"同比增速\",\"align\":\"right\"},{\"field\":\"VAL06\",\"title\":\"发电量\",\"align\":\"right\"},{\"field\":\"VAR06\",\"title\":\"同比增速\",\"align\":\"right\"}]]}";
+	private static final String expJson2 = "{\"elem\":\"#yourTableHolderId\",\"width\":\"100%\",\"cellMinWidth\":100,\"sheetName\":\"跨省区输入输出电量\",\"limit\":1000,\"data\":[{\"timep\":\"2017年1季度\",\"la\":\"900\",\"ga\":\"900\",\"ra\":\"0.0\",\"lb\":\"1800\",\"gb\":\"1800\",\"rb\":\"0.0\"},{\"timep\":\"2017年2季度\",\"la\":\"0\",\"ga\":\"900\",\"ra\":\"0.0\",\"lb\":\"0\",\"gb\":\"1800\",\"rb\":\"0.0\"},{\"timep\":\"2017年3季度\",\"la\":\"0\",\"ga\":\"900\",\"ra\":\"0.0\",\"lb\":\"0\",\"gb\":\"1800\",\"rb\":\"0.0\"},{\"timep\":\"2017年4季度\",\"la\":\"0\",\"ga\":\"900\",\"ra\":\"0.0\",\"lb\":\"0\",\"gb\":\"1800\",\"rb\":\"0.0\"},{\"timep\":\"2018年1季度\",\"la\":\"2200\",\"ga\":\"3100\",\"ra\":\"144.44\",\"lb\":\"1100\",\"gb\":\"2900\",\"rb\":\"-38.89\"},{\"timep\":\"2018年2季度\",\"la\":\"0\",\"ga\":\"3100\",\"ra\":\"0.0\",\"lb\":\"0\",\"gb\":\"2900\",\"rb\":\"0.0\"}],\"cols\":[[{\"title\":\"跨省区输入输出电量\",\"align\":\"center\",\"colspan\":7}],[{\"title\":\"时间\",\"align\":\"center\",\"field\":\"timep\",\"rowspan\":\"2\"},{\"title\":\"送出电量\",\"align\":\"center\",\"colspan\":\"3\"},{\"title\":\"送出电量\",\"align\":\"center\",\"colspan\":\"3\"}],[{\"field\":\"la\",\"title\":\"当期值\",\"align\":\"left\"},{\"field\":\"ga\",\"title\":\"累计值\",\"align\":\"left\"},{\"field\":\"ra\",\"title\":\"同比增速\",\"align\":\"left\"},{\"field\":\"lb\",\"title\":\"当期值\",\"align\":\"left\"},{\"field\":\"gb\",\"title\":\"累计值\",\"align\":\"left\"},{\"field\":\"rb\",\"title\":\"同比增速\",\"align\":\"left\"}]]}";
 
 	@Test
 	public void testDoExport() {
 		try {
 			 OutputStream fos = new FileOutputStream("C:\\Users\\Dong\\Desktop\\testDoExport.xlsx");
-			doExport(expJson, fos);
+			doExport("["+expJson+","+expJson1+","+expJson2+"]", fos);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -287,6 +292,7 @@ public class TestOne {
 		CellRangeAddress addr = null;
 		JsonArray dats = gson.fromJson(arrs, JsonArray.class);
 		Map<String, CellStyle> styles = styles(wb);
+		CellStyle heady = styles.get("header");
 		CellStyle celly = styles.get("cellBorder");
 		int m=0;
 		for (JsonElement data : dats) {
@@ -302,9 +308,10 @@ public class TestOne {
 			s = wb.createSheet();
 			wb.setSheetName(m, shtnm);
 
-			int i = 1, j = 0, k = 1;
+			int i = 0, j = 0, k = 0;
 			Map<Integer,Integer> sph = new HashMap<Integer, Integer>();
-			Map<Integer,Integer> spv = new HashMap<Integer, Integer>();
+			List<CellRangeAddress> mergeLs = new ArrayList<CellRangeAddress>();
+			List<Map<String, String>> fieldLs = new ArrayList<Map<String, String>>();
 			for (JsonElement ce : cols) {
 				if (!ce.isJsonArray())throw new Exception("cols error!");
 
@@ -323,50 +330,108 @@ public class TestOne {
 					JsonElement cspe = cmo.get("colspan");
 					JsonElement rspe = cmo.get("rowspan");
 					String tit = tite != null && tite.isJsonPrimitive() ? tite.getAsString() : "";
-					String fld = flde != null && flde.isJsonPrimitive() ? flde.getAsString() : "";
-					String ali = alie != null && alie.isJsonPrimitive() ? alie.getAsString() : "";
+					String fld = flde != null && flde.isJsonPrimitive() ? flde.getAsString() : null;
+					String ali = alie != null && alie.isJsonPrimitive() ? alie.getAsString() : null;
 					csp = cspe != null && cspe.isJsonPrimitive() ? cspe.getAsInt() : 1;
 					rsp = rspe != null && rspe.isJsonPrimitive() ? rspe.getAsInt() : 1;
-
+					if(fld!=null){
+						Map<String, String> mp = new HashMap<String, String>();
+						mp.put("field", fld);
+						if(ali!=null)mp.put("align", ali);
+						fieldLs.add(mp);
+						
+					}
 					for (int y = 0; y < rsp; y++) {
 						for (int x = 0; x < csp; x++) {
 							
 							Object xo = sph.get(i+y);
 							int xp = xo!=null?sph.get(i+y):0;
-
+							
 							if(x==0&&y==0) {
 								j = xp;
 							}
-							
 							sph.put(i+y, ++xp);
+
+							
 						}
 					}
 					
 					addr = new CellRangeAddress(i, i+rsp-1, j+k, j+k+csp-1);
-					s.addMergedRegion(addr);
-					
+					mergeLs.add(addr);
 					c = r.createCell(j+k);
-					c.setCellStyle(celly);
+					c.setCellStyle(heady);
 					s.setColumnWidth(j+k, 3000);
 					c.setCellValue(tit);
-					setBorder(1, addr, s, wb);
+					
 					j+=csp;
 				}
 				i+=rsp;
 			}
 			
+			int x=0,y;
+			for (JsonElement cn : datas) {
+				if (!cn.isJsonObject())	throw new Exception("datas item error!");
+				
+			 	r = s.createRow(i+x);
+				r.setHeight((short) 0x200);
+				
+				JsonObject dmo = cn.getAsJsonObject();
+				Object yo = sph.get(i+x);
+				y = yo!=null?sph.get(i+x):0;
+				for (Map<String, String> map : fieldLs) {
+					String fld = map.get("field");
+					String ali = map.get("align");
+					
+					JsonElement valu = dmo.get(fld);
+					String vale = valu != null && valu.isJsonPrimitive() ? valu.getAsString() : "";
+
+					c = r.createCell(y+k);
+					short bdw=1;
+					XSSFCellStyle cely = wb.createCellStyle();
+					cely.setAlignment(CellStyle.ALIGN_CENTER);
+					cely.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+					cely.setWrapText(true);
+					cely.setBorderBottom(bdw);
+					cely.setBorderLeft(bdw);
+					cely.setBorderRight(bdw);
+					cely.setBorderTop(bdw);
+					if("left".equals(ali)){
+						cely.setAlignment(CellStyle.ALIGN_LEFT);
+					}else if("right".equals(ali)){
+						cely.setAlignment(CellStyle.ALIGN_RIGHT);
+					}
+					c.setCellStyle(cely);
+					s.setColumnWidth(y+k, 3000);
+					c.setCellValue(vale);
+					
+					y++;
+				}
+				
+				x++;
+			}
+			
+			
+			for (CellRangeAddress  laddr : mergeLs) {
+				int fr = laddr.getFirstRow();
+				int lr = laddr.getLastRow();
+				int fc = laddr.getFirstColumn();
+				int lc = laddr.getLastColumn();
+				for (int l = fr; l <= lr; l++) {
+					for (int g = fc; g <= lc; g++) {
+						if(!(l==fr&&g==fc)){
+							Row rr = s.getRow(l);
+							Cell cc = rr.createCell(g);
+							cc.setCellStyle(heady);
+						}
+					}
+				}
+				s.addMergedRegion(laddr);
+			}
 			m++;
 		}
+
 		wb.write(os);
 	}
 	
-    private static void setBorder(int i, CellRangeAddress addr, Sheet sheet, XSSFWorkbook workBook){
-        RegionUtil.setBorderBottom(i, addr, sheet, workBook);
-        RegionUtil.setBorderLeft(i, addr, sheet, workBook);
-        RegionUtil.setBorderRight(i, addr, sheet, workBook);
-        RegionUtil.setBorderTop(i, addr, sheet, workBook);
-    }
-	
 
 }
-
