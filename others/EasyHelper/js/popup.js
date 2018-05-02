@@ -70,10 +70,10 @@ function startDown(){
 		'<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/>';
 	panelCaseA({ title: '文件下载', content:ctt, btn1:"开始", btn2: "取消",
 		fun1: function(mbdy){
-			var fbf=_$G("beforeDownName",mbdy);
-			var fin=_$G("beforeDownIndx",mbdy);		
-			var fst=_$G("beforeDownStart",mbdy);
-			var fen=_$G("beforeDownEnd",mbdy);
+			var fbf=_$Q("beforeDownName",mbdy);
+			var fin=_$Q("beforeDownIndx",mbdy);		
+			var fst=_$Q("beforeDownStart",mbdy);
+			var fen=_$Q("beforeDownEnd",mbdy);
 			downParam.dwnFolder = fbf.value;
 			downParam.dwnSubFolder = fin.value;
 			_setStorage("dwnFolder", downParam.dwnFolder);
