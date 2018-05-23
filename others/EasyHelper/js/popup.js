@@ -110,8 +110,9 @@ function parseUrls(){
 	var dprm = _$G("down_prms").value;
 	dprm = _$Ava(dprm)?dprm:"";
 	var rearr=[];
-	var reg = new RegExp("((http).*)","g");
+	//var reg = new RegExp("((http).*)","g");
 	//.replace(/[\r\n]/g, "")
+	var reg = new RegExp("(.*\.ts.*)","g");
 	//var reg = new RegExp("(.*\.ts)","g");
 	//var reg = new RegExp("(.*\.mp4.*)","g");
 	var result =null;
