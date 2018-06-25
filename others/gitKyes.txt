@@ -72,3 +72,12 @@ git revert b10cc123												Èç¹ûÊÇ¸ü¸´ÔÓµÄÇé¿ö£¬±ÈÈç²»ÊÇ×îĞÂµÄÌá½»ÁË£¬ÄÇÄã¿ÉÒ
 			node_modules/
 			.idea/
 			my_notes.txt
+			
+			
+			
+---------------±¾µØÎÄ¼ş¼ĞÉÏ´«--------------			
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/dwfHub/cfProjects.git
+git push -u origin master
