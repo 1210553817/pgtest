@@ -113,7 +113,7 @@ function renderSeasonDate(options){
 		}else{ele.attr("startDate","");window.setTimeout(function(){ele.val("");},50);}
 		if(!isNull(endDate)&&endDate.month>0&&endDate.month<5){  
 			ele.attr("endDate",endDate.year+"-"+endDate.month)  
-		}else{ele.attr("endDate","");window.setTimeout(function(){ele.val("");},50);} 
+		}else{ele.attr("endDate","");if(isNull(sgl))window.setTimeout(function(){ele.val("");},50);} 
 	},
 	inited: function(value, date, endDate){
 		if(!isNull(dfs)&&!isNull(date)&&date.month>0&&date.month<5){
@@ -134,8 +134,8 @@ function renderSeasonDate(options){
 				var cx = ele.innerHTML;  
 				if(inx<4){
 					ele.innerHTML=cx.replace(/月/g,"季度");
-					ele.style.width="99%";
-					ele.style.margin="8px 0";
+					ele.style.width="49.6%";
+					ele.style.margin="32px 0";
 				}else{
 					ele.style.display="none";
 					ele.innerHTML="";					
