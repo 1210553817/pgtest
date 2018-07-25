@@ -1,9 +1,9 @@
 var downParam={};
 window.onload=function(){
+	//$BG = chrome.extension.getBackgroundPage();
 	Date.prototype.toStr =dateFmt;
 	initTabs();
 	initEvents();
-	//$BG = chrome.extension.getBackgroundPage();
 	initDatas()
 };
 function initTabs(){
@@ -32,6 +32,8 @@ function initEvents(){
 	downbtn.onclick=startDown;	
 	var sglbtn = _$G("taba_single");
 	sglbtn.onclick=function(){window.open("../popup.html","newwindow");};
+	var pgebtn = _$G("taba_Page");
+	pgebtn.onclick=function(){window.open("../one.html","newwindow");};
 	pdnBtn = _$G("tabb_btn1");
 	pdnBtn.onclick=function(){picDownUrl();};
 	//testC...
