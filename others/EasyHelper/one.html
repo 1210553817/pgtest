@@ -280,7 +280,10 @@ div{
 		<tbody>
 			<tr>
 				<td>
-					<div id="tabtit3" class="mtabb mtab_tit">请求</div>
+					<div id="tabtit1" class="mtabb mtab_tit">解析下载</div>
+					<div id="tabtit2" class="mtabb mtab_titgry">顺序下载</div>
+					<div id="tabtit3" class="mtabb mtab_titgry">测试</div>
+					<div id="tabtit4" class="mtabb mtab_titgry">网络请求</div>
 				</td>
 			</tr>
 			<tr> 
@@ -289,16 +292,42 @@ div{
 				<table class="mdlg_table" style="border:0px;margin:0px;padding:0px;width:100%;" >
 					<tbody>
 						<tr>
-							<td>																		
-								<div id="tabctt_tabtit3">
-									<textarea id="defpop_txts" style="resize:none;width:100%;height:600px;"></textarea><br>
+							<td>									
+								<div id="tabctt_tabtit1">
+									<textarea id="down_urls" style="resize:none;width:100%;height:400px;" placeHolder="URL列表"></textarea><br>
+									<textarea id="down_prms" style="resize:none;width:100%;height:190px;margin-top:10px;" placeHolder="前置参数"></textarea><br>
 									<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
 										<td align="center">
-											<a id="tabc_btn3"  class="btn btn-mini btn-green" style="margin-left:2px;">清除</a>
-											<a id="tabc_btn4"  class="btn btn-mini btn-green" style="margin-left:2px;">获取</a>
+											<a id="tabb_down"  class="btn btn-mini btn-green" style="margin-left:2px;">下载</a>
 										</td>
 									</tr></tbody></table>
 								</div>									
+								<div id="tabctt_tabtit2" style="display:none;">
+									<textarea id="picdn_url" style="resize:none;width:100%;height:600px;"></textarea><br>
+									<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
+										<td align="center">
+											<a id="tabb_btn1" class="btn btn-mini btn-green" style="margin-right:2px;">开始下载</a>
+										</td>
+									</tr></tbody></table>
+								</div>									
+								<div id="tabctt_tabtit3" style="display:none;">
+									<textarea id="defpop_txts" style="resize:none;width:100%;height:600px;"></textarea><br>
+									<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
+										<td align="center">
+											<a id="tabc_btn1" class="btn btn-mini btn-green" style="margin-right:2px;">按钮31</a>
+											<a id="tabc_btn2"  class="btn btn-mini btn-green" style="margin-left:2px;">按钮32</a>
+										</td>
+									</tr></tbody></table>
+								</div>
+								<div id="tabctt_tabtit4" style="display:none;">
+									<textarea id="netreq_txts" style="resize:none;width:100%;height:600px;"></textarea><br>
+									<table align="center" style="margin-top:2px;width:100%;"><tbody><tr>
+										<td align="center">
+											<a id="tabd_btn1" class="btn btn-mini btn-green" style="margin-right:2px;">清除</a>
+											<a id="tabd_btn2"  class="btn btn-mini btn-green" style="margin-left:2px;">获取</a>
+										</td>
+									</tr></tbody></table>
+								</div>								
 							</td>
 						</tr>
 					</tbody>
