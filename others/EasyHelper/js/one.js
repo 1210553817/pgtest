@@ -51,6 +51,7 @@ function initEvents(){
 	_$G("tabd_btn1").onclick=function(){
 		_$G("netreq_txts").value="";
 		$BG.clearPageReqs();
+		tipCase({msg:"Done"});
 	};
 	_$G("tabd_btn2").onclick=function(){
 		var txtarea = _$G("netreq_txts");
@@ -63,12 +64,14 @@ function initDatas(){
 	downParam.dwnSubFolder = _getStorage("dwnSubFolder");	
 	downParam.dwnStartIndx = _getStorage("dwnStartIndx");
 	downParam.dwnEndIndx = _getStorage("dwnEndIndx");
+	/**
 	chrome.downloads.onDeterminingFilename.addListener(function (downloadItem,suggest){
 		suggest({
 			filename:downParam.dwnFolder+"\\"+downParam.dwnSubFolder+"\\"+downParam.dwnFname,
 			conflictAction: 'uniquify'
 		});
 	});
+	**/
 }
 
 function startDown(){
@@ -101,6 +104,7 @@ function startDown(){
 				function(indx,len){
 					downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
 					downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
+					return downParam.dwnFolder+"/"+downParam.dwnSubFolder+"/"+downParam.dwnFname;
 				},
 				function(){
 					downbtn.onclick=startDown;
@@ -195,8 +199,10 @@ function picDowner(urlpre,urlsuf,now,end,lenInt){
 	var rindx=(lenInt>1)?prefixInteger(now, lenInt):now;
 	downParam.dwnFname=rindx+urlsuf;
 	var dnurl=urlpre+downParam.dwnFname;
+	var fnm = downParam.dwnFolder+"/"+downParam.dwnSubFolder+"/"+downParam.dwnFname;
 	chrome.downloads.download({
 		url: dnurl,
+		filename: fnm,
 		conflictAction: 'uniquify',
 		saveAs: false
 	},function(){

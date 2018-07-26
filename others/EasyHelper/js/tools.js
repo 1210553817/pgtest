@@ -361,10 +361,12 @@ function multDowner(urls,indx,ing,bkf){
 		if(bkf)bkf.call(null);
 		return;
 	}
-	if(ing)ing.call(null,indx,urls.length);
+	var fnm="00"+indx;
+	if(ing)fnm=ing.call(null,indx,urls.length);
 	var dnurl=urls[indx];
 	chrome.downloads.download({
 		url: dnurl,
+		filename: fnm,
 		conflictAction: 'uniquify',
 		saveAs: false
 	},function(){
