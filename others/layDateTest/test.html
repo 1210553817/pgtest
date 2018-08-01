@@ -106,14 +106,14 @@ function renderSeasonDate(options){
 			});  
 		}
 		ren(hd);				
-	},  
+	},
 	done: function(value, date, endDate){
 		if(!isNull(date)&&date.month>0&&date.month<5){
 			ele.attr("startDate",date.year+"-"+date.month);  
-		}else{ele.attr("startDate","");}
+		}else{ele.attr("startDate","");window.setTimeout(function(){ele.val("");},50);}
 		if(!isNull(endDate)&&endDate.month>0&&endDate.month<5){  
 			ele.attr("endDate",endDate.year+"-"+endDate.month)  
-		}else{ele.attr("endDate","");} 
+		}else{ele.attr("endDate","");window.setTimeout(function(){ele.val("");},50);} 
 	},
 	inited: function(value, date, endDate){
 		if(!isNull(dfs)&&!isNull(date)&&date.month>0&&date.month<5){
