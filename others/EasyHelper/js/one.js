@@ -183,7 +183,7 @@ function picDownUrl(){
 		tipCase({msg:"通配符不正确，如：[1-23#2]"});
 		return;
 	}
-	var now = new Date()
+	var now = new Date();
 	downParam.dwnFolder=now.toStr('yyyy-MM-dd');
 	downParam.dwnSubFolder=now.toStr('hh_mm_ss');
 	picDowner(group[1],group[7],startInt,endInt,lenInt);
