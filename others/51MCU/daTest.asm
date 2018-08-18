@@ -11,7 +11,7 @@ MAIN:
 	SETB RS0
 	MOV R2,#07H
 	MOV R3,#0CEH
-	LCALL DBN2CHR
+	LCALL DBN2BCD
 	LCALL DBN2DIS
 
 	;LCALL NUM2CH
@@ -20,7 +20,7 @@ MAIN:
 
 	LJMP $
 ;-----------------------DN2CH 3FH,3EH中的双字节数转BCD存放在R4-R6-----------------------
-DBN2CHR:MOV R4,#0
+DBN2BCD:MOV R4,#0
 	MOV R5,#0
 	MOV R6,#0
 	MOV R7,#16
