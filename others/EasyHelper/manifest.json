@@ -11,5 +11,4 @@
 	"background":{
 		"scripts":["js/tools.js","js/background.js"]
 	}
-
 }
