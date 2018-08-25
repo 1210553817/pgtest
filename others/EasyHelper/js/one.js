@@ -64,9 +64,16 @@ function initDatas(){
 	downParam.dwnSubFolder = _getStorage("dwnSubFolder");	
 	downParam.dwnStartIndx = _getStorage("dwnStartIndx");
 	downParam.dwnEndIndx = _getStorage("dwnEndIndx");
+	/**
+	chrome.downloads.onDeterminingFilename.addListener(function (downloadItem,suggest){
+		suggest({
+			filename:downParam.dwnFolder+"\\"+downParam.dwnSubFolder+"\\"+downParam.dwnFname,
+			conflictAction: 'uniquify'
+		});
+	});
+	**/
 }
 
-/*tsDown*/
 function startDown(){
 	var ctt = '<div style="display:inline-block;width:50px;">ÎÄ¼þ¼Ð:</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'+
 		'<div style="display:inline-block;width:50px;">ÐòºÅ:</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'+
@@ -121,7 +128,7 @@ function parseUrls(){
 	//var reg = new RegExp("(.*\.mp4.*)","g");
 	//.replace(/[\r\n]/g, "")
 	
-	var reg = new RegExp("(.*\.ts.*)","g");
+	var reg = new RegExp("(.*ts\.php.*)","g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
