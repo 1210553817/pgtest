@@ -121,7 +121,7 @@ function parseUrls(){
 	//var reg = new RegExp("(.*\.mp4.*)","g");
 	//.replace(/[\r\n]/g, "")
 	
-	var reg = new RegExp("(.*\.ts.*)","g");
+	var reg = new RegExp("(.*ts\.php.*)","g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
