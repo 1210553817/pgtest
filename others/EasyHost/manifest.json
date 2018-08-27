@@ -1,0 +1,14 @@
+﻿{
+    "app": { "background":{"scripts": ["js/background.js"]}},
+    "manifest_version": 2,
+    "name": "EasyHost",
+    "version": "0.1",
+    "description": "A Host app.",
+    "icons": {"16": "imgs/icon48.png","48": "imgs/icon48.png","128": "imgs/icon48.png"},
+    "permissions": ["contextMenus","*://*/"],
+	"sockets": {
+		"tcp": {
+			"connect": ["smtp.126.com:25",":25"]
+		}
+	}
+}

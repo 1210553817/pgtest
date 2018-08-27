@@ -1,4 +1,5 @@
-var downParam={};
+ï»¿var downParam={};
+var mailParam={};
 window.onload=function(){
 	$BG = chrome.extension.getBackgroundPage();
 	Date.prototype.toStr =dateFmt;
@@ -39,13 +40,16 @@ function initEvents(){
 		window.setTimeout(function(){tip.close();},5000)
 	};
 	_$G("tabc_btn2").onclick=function(){
-		panelCaseA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"È·¶¨", btn2:"È¡Ïû", btn3:"ºöÂÔ",
+		panelCaseA({ title:'Test22...........', content:"I am test22 Dialog", width:280, btn1:"ç¡®å®š", btn2:"å–æ¶ˆ", btn3:"å¿½ç•¥",
 			fun1: function(mbdy){
 				return true;
 			},closed: function(){
 				tipCase({msg:"FROM: "+this.innerHTML,cover:1});
 			}
 		});
+	};
+	_$G("tabc_btn3").onclick=function(){
+		startMail();
 	};
 	//4
 	_$G("tabd_btn1").onclick=function(){
@@ -57,29 +61,34 @@ function initEvents(){
 		var txtarea = _$G("netreq_txts");
 		txtarea.value=$BG.getPageReqs();
 	};
-
+	//listener
+	chrome.runtime.onMessageExternal.addListener(
+	  function(request, sender, sendResponse) {
+		if("sendMail"==request.id){
+			tipCase({msg:request.msg});
+		}
+	});
 }
 function initDatas(){
 	downParam.dwnFolder = _getStorage("dwnFolder");
 	downParam.dwnSubFolder = _getStorage("dwnSubFolder");	
 	downParam.dwnStartIndx = _getStorage("dwnStartIndx");
 	downParam.dwnEndIndx = _getStorage("dwnEndIndx");
-	/**
-	chrome.downloads.onDeterminingFilename.addListener(function (downloadItem,suggest){
-		suggest({
-			filename:downParam.dwnFolder+"\\"+downParam.dwnSubFolder+"\\"+downParam.dwnFname,
-			conflictAction: 'uniquify'
-		});
-	});
-	**/
+	
+	mailParam.smtp = _getStorage("mailParamSmtp");
+	mailParam.port = _getStorage("mailParamPort");	
+	mailParam.from = _getStorage("mailParamFrom");
+	mailParam.pwd = _getStorage("mailParamPwd");
+	mailParam.to = _getStorage("mailParamTo");
+	mailParam.tit = _getStorage("mailParamTit");
 }
 
 function startDown(){
-	var ctt = '<div style="display:inline-block;width:50px;">ÎÄ¼ş¼Ğ:</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">ĞòºÅ:</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'+
-		'<div style="display:inline-block;width:50px;">È¥Í·Êı:</div><input id="beforeDownStart" type="text" value="'+downParam.dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">È¥Î²Êı:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/>';
-	panelCaseA({ title: 'ÎÄ¼şÏÂÔØ', content:ctt, btn1:"¿ªÊ¼", btn2: "È¡Ïû",
+	var ctt = '<div style="display:inline-block;width:50px;">æ–‡ä»¶å¤¹:</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">åºå·:</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;">å»å¤´æ•°:</div><input id="beforeDownStart" type="text" value="'+downParam.dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">å»å°¾æ•°:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/>';
+	panelCaseA({ title: 'æ–‡ä»¶ä¸‹è½½', content:ctt, btn1:"å¼€å§‹", btn2: "å–æ¶ˆ",
 		fun1: function(mbdy){
 			var fbf=_$Q("#beforeDownName",mbdy);
 			var fin=_$Q("#beforeDownIndx",mbdy);		
@@ -108,7 +117,7 @@ function startDown(){
 				},
 				function(){
 					downbtn.onclick=startDown;
-					downbtn.innerHTML="¿ªÊ¼ÏÂÔØ";
+					downbtn.innerHTML="å¼€å§‹ä¸‹è½½";
 				});
 			downbtn.onclick=null;
 			return true;
@@ -173,14 +182,14 @@ function picDownUrl(){
 	var reg = new RegExp("^((http)[s]*://.*)(\\[(\\d+)\-(\\d+)#(\\d)\\])(.*)$");
 	var group = reg.exec(setStr); 
 	if(!_$Ava(group)||group[2]!="http"){
-		tipCase({msg:"ÇëÊäÈëurl,Í¨Åä·û,Èç:[1-23#2]"});
+		tipCase({msg:"è¯·è¾“å…¥url,é€šé…ç¬¦,å¦‚:[1-23#2]"});
 		return;
 	}
 	var lenInt=parseInt(group[6]);
 	var startInt=parseInt(group[4]);
 	var endInt=parseInt(group[5]);
 	if(endInt<startInt){
-		tipCase({msg:"Í¨Åä·û²»ÕıÈ·£¬Èç£º[1-23#2]"});
+		tipCase({msg:"é€šé…ç¬¦ä¸æ­£ç¡®ï¼Œå¦‚ï¼š[1-23#2]"});
 		return;
 	}
 	var now = new Date();
@@ -192,7 +201,7 @@ function picDownUrl(){
 function picDowner(urlpre,urlsuf,now,end,lenInt){
 	if(now>end){
 		pdnBtn.onclick=function(){picDownUrl();};
-		pdnBtn.innerHTML="¿ªÊ¼ÏÂÔØ";
+		pdnBtn.innerHTML="å¼€å§‹ä¸‹è½½";
 		return;
 	}
 	pdnBtn.innerHTML=now+" / "+end;
@@ -209,5 +218,65 @@ function picDowner(urlpre,urlsuf,now,end,lenInt){
 		window.setTimeout(function(){
 			picDowner(urlpre,urlsuf,now+1,end,lenInt);
 		},1000);
+	});
+}
+/*test*/
+function startMail(){
+	var ctt = '<div style="display:inline-block;width:50px;">SMTP:</div></div><input id="mailParamSmtp" type="text" value="'+mailParam.smtp+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">Port:</div><input id="mailParamPort" type="text" value="'+mailParam.port+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;">å‘é€äºº:</div><input id="mailParamFrom" type="text" value="'+mailParam.from+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">å¯†ç :</div><input id="mailParamPwd" type="text" value="'+mailParam.pwd+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;">æ¥æ”¶äºº:</div><input id="mailParamTo" type="text" value="'+mailParam.to+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">æ ‡é¢˜:</div><input id="mailParamTit" type="text" value="'+mailParam.tit+'" style="width:80px;"/>';
+	panelCaseA({ title: 'å‘é€é‚®ä»¶', content:ctt, btn1:"å‘é€", btn2: "å–æ¶ˆ",
+		fun1: function(mbdy){
+			var mpSmtp=_$Q("#mailParamSmtp",mbdy);
+			var mpPort=_$Q("#mailParamPort",mbdy);		
+			var mpFrom=_$Q("#mailParamFrom",mbdy);
+			var mpPwd=_$Q("#mailParamPwd",mbdy);
+			var mpTo=_$Q("#mailParamTo",mbdy);
+			var mpTit=_$Q("#mailParamTit",mbdy);
+			mailParam.smtp = mpSmtp.value;
+			mailParam.port = mpPort.value;
+			mailParam.from = mpFrom.value;
+			mailParam.pwd = mpPwd.value;
+			mailParam.to = mpTo.value;
+			mailParam.tit = mpTit.value;
+			_setStorage("mailParamSmtp", mailParam.smtp);
+			_setStorage("mailParamPort", mailParam.port);
+			_setStorage("mailParamFrom", mailParam.from);
+			_setStorage("mailParamPwd", mailParam.pwd);
+			_setStorage("mailParamTo", mailParam.to);
+			_setStorage("mailParamTit", mailParam.tit);
+			var mailTxt = _$G("defpop_txts").value;
+			sendMail(mailTxt);
+			return true;
+		}
+	});
+
+}
+function sendMail(txt){
+	chrome.management.getAll(function(exs){
+		var exid=null;
+		var myid="";
+		for(var i=0;i<exs.length;i++){
+			var itm=exs[i];
+			if("EasyHost"==itm.name&&itm.enabled){
+				exid=itm.id;
+			}else if("EasyHelper"==itm.name){
+				myid=itm.id;
+			}
+		}
+		if(exid==null){
+			tipCase({msg:"æ²¡æœ‰å®‰è£…EasyHostæˆ–è€…EasyHostè¢«ç¦ç”¨ï¼"});
+			return;
+		}
+		mailParam.id = "sendMail";
+		mailParam.txt = txt;
+		mailParam.myid = myid;
+		chrome.runtime.sendMessage(exid, mailParam,function(response) {
+			tipCase({msg:response.msg});
+		});
+		
 	});
 }
