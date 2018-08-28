@@ -48,7 +48,7 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 		}else if(4==mailStatus){
 			if(data.indexOf("235")>-1){
 				mailStatus =5;
-				var mltr="mail from <"+mailReq.from+">\r\nrcpt to <"+mailReq.to+">\r\ndata\r\nfrom:"+mailReq.from+"\r\nto:"+mailReq.to+"\r\nsubject:";
+				var mltr="mail from:<"+mailReq.from+">\r\nrcpt to:<"+mailReq.to+">\r\ndata\r\nfrom:"+mailReq.from+"\r\nto:"+mailReq.to+"\r\nsubject:";
 				mltr+=mailReq.tit+"\r\n\r\n"+mailReq.txt+"\r\n.\r\n";
 				chrome.sockets.tcp.send(socktId, str2ab(mltr), function(infod){});
 				return;
@@ -59,6 +59,8 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 				mailStatus =6;
 				chrome.sockets.tcp.send(socktId, str2ab("quit\r\n"), function(infoj){});
 				sendMsg({id:"sendMail",msg:"邮件发送成功！"});
+			}else{
+				sendMsg({id:"sendMail",msg:"邮件内容发送错误！"});
 			}
 		}
 		

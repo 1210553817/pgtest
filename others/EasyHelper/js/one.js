@@ -222,13 +222,13 @@ function picDowner(urlpre,urlsuf,now,end,lenInt){
 }
 /*test*/
 function startMail(){
-	var ctt = '<div style="display:inline-block;width:50px;">SMTP:</div></div><input id="mailParamSmtp" type="text" value="'+mailParam.smtp+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">Port:</div><input id="mailParamPort" type="text" value="'+mailParam.port+'" style="width:80px;"/><br/><br/>'+
-		'<div style="display:inline-block;width:50px;">发送人:</div><input id="mailParamFrom" type="text" value="'+mailParam.from+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">密码:</div><input id="mailParamPwd" type="password" value="'+mailParam.pwd+'" style="width:80px;"/><br/><br/>'+
-		'<div style="display:inline-block;width:50px;">接收人:</div><input id="mailParamTo" type="text" value="'+mailParam.to+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">标题:</div><input id="mailParamTit" type="text" value="'+mailParam.tit+'" style="width:80px;"/>';
-	panelCaseA({ title: '发送邮件', content:ctt, btn1:"发送", btn2: "取消",
+	var ctt = '<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">SMTP:</div></div><input id="mailParamSmtp" type="text" value="'+mailParam.smtp+'" style="width:180px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">Port:</div><input id="mailParamPort" type="text" value="'+mailParam.port+'" style="width:180px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">发送人:</div><input id="mailParamFrom" type="text" value="'+mailParam.from+'" style="width:180px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">密码:</div><input id="mailParamPwd" type="password" value="'+mailParam.pwd+'" style="width:180px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">接收人:</div><input id="mailParamTo" type="text" value="'+mailParam.to+'" style="width:180px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">标题:</div><input id="mailParamTit" type="text" value="'+mailParam.tit+'" style="width:180px;"/>';
+	panelCaseA({ width:500,title: '发送邮件', content:ctt, btn1:"发送", btn2: "取消",
 		fun1: function(mbdy){
 			var mpSmtp=_$Q("#mailParamSmtp",mbdy);
 			var mpPort=_$Q("#mailParamPort",mbdy);		
