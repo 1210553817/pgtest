@@ -5,10 +5,7 @@ var mailReq={};
 chrome.app.runtime.onLaunched.addListener(function() {
     chrome.app.window.create('one.html', {
         'id': 'one',
-        'bounds': {
-            'width': 600,
-            'height': 400
-        },
+        'bounds': {'width': 600,'height': 400},
         'resizable': false,
         'frame': 'none'
     });
@@ -31,8 +28,9 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 				mailStatus =2;
 				chrome.sockets.tcp.send(socktId, str2ab("auth login\r\n"), function(infoa){});
 				return;
+			}else if(data.indexOf("220")<0){
+				sendMsg({id:"sendMail",msg:"与SMTP服务器握手失败！"});
 			}
-			sendMsg({id:"sendMail",msg:"与SMTP服务器握手失败！"});
 		}else if(2==mailStatus){
 			if(data.indexOf("334")>-1){
 				mailStatus =3;
@@ -50,8 +48,8 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 		}else if(4==mailStatus){
 			if(data.indexOf("235")>-1){
 				mailStatus =5;
-				var mltr="mail from <"+mailReq.from+">\r\nrcpt to <"+mailReq.to+">\r\n";
-				mltr+="data\r\nfrom:"+mailReq.from+"\r\nto:"+mailReq.to+"\r\nsubject:"+mailReq.tit+"\r\n\r\n"+mailReq.txt+"\r\n.\r\n"
+				var mltr="mail from <"+mailReq.from+">\r\nrcpt to <"+mailReq.to+">\r\ndata\r\nfrom:"+mailReq.from+"\r\nto:"+mailReq.to+"\r\nsubject:";
+				mltr+=mailReq.tit+"\r\n\r\n"+mailReq.txt+"\r\n.\r\n";
 				chrome.sockets.tcp.send(socktId, str2ab(mltr), function(infod){});
 				return;
 			}
@@ -60,6 +58,7 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 			if(data.indexOf("250")>-1){
 				mailStatus =6;
 				chrome.sockets.tcp.send(socktId, str2ab("quit\r\n"), function(infoj){});
+				sendMsg({id:"sendMail",msg:"邮件发送成功！"});
 			}
 		}
 		

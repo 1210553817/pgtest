@@ -137,7 +137,7 @@ function parseUrls(){
 	//var reg = new RegExp("(.*\.mp4.*)","g");
 	//.replace(/[\r\n]/g, "")
 	
-	var reg = new RegExp("(.*ts\.php.*)","g");
+	var reg = new RegExp("(.*\.ts.*)","g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
@@ -225,7 +225,7 @@ function startMail(){
 	var ctt = '<div style="display:inline-block;width:50px;">SMTP:</div></div><input id="mailParamSmtp" type="text" value="'+mailParam.smtp+'" style="width:80px;"/>&nbsp;&nbsp;'+
 		'<div style="display:inline-block;width:50px;">Port:</div><input id="mailParamPort" type="text" value="'+mailParam.port+'" style="width:80px;"/><br/><br/>'+
 		'<div style="display:inline-block;width:50px;">发送人:</div><input id="mailParamFrom" type="text" value="'+mailParam.from+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">密码:</div><input id="mailParamPwd" type="text" value="'+mailParam.pwd+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;">密码:</div><input id="mailParamPwd" type="password" value="'+mailParam.pwd+'" style="width:80px;"/><br/><br/>'+
 		'<div style="display:inline-block;width:50px;">接收人:</div><input id="mailParamTo" type="text" value="'+mailParam.to+'" style="width:80px;"/>&nbsp;&nbsp;'+
 		'<div style="display:inline-block;width:50px;">标题:</div><input id="mailParamTit" type="text" value="'+mailParam.tit+'" style="width:80px;"/>';
 	panelCaseA({ title: '发送邮件', content:ctt, btn1:"发送", btn2: "取消",

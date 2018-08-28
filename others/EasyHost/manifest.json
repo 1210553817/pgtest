@@ -8,7 +8,7 @@
     "permissions": ["contextMenus","*://*/"],
 	"sockets": {
 		"tcp": {
-			"connect": ["smtp.126.com:25",":25"]
+			"connect": [":25"]
 		}
 	}
 }

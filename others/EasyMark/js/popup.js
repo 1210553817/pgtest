@@ -1,4 +1,4 @@
-var downParam={};
+var mailParam={};
 window.onload=function(){
 	initTabs();
 	initEvents();
@@ -32,7 +32,16 @@ function initEvents(){
 	_$G("defpop_setBkmksStore").onclick=addBkmk2dm;
 	_$G("defpop_getBkmkDomain").onclick=showBkmkdm;
 	_$G("defpop_setBkmkDomain").onclick=restoreBkmkdm;
-
+	_$G("defpop_emailBkmk").onclick=function(){
+		startMail();
+	};
+	//listener
+	chrome.runtime.onMessageExternal.addListener(
+	  function(request, sender, sendResponse) {
+		if("sendMail"==request.id){
+			tipCase({msg:request.msg});
+		}
+	});
 }
 function initDatas(){
 	try{
@@ -41,6 +50,12 @@ function initDatas(){
 		setBkmkdm("");
 		tipCase({msg:"init list failed!"+e});
 	}
+	mailParam.smtp = _getStorage("mailParamSmtp");
+	mailParam.port = _getStorage("mailParamPort");	
+	mailParam.from = _getStorage("mailParamFrom");
+	mailParam.pwd = _getStorage("mailParamPwd");
+	mailParam.to = _getStorage("mailParamTo");
+	mailParam.tit = _getStorage("mailParamTit");
 }
 
 function getBkmks() {
@@ -400,4 +415,64 @@ function decrypt(str, pwd) {
 		prand = (mult * prand + incr) % modu;
 	}
 	return enc_str;
+}
+/*email*/
+function startMail(){
+	var ctt = '<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">SMTP:</div></div><input id="mailParamSmtp" type="text" value="'+mailParam.smtp+'" style="width:180px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">Port:</div><input id="mailParamPort" type="text" value="'+mailParam.port+'" style="width:180px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">发送人:</div><input id="mailParamFrom" type="text" value="'+mailParam.from+'" style="width:180px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">密码:</div><input id="mailParamPwd" type="password" value="'+mailParam.pwd+'" style="width:180px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">接收人:</div><input id="mailParamTo" type="text" value="'+mailParam.to+'" style="width:180px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">标题:</div><input id="mailParamTit" type="text" value="'+mailParam.tit+'" style="width:180px;"/>';
+	panelCaseA({ width:500,title: '发送邮件', content:ctt, btn1:"发送", btn2: "取消",
+		fun1: function(mbdy){
+			var mpSmtp=_$Q("#mailParamSmtp",mbdy);
+			var mpPort=_$Q("#mailParamPort",mbdy);		
+			var mpFrom=_$Q("#mailParamFrom",mbdy);
+			var mpPwd=_$Q("#mailParamPwd",mbdy);
+			var mpTo=_$Q("#mailParamTo",mbdy);
+			var mpTit=_$Q("#mailParamTit",mbdy);
+			mailParam.smtp = mpSmtp.value;
+			mailParam.port = mpPort.value;
+			mailParam.from = mpFrom.value;
+			mailParam.pwd = mpPwd.value;
+			mailParam.to = mpTo.value;
+			mailParam.tit = mpTit.value;
+			_setStorage("mailParamSmtp", mailParam.smtp);
+			_setStorage("mailParamPort", mailParam.port);
+			_setStorage("mailParamFrom", mailParam.from);
+			_setStorage("mailParamPwd", mailParam.pwd);
+			_setStorage("mailParamTo", mailParam.to);
+			_setStorage("mailParamTit", mailParam.tit);
+			var mailTxt = _$G("defpop_txts").value;
+			sendMail(mailTxt);
+			return true;
+		}
+	});
+
+}
+function sendMail(txt){
+	chrome.management.getAll(function(exs){
+		var exid=null;
+		var myid="";
+		for(var i=0;i<exs.length;i++){
+			var itm=exs[i];
+			if("EasyHost"==itm.name&&itm.enabled){
+				exid=itm.id;
+			}else if("EasyMark"==itm.name){
+				myid=itm.id;
+			}
+		}
+		if(exid==null){
+			tipCase({msg:"EasyHost不可用！"});
+			return;
+		}
+		mailParam.id = "sendMail";
+		mailParam.txt = txt;
+		mailParam.myid = myid;
+		chrome.runtime.sendMessage(exid, mailParam,function(response) {
+			tipCase({msg:response.msg});
+		});
+		
+	});
 }
