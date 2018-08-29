@@ -17,7 +17,7 @@ chrome.runtime.onMessageExternal.addListener(
 		sendMail(request,sender,sendResponse);
 	}
 });
-//chrome.sockets.tcp.onReceiveError.addListener(function(info){
+//chrome.sockets.tcp.onReceiveError.addListener(function(info){//{resultCode,socketId}
 //    sendMsg({id:"sendMail",msg:"SMTP服务器错误！"});
 //});
 chrome.sockets.tcp.onReceive.addListener(function(info){
@@ -28,9 +28,10 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 				mailStatus =2;
 				chrome.sockets.tcp.send(socktId, str2ab("auth login\r\n"), function(infoa){});
 				return;
-			}else if(data.indexOf("220")<0){
-				sendMsg({id:"sendMail",msg:"与SMTP服务器握手失败！"});
+			}else if(data.indexOf("220")>-1){
+				return;
 			}
+			sendMsg({id:"sendMail",msg:"与SMTP服务器握手失败！"});
 		}else if(2==mailStatus){
 			if(data.indexOf("334")>-1){
 				mailStatus =3;
@@ -63,12 +64,12 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 				sendMsg({id:"sendMail",msg:"邮件内容发送错误！"});
 			}
 		}
-		
+		closeSockt(socktId);
 	}
 });
 function sendMail(request,sender,sendResponse){
 	mailReq = request;
-	var socktOpt = {persistent: true,name: 'tcpSocket',bufferSize: 4096};
+	var socktOpt = {persistent: false,name: 'tcpSocket',bufferSize: 4096};
 	chrome.sockets.tcp.create(socktOpt, function(infa){
 		socktId = infa.socketId;
 		mailStatus =0;

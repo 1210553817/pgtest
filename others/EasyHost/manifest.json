@@ -8,7 +8,7 @@
     "permissions": ["contextMenus","*://*/"],
 	"sockets": {
 		"tcp": {
-			"connect": [":25"]
+			"connect": [":25",":587",":465"]
 		}
 	}
 }
