@@ -109,3 +109,42 @@ function str2ab(str) {
     }
     return buf;
 }
+function ab2strA(buf,f) {
+   var b = new Blob([buf]);
+   var reader = new FileReader();
+	reader.readAsText(b, 'utf-8');
+	reader.onload = function (e) {
+		console.info("--------toStr--------");
+		console.info(reader.result);
+		if(f)f.call(null,reader.result);
+		console.info("\r\n");
+	}
+}
+function str2abA(str,f) {
+	var b = new Blob([str],{type:'text/plain'});
+	var reader = new FileReader();
+	reader.readAsArrayBuffer(b);
+	reader.onload = function (e) {
+		console.info("--------toBa--------");
+		console.info(reader.result);
+		if(f)f.call(null,reader.result);
+		console.info("\r\n");
+	}
+}
+/**
+*https://www.cnblogs.com/tianma3798/p/5834598.html
+*ArrayBuffer转Blob
+var buffer = new ArrayBuffer(32);
+var blob = new Blob([buffer]); 
+*
+//将字符串转换成 Blob对象
+var blob = new Blob(['中文字符串'], {
+    type: 'text/plain'
+});
+//将Blob 对象转换成字符串
+var reader = new FileReader();
+reader.readAsText(blob, 'utf-8');
+reader.onload = function (e) {
+    console.info(reader.result);
+}
+**/
