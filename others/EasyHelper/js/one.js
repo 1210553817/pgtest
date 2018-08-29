@@ -258,22 +258,19 @@ function startMail(){
 function sendMail(txt){
 	chrome.management.getAll(function(exs){
 		var exid=null;
-		var myid="";
 		for(var i=0;i<exs.length;i++){
 			var itm=exs[i];
-			if("EasyHost"==itm.name&&itm.enabled){
-				exid=itm.id;
-			}else if("EasyHelper"==itm.name){
-				myid=itm.id;
+			if("EasyHost"==itm.name){
+				if(itm.enabled)exid=itm.id;
+				break;
 			}
 		}
 		if(exid==null){
-			tipCase({msg:"没有安装EasyHost或者EasyHost被禁用！"});
+			tipCase({msg:"EasyHost不可用！"});
 			return;
 		}
 		mailParam.id = "sendMail";
 		mailParam.txt = txt;
-		mailParam.myid = myid;
 		chrome.runtime.sendMessage(exid, mailParam,function(response) {
 			tipCase({msg:response.msg});
 		});
