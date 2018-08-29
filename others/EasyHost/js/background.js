@@ -88,7 +88,7 @@ function procMail(data){
 		}
 		sendMsg({id:"sendMail",msg:"邮件内容发送错误！"});
 	}
-	closeSockt(mailSid);
+	//closeSockt(mailSid);
 }
 
 function tcpSendStr(str){
