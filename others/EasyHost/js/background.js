@@ -41,7 +41,7 @@ function pushMail(data){
 	console.log("-------"+mailStatus+"-------");
 	console.log(data);
 	console.log("\r\n");
-	if(mailSid==null||data.indexOf("354 ")==0)return;
+	if(data.indexOf("354 ")==0)return;
 	if(0==mailStatus){
 		if(data.indexOf("220 "==0)){
 			mailStatus =1;
@@ -88,8 +88,7 @@ function pushMail(data){
 		}
 		sendMsg({id:"sendMail",msg:"邮件发送错误！"});
 	}
-	closeSockt(mailSid);
-	mailSid==null;
+	
 }
 
 function tcpSendStr(str){
