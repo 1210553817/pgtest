@@ -23,36 +23,36 @@ chrome.runtime.onMessageExternal.addListener(
 chrome.sockets.tcp.onReceive.addListener(function(info){
 	ab2str(info.data,function(data){
 		if(mailSid==info.socketId){
-			procMail(data);
+			pushMail(data);
 		}
 	});
 });
 function sendMail(request,sender,sendResponse){
 	mailReq = request;
-	var socktOpt = {persistent: false,name: 'tcpSocket',bufferSize: 4096};
-	chrome.sockets.tcp.create(socktOpt, function(infa){
+	var opt = {persistent: false,name: 'tcpSocket',bufferSize: 4096};
+	chrome.sockets.tcp.create(opt, function(infa){
 		mailSid = infa.socketId;
 		mailStatus =0;
-		chrome.sockets.tcp.connect(mailSid, request.smtp, parseInt(request.port), function(code){
-			if(!code){
-				mailStatus =1;
-				tcpSendStr("helo Email\r\n");
-			}else{
-				sendMsg({id:"sendMail",msg:"连接SMTP服务器失败！"});
-				closeSockt(infa.socketId);
-			}
-		});
+		chrome.sockets.tcp.connect(mailSid, request.smtp, parseInt(request.port), function(code){});
 	});
 	sendResponse({msg:"邮件正在发送..."});
 }
-function procMail(data){
-	if(data.indexOf("354")==0)return;
-	if(1==mailStatus){
-		if(data.indexOf("250")>-1){
+function pushMail(data){
+	console.log("-------"+mailStatus+"-------");
+	console.log(data);
+	console.log("\r\n");
+	if(mailSid==null||data.indexOf("354")==0)return;
+	if(0==mailStatus){
+		if(data.indexOf("220"==0)){
+			mailStatus =1;
+			tcpSendStr("helo Email\r\n");
+			return;
+		}
+		sendMsg({id:"sendMail",msg:"连接SMTP服务器失败！"});
+	}else if(1==mailStatus){
+		if(data.indexOf("250")==0){
 			mailStatus =2;
 			tcpSendStr("auth login\r\n");
-			return;
-		}else if(data.indexOf("220")>-1){
 			return;
 		}
 		sendMsg({id:"sendMail",msg:"与SMTP服务器握手失败！"});
@@ -86,9 +86,10 @@ function procMail(data){
 			sendMsg({id:"sendMail",msg:"邮件发送成功！"});
 			return;
 		}
-		sendMsg({id:"sendMail",msg:"邮件内容发送错误！"});
+		sendMsg({id:"sendMail",msg:"邮件发送错误！"});
 	}
-	//closeSockt(mailSid);
+	closeSockt(mailSid);
+	mailSid==null;
 }
 
 function tcpSendStr(str){
