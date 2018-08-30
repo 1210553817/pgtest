@@ -41,37 +41,37 @@ function pushMail(data){
 	console.log("-------"+mailStatus+"-------");
 	console.log(data);
 	console.log("\r\n");
-	if(mailSid==null||data.indexOf("354")==0)return;
+	if(mailSid==null||data.indexOf("354 ")==0)return;
 	if(0==mailStatus){
-		if(data.indexOf("220"==0)){
+		if(data.indexOf("220 "==0)){
 			mailStatus =1;
 			tcpSendStr("helo Email\r\n");
 			return;
 		}
 		sendMsg({id:"sendMail",msg:"连接SMTP服务器失败！"});
 	}else if(1==mailStatus){
-		if(data.indexOf("250")==0){
+		if(data.indexOf("250 ")==0){
 			mailStatus =2;
 			tcpSendStr("auth login\r\n");
 			return;
 		}
 		sendMsg({id:"sendMail",msg:"与SMTP服务器握手失败！"});
 	}else if(2==mailStatus){
-		if(data.indexOf("334")==0){
+		if(data.indexOf("334 ")==0){
 			mailStatus =3;
 			tcpSendStr(Base64.encode(mailReq.from)+"\r\n");
 			return;
 		}
 		sendMsg({id:"sendMail",msg:"SMTP服务器禁止登陆！"});
 	}else if(3==mailStatus){
-		if(data.indexOf("334")==0){
+		if(data.indexOf("334 ")==0){
 			mailStatus =4;
 			tcpSendStr(Base64.encode(mailReq.pwd)+"\r\n");
 			return;
 		}
 		sendMsg({id:"sendMail",msg:"SMTP服务器登陆失败！"});
 	}else if(4==mailStatus){
-		if(data.indexOf("235")==0){
+		if(data.indexOf("235 ")==0){
 			mailStatus =5;
 			var mltr="mail from:<"+mailReq.from+">\r\nrcpt to:<"+mailReq.to+">\r\ndata\r\nfrom:"+mailReq.from+"\r\nto:"+mailReq.to+"\r\nsubject:";
 			mltr+=mailReq.tit+"\r\n\r\n"+mailReq.txt+"\r\n.\r\n";
@@ -80,7 +80,7 @@ function pushMail(data){
 		}
 		sendMsg({id:"sendMail",msg:"SMTP服务器登陆失败！"});
 	}else if(5==mailStatus){
-		if(data.indexOf("250")==0){
+		if(data.indexOf("250 ")==0){
 			mailStatus =6;
 			tcpSendStr("quit\r\n");
 			sendMsg({id:"sendMail",msg:"邮件发送成功！"});
