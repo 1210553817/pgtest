@@ -419,7 +419,7 @@ function decrypt(str, pwd) {
 /*email*/
 function startMail(){
 	var ctt = '<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">SMTP:</div></div><input id="mailParamSmtp" type="text" value="'+mailParam.smtp+'" style="width:180px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">Port:</div><input id="mailParamPort" type="text" value="'+mailParam.port+'" style="width:180px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">Port:</div><input id="mailParamPort" type="text" value="25" style="width:180px;" readonly="readonly"/><br/><br/>'+
 		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">发送人:</div><input id="mailParamFrom" type="text" value="'+mailParam.from+'" style="width:180px;"/>&nbsp;&nbsp;'+
 		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">密码:</div><input id="mailParamPwd" type="password" value="'+mailParam.pwd+'" style="width:180px;"/><br/><br/>'+
 		'<div style="display:inline-block;width:50px;text-align:right;padding-right:5px;">接收人:</div><input id="mailParamTo" type="text" value="'+mailParam.to+'" style="width:180px;"/>&nbsp;&nbsp;'+
