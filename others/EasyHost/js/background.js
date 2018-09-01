@@ -14,7 +14,7 @@ chrome.runtime.onMessageExternal.addListener(
   function(request, sender, sendResponse) {
   	fromId = sender.id;
 	if("sendMail"==request.id){
-		sendMail(request,sender,sendResponse);
+		sendMail(request,sender);
 	}
 });
 //chrome.sockets.tcp.onReceiveError.addListener(function(info){//{resultCode,socketId}
@@ -27,15 +27,21 @@ chrome.sockets.tcp.onReceive.addListener(function(info){
 		}
 	});
 });
-function sendMail(request,sender,sendResponse){
+function sendMail(request,sender){
 	mailReq = request;
 	var opt = {persistent: false,name: 'tcpSocket',bufferSize: 4096};
-	chrome.sockets.tcp.create(opt, function(infa){
-		mailSid = infa.socketId;
+	chrome.sockets.tcp.create(opt, function(info){
+		mailSid = info.socketId;
 		mailStatus =0;
-		chrome.sockets.tcp.connect(mailSid, request.smtp, parseInt(request.port), function(code){});
+		chrome.sockets.tcp.connect(mailSid, request.smtp, parseInt(request.port), function(code){
+			if(code){
+				sendMsg({id:"sendMail",msg:"网络错误！"});
+			}else{
+				sendMsg({id:"sendMail",msg:"邮件正在发送..."});
+			}
+		});
 	});
-	sendResponse({msg:"邮件正在发送..."});
+	
 }
 function pushMail(data){
 	console.log("-------"+mailStatus+"-------");

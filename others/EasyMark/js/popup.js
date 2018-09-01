@@ -470,9 +470,7 @@ function sendMail(txt){
 		mailParam.id = "sendMail";
 		mailParam.txt = txt;
 		mailParam.myid = myid;
-		chrome.runtime.sendMessage(exid, mailParam,function(response) {
-			tipCase({msg:response.msg});
-		});
+		chrome.runtime.sendMessage(exid, mailParam,function() {});
 		
 	});
 }
