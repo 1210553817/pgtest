@@ -471,6 +471,5 @@ function sendMail(txt){
 		mailParam.txt = txt;
 		mailParam.myid = myid;
 		chrome.runtime.sendMessage(exid, mailParam,function() {});
-		
 	});
 }

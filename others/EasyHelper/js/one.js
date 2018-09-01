@@ -272,6 +272,5 @@ function sendMail(txt){
 		mailParam.id = "sendMail";
 		mailParam.txt = txt;
 		chrome.runtime.sendMessage(exid, mailParam,function() {});
-		tipCase({msg:"邮件正在发送..."});
 	});
 }
