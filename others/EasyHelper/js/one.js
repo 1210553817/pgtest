@@ -217,7 +217,7 @@ function picDowner(urlpre,urlsuf,now,end,lenInt){
 	},function(){
 		window.setTimeout(function(){
 			picDowner(urlpre,urlsuf,now+1,end,lenInt);
-		},1000);
+		},600);
 	});
 }
 /*test*/

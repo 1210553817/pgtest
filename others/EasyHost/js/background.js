@@ -34,11 +34,8 @@ function sendMail(request,sender){
 		mailSid = info.socketId;
 		mailStatus =0;
 		chrome.sockets.tcp.connect(mailSid, request.smtp, parseInt(request.port), function(code){
-			if(code){
-				sendMsg({id:"sendMail",msg:"网络错误！"});
-			}else{
-				sendMsg({id:"sendMail",msg:"邮件正在发送..."});
-			}
+			if(code)sendMsg({id:"sendMail",msg:"网络错误！"});
+			else sendMsg({id:"sendMail",msg:"邮件正在发送..."});
 		});
 	});
 	
