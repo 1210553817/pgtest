@@ -12,7 +12,7 @@ var _$P=function(g,p,s){
 	try{
 		if(_$Ava(p)){
 			if(typeof p == "object"&&p.tagName){
-				var id = "TMPQUERYID"+new Date().getTime()+p.tagName+p.innerHTML.length;
+				var id = "TMPQUERYID"+new Date().getTime()+p.tagName;
 				oid = p?p.getAttribute("id"):null,nid = oid || id;
 				p.id=nid;
 				if(s) return document.querySelector("[id='"+nid+"'] "+g);
