@@ -4,9 +4,8 @@ chrome.webRequest.onBeforeRequest.addListener (
         $PageReqs+="\n----------"+dtl.type+"----------\n"+dtl.url+"\n";
     },
     {urls:["*://*/*"]},
-    ["blocking"] 
+    ["blocking"]
 );
-
 function clearPageReqs(){
     $PageReqs="";
 }
@@ -19,7 +18,6 @@ function onPageMenu(info, tab) {
       b='http://www.flvcd.com/parse.php?kw='+a;
       chrome.tabs.create({ url: b });
 }
-
 function onLinkMenu(info, tab) {
       var a = encodeURIComponent(info.linkUrl);
       b='http://www.flvcd.com/parse.php?kw='+a;
