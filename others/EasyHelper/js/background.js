@@ -12,7 +12,7 @@ function clearPageReqs(){
 function getPageReqs(){
     return $PageReqs;
 }
-/*flvcd parse*/
+/**flvcd parse**/
 function onPageMenu(info, tab) {
       var a = encodeURIComponent(info.pageUrl);
       b='http://www.flvcd.com/parse.php?kw='+a;
@@ -26,3 +26,4 @@ function onLinkMenu(info, tab) {
 var contexts = ["page","selection","link","editable","image","video","audio"];
 chrome.contextMenus.create({"title": "FLVCD解析本页", "contexts":[contexts[0]],"onclick": onPageMenu});
 chrome.contextMenus.create({"title": "FLVCD解析链接", "contexts":[contexts[2]],"onclick": onLinkMenu});
+
