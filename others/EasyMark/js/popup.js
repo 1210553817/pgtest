@@ -32,7 +32,7 @@ function initEvents(){
 	_$G("defpop_setBkmksStore").onclick=addBkmk2dm;
 	_$G("defpop_getBkmkDomain").onclick=showBkmkdm;
 	_$G("defpop_setBkmkDomain").onclick=restoreBkmkdm;
-	_$G("defpop_emailBkmk").onclick=function(){
+	_$G("defpop_emailBkmkDomain").onclick=function(){
 		startMail();
 	};
 	//listener
@@ -444,7 +444,7 @@ function startMail(){
 			_setStorage("mailParamPwd", mailParam.pwd);
 			_setStorage("mailParamTo", mailParam.to);
 			_setStorage("mailParamTit", mailParam.tit);
-			var mailTxt = _$G("defpop_txts").value;
+			var mailTxt = _$G("defpop_domain_txts").value;
 			sendMail(mailTxt);
 			return true;
 		}
