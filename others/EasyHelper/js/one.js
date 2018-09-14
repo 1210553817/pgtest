@@ -133,8 +133,8 @@ function parseUrls(){
 	var rearr=[];
 	//.replace(/[\r\n]/g, "")
 	//var reg = new RegExp("((http).*)","g");
-	//var reg = new RegExp("(.*ts\.php*)","g");
-	var reg = new RegExp("(.*\.ts.*)","g");
+	var reg = new RegExp("(.*ts\.php*)","g");
+	//var reg = new RegExp("(.*\.ts.*)","g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
