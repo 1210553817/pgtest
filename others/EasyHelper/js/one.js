@@ -74,6 +74,8 @@ function initDatas(){
 	downParam.dwnSubFolder = _getStorage("dwnSubFolder");	
 	downParam.dwnStartIndx = _getStorage("dwnStartIndx");
 	downParam.dwnEndIndx = _getStorage("dwnEndIndx");
+	downParam.dwnParseReg = _getStorage("dwnParseReg");
+	downParam.dwnDownType = _getStorage("dwnDownType");
 	
 	mailParam.smtp = _getStorage("mailParamSmtp");
 	mailParam.port = _getStorage("mailParamPort");	
@@ -87,17 +89,31 @@ function startDown(){
 	var ctt = '<div style="display:inline-block;width:50px;">文件夹:</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'+
 		'<div style="display:inline-block;width:50px;">序号:</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'+
 		'<div style="display:inline-block;width:50px;">去头数:</div><input id="beforeDownStart" type="text" value="'+downParam.dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/>';
+		'<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;">匹配:</div><select id="beforeParseReg" type="text" style="width:80px;">'+
+			'<option value="(.*\.ts.*)" '+("(.*\.ts.*)"==downParam.dwnParseReg?"selected":"")+'>.ts</option>'+
+			'<option value="(.*ts\.php.*)" '+("(.*ts\.php.*)"==downParam.dwnParseReg?"selected":"")+'>ts.php</option>'+
+		'</select>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;">类型:</div><select id="beforeDownType" type="text" style="width:80px;">'+
+			'<option value="0" '+("0"==downParam.dwnDownType?"selected":"")+'>直接下载</option>'+
+			'<option value="1" '+("1"==downParam.dwnDownType?"selected":"")+'>页面下载</option>'+
+		'</select>';
 	panelCaseA({ title: '文件下载', content:ctt, btn1:"开始", btn2: "取消",
 		fun1: function(mbdy){
 			var fbf=_$Q("#beforeDownName",mbdy);
 			var fin=_$Q("#beforeDownIndx",mbdy);		
 			var fst=_$Q("#beforeDownStart",mbdy);
 			var fen=_$Q("#beforeDownEnd",mbdy);
+			var frg=_$Q("#beforeParseReg",mbdy);
+			var ftp=_$Q("#beforeDownType",mbdy);
 			downParam.dwnFolder = fbf.value;
 			downParam.dwnSubFolder = fin.value;
+			downParam.dwnParseReg = frg.value;
+			downParam.dwnDownType = ftp.value;
 			_setStorage("dwnFolder", downParam.dwnFolder);
 			_setStorage("dwnSubFolder", downParam.dwnSubFolder);
+			_setStorage("dwnParseReg", downParam.dwnParseReg);
+			_setStorage("dwnDownType", downParam.dwnDownType);
 			var dnsr=parseInt(fst.value);
 			var dnen=parseInt(fen.value);
 			if(dnsr>=0){
@@ -108,8 +124,8 @@ function startDown(){
 				downParam.dwnEndIndx = dnen;
 				_setStorage("dwnEndIndx", downParam.dwnEndIndx);
 			}
-			var parr = parseUrls();
-			multDowner(parr,0,
+			/**
+			directDowner(parr,0,
 				function(indx,len){
 					downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
 					downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
@@ -119,22 +135,86 @@ function startDown(){
 					downbtn.onclick=startDown;
 					downbtn.innerHTML="开始下载";
 				});
+			*/
 			downbtn.onclick=null;
+			downParam.pathArray = parseUrls();
+			downParam.currDownIndex = 0;
+			if(chrome.downloads.onDeterminingFilename.hasListeners(onDownloadDeterminingFilename))chrome.downloads.onDeterminingFilename.removeListener(onDownloadDeterminingFilename);
+			if("0"==downParam.dwnDownType){
+				directDowner(downParam.pathArray,0,onBeforeDownloadPerFile,onAfterDownloadAllFile);
+			}else if("1"==downParam.dwnDownType){
+				chrome.downloads.onDeterminingFilename.addListener(onDownloadDeterminingFilename);
+				pageDown(downParam.pathArray,0,onBeforeDownloadPerFile,onAfterDownloadAllFile);
+			}
 			return true;
 		}
 	});
 
 }
-
+function onDownloadDeterminingFilename(downloadItem,suggest){
+	suggest({
+		filename:downParam.generalDownName,
+		conflictAction: 'uniquify'
+	});
+}
+function onBeforeDownloadPerFile(indx,len){
+	downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
+	downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
+	return downParam.dwnFolder+"/"+downParam.dwnSubFolder+"/"+downParam.dwnFname;
+}
+function onAfterDownloadAllFile(indx,len){
+	downbtn.onclick=startDown;
+	downbtn.innerHTML="开始下载";
+}
+function directDowner(urls,indx,ing,bkf){
+	if(urls.length<1||urls.length==indx){
+		if(bkf)bkf.call(null);
+		return;
+	}
+	downParam.currDownIndex = indx;
+	var fnm="00"+indx;
+	if(ing)fnm=ing.call(null,indx,urls.length);
+	var dnurl=urls[indx];
+	chrome.downloads.download({
+		url: dnurl,
+		filename: fnm,
+		conflictAction: 'uniquify',
+		saveAs: false
+	},function(){
+		window.setTimeout(function(){
+			directDowner(urls,indx+1,ing,bkf);
+		},400);
+	});
+}
+function pageDown(urls,indx,ing,bkf){
+	if(urls.length<1||urls.length==indx){
+		if(bkf)bkf.call(null);
+		return;
+	}
+	downParam.currDownIndex = indx;
+	var fnm="00"+indx;
+	if(ing)fnm=ing.call(null,indx,urls.length);
+	downParam.generalDownName=fnm;
+	var dnurl=urls[indx];
+	chrome.tabs.create({
+		index: 0,
+		url: dnurl,
+		active: true,
+		pinned: false
+	}, function(otab){
+		window.setTimeout(function(){
+			pageDown(urls,indx+1,ing,bkf);
+		},500);
+	});
+	
+}
 function parseUrls(){
 	var dtxt = _$G("down_urls").value;
 	var dprm = _$G("down_prms").value;
 	dprm = _$Ava(dprm)?dprm:"";
 	var rearr=[];
 	//.replace(/[\r\n]/g, "")
-	//var reg = new RegExp("((http).*)","g");
-	var reg = new RegExp("(.*ts\.php*)","g");
-	//var reg = new RegExp("(.*\.ts.*)","g");
+	var reg = new RegExp(downParam.dwnParseReg,"g");
 	var result =null;
 	do{
 		result=reg.exec(dtxt);
