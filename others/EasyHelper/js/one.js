@@ -93,6 +93,7 @@ function startDown(){
 		'<div style="display:inline-block;width:50px;">匹配:</div><select id="beforeParseReg" type="text" style="width:80px;">'+
 			'<option value="(.*\.ts.*)" '+("(.*\.ts.*)"==downParam.dwnParseReg?"selected":"")+'>.ts</option>'+
 			'<option value="(.*ts\.php.*)" '+("(.*ts\.php.*)"==downParam.dwnParseReg?"selected":"")+'>ts.php</option>'+
+			'<option value="(.*\.mp4.*)" '+("(.*\.mp4.*)"==downParam.dwnParseReg?"selected":"")+'>.mp4</option>'+
 		'</select>&nbsp;&nbsp;'+
 		'<div style="display:inline-block;width:50px;">类型:</div><select id="beforeDownType" type="text" style="width:80px;">'+
 			'<option value="0" '+("0"==downParam.dwnDownType?"selected":"")+'>直接下载</option>'+
@@ -139,23 +140,11 @@ function startDown(){
 			downbtn.onclick=null;
 			downParam.pathArray = parseUrls();
 			downParam.currDownIndex = 0;
-			if(chrome.downloads.onDeterminingFilename.hasListeners(onDownloadDeterminingFilename))chrome.downloads.onDeterminingFilename.removeListener(onDownloadDeterminingFilename);
-			if("0"==downParam.dwnDownType){
-				directDowner(downParam.pathArray,0,onBeforeDownloadPerFile,onAfterDownloadAllFile);
-			}else if("1"==downParam.dwnDownType){
-				chrome.downloads.onDeterminingFilename.addListener(onDownloadDeterminingFilename);
-				pageDown(downParam.pathArray,0,onBeforeDownloadPerFile,onAfterDownloadAllFile);
-			}
+			directDowner(downParam.pathArray,0,onBeforeDownloadPerFile,onAfterDownloadAllFile);
 			return true;
 		}
 	});
 
-}
-function onDownloadDeterminingFilename(downloadItem,suggest){
-	suggest({
-		filename:downParam.generalDownName,
-		conflictAction: 'uniquify'
-	});
 }
 function onBeforeDownloadPerFile(indx,len){
 	downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
@@ -185,28 +174,6 @@ function directDowner(urls,indx,ing,bkf){
 			directDowner(urls,indx+1,ing,bkf);
 		},400);
 	});
-}
-function pageDown(urls,indx,ing,bkf){
-	if(urls.length<1||urls.length==indx){
-		if(bkf)bkf.call(null);
-		return;
-	}
-	downParam.currDownIndex = indx;
-	var fnm="00"+indx;
-	if(ing)fnm=ing.call(null,indx,urls.length);
-	downParam.generalDownName=fnm;
-	var dnurl=urls[indx];
-	chrome.tabs.create({
-		index: 0,
-		url: dnurl,
-		active: true,
-		pinned: false
-	}, function(otab){
-		window.setTimeout(function(){
-			pageDown(urls,indx+1,ing,bkf);
-		},500);
-	});
-	
 }
 function parseUrls(){
 	var dtxt = _$G("down_urls").value;
