@@ -1,5 +1,5 @@
 function $Q(e){return document.querySelectorAll(e);}
-var aps = $Q("a,img,iframe");
+var aps = $Q("div,a,img,iframe");
 alert("Length: "+aps.length);
 if(aps.length>0){
 	for(var i=0;i<aps.length;i++){
