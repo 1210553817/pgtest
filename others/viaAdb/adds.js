@@ -10,6 +10,11 @@ if(aps.length>0){
 		}
 		if(itm.src&&itm.src.indexOf("gif")>-1){
 			itm.style.display="none";
+			continue;
+		}
+		var atr=window.getComputedStyle(itm);
+		if(atr.backgroundImage&&atr.backgroundImage.indexOf("gif")>-1){
+			itm.style.display="none";
 		}
 	}
 }
