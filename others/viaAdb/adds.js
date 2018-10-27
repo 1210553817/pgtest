@@ -65,19 +65,22 @@ if(aps.length>0){
 		for(var j=0;j<uls.length;j++){
 			var itn =  uls[j];
 			if(itm.href&&itm.href.indexOf(itn)>-1){
+				itm.href="#";
 				itm.style.display="none";
-				if("span"==ptm.tagName)itm.parentNode.style.display="none";
+				if("body"!=ptm.tagName)itm.parentNode.style.display="none";
 				break;
 			}
 			if(itm.src&&itm.src.indexOf(itn)>-1){
+				itm.src="#";
 				itm.style.display="none";
-				if("span"==ptm.tagName)itm.parentNode.style.display="none";
+				if("body"!=ptm.tagName)itm.parentNode.style.display="none";
 				break;
 			}
 			var atr=window.getComputedStyle(itm);
 			if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
+				itm.style.backgroundImage="url(./fxqy.jpg)";
 				itm.style.display="none";
-				if("span"==ptm.tagName){
+				if("body"!=ptm.tagName){
 					itm.parentNode.style.display="none";
 					var chs=ptm.childNodes;
 					if(chs){
