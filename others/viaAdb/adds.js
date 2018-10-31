@@ -1,4 +1,5 @@
 var uls=[
+"a.lwinl.com",
 "wx2.sinaimg.cn",
 "c.hzblic.com",
 "imgs.wangketuan.com",
@@ -79,7 +80,7 @@ if(aps.length>0){
 			if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
 				itm.style.backgroundImage="url(./null.jpg)";
 				itm.style.display="none";
-				if(hostName.indexOf("40yb")>-1&&"body"!=ptm.tagName){
+				if((hostName.indexOf("40yb")>-1||hostName.indexOf("97kp")>-1)&&"body"!=ptm.tagName){
 					itm.parentNode.style.display="none";
 					var chs=ptm.childNodes;
 					if(chs){
