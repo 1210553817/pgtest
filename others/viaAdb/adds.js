@@ -59,39 +59,42 @@ var uls=[
 ];
 var hostName = window.location.host;
 function $Q(e){return document.querySelectorAll(e);}
-var aps = $Q("div,a,img,iframe");
-if(aps.length>0){
-	for(var i=0;i<aps.length;i++){
-		var itm = aps[i];
-		var ptm = itm.parentNode;
-		for(var j=0;j<uls.length;j++){
-			var itn =  uls[j];
-			if(itm.href&&itm.href.indexOf(itn)>-1){
-				itm.href=" ";
-				itm.style.display="none";
-				break;
-			}
-			if(itm.src&&itm.src.indexOf(itn)>-1){
-				itm.src=" ";
-				itm.style.display="none";
-				break;
-			}
-			var atr=window.getComputedStyle(itm);
-			if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
-				itm.style.backgroundImage="url(./null.jpg)";
-				itm.style.display="none";
-				if((hostName.indexOf("40yb")>-1||hostName.indexOf("97kp")>-1)&&"body"!=ptm.tagName){
-					itm.parentNode.style.display="none";
-					var chs=ptm.childNodes;
-					if(chs){
-						for(var i=0;i<chs.length;i++){
-							var chtm=chs[i];
-							chtm.style.display="none";
+function doFilter(){
+	var aps = $Q("div,a,img,iframe");
+	if(aps.length>0){
+		for(var i=0;i<aps.length;i++){
+			var itm = aps[i];
+			var ptm = itm.parentNode;
+			for(var j=0;j<uls.length;j++){
+				var itn =  uls[j];
+				if(itm.href&&itm.href.indexOf(itn)>-1){
+					itm.href=" ";
+					itm.style.display="none";
+					break;
+				}
+				if(itm.src&&itm.src.indexOf(itn)>-1){
+					itm.src=" ";
+					itm.style.display="none";
+					break;
+				}
+				var atr=window.getComputedStyle(itm);
+				if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
+					itm.style.backgroundImage="url(./null.jpg)";
+					itm.style.display="none";
+					if((hostName.indexOf("40yb")>-1||hostName.indexOf("97kp")>-1)&&"body"!=ptm.tagName){
+						itm.parentNode.style.display="none";
+						var chs=ptm.childNodes;
+						if(chs){
+							for(var i=0;i<chs.length;i++){
+								var chtm=chs[i];
+								chtm.style.display="none";
+							}
 						}
 					}
+					break;
 				}
-				break;
 			}
 		}
 	}
 }
+if(hostName.indexOf("9zdm")>-1||hostName.indexOf("74zu")>-1||hostName.indexOf("babayu")>-1||hostName.indexOf("micaitu")>-1||hostName.indexOf("88k")>-1||hostName.indexOf("40yb")>-1||hostName.indexOf("97kp")>-1)doFilter();
