@@ -1,4 +1,7 @@
 var uls=[
+"li3.4r3z2ahp8.com",
+"u.umm6.cn",
+"i.hzblic.com",
 "a.lwinl.com",
 "wx2.sinaimg.cn",
 "c.hzblic.com",
