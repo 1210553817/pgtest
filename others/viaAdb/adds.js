@@ -85,6 +85,7 @@ function doFilter(){
 				if(dsrc){
 					itm.setAttribute("data-src","0");
 					itm.style.display="none";
+					parentHide(itm,ptm);
 					break;
 				}
 				var atr=window.getComputedStyle(itm);
