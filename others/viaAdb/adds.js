@@ -69,6 +69,7 @@ function doFilter(){
 		for(var i=0;i<aps.length;i++){
 			var itm = aps[i];
 			var ptm = itm.parentNode;
+			var dsrc = itm.getAttribute("data-src");
 			for(var j=0;j<uls.length;j++){
 				var itn =  uls[j];
 				if(itm.href&&itm.href.indexOf(itn)>-1){
@@ -78,6 +79,11 @@ function doFilter(){
 				}
 				if(itm.src&&itm.src.indexOf(itn)>-1){
 					itm.src=" ";
+					itm.style.display="none";
+					break;
+				}				
+				if(dsrc){
+					itm.setAttribute("data-src","0");
 					itm.style.display="none";
 					break;
 				}
