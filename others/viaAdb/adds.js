@@ -94,15 +94,22 @@ function doFilter(){
 					parentHide(itm,ptm);
 					break;
 				}
-				/**
-				if(atr["transform"]||atr["-webkit-transform"]){
+				var tsfm0=atr["transform"];
+				if(tsfm0&&(tsfm0.indexOf("matrix")>-1||tsfm0.indexOf("rotate")>-1)){
 					itm.style.backgroundImage="url(./null.jpg)";
 					itm.src=" ";
 					itm.style.display="none";
 					parentHide(itm,ptm);
 					break;
 				}
-				*/
+				var tsfm1=atr["-webkit-transform"];
+				if(tsfm1&&(tsfm1.indexOf("matrix")>-1||tsfm1.indexOf("rotate")>-1)){
+					itm.style.backgroundImage="url(./null.jpg)";
+					itm.src=" ";
+					itm.style.display="none";
+					parentHide(itm,ptm);
+					break;
+				}
 			}
 		}
 	}
