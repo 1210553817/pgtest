@@ -68,6 +68,7 @@ function doFilter(){
 	if(aps.length>0){
 		for(var i=0;i<aps.length;i++){
 			var itm = aps[i];
+			var atr=window.getComputedStyle(itm);
 			var ptm = itm.parentNode;
 			var dsrc = itm.getAttribute("data-src");
 			for(var j=0;j<uls.length;j++){
@@ -85,12 +86,17 @@ function doFilter(){
 				if(dsrc){
 					itm.setAttribute("data-src","0");
 					itm.style.display="none";
+					break;
+				}
+				if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
+					itm.style.backgroundImage="url(./null.jpg)";
+					itm.style.display="none";
 					parentHide(itm,ptm);
 					break;
 				}
-				var atr=window.getComputedStyle(itm);
-				if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
+				if(atr["transform"]||atr["-webkit-transform"]){
 					itm.style.backgroundImage="url(./null.jpg)";
+					itm.src=" ";
 					itm.style.display="none";
 					parentHide(itm,ptm);
 					break;
