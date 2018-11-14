@@ -98,7 +98,7 @@ function doFilter(){
 					itm.style.backgroundImage="url(./null.jpg)";
 					itm.src=" ";
 					itm.style.display="none";
-					parentHide(itm,ptm);
+					//parentHide(itm,ptm);
 					break;
 				}
 			}
