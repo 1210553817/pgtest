@@ -85,24 +85,28 @@ function doFilter(){
 				if(dsrc){
 					itm.setAttribute("data-src","0");
 					itm.style.display="none";
+					parentHide(itm,ptm);
 					break;
 				}
 				var atr=window.getComputedStyle(itm);
 				if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
 					itm.style.backgroundImage="url(./null.jpg)";
 					itm.style.display="none";
-					if((hostName.indexOf("40yb")>-1||hostName.indexOf("97kp")>-1)&&"body"!=ptm.tagName){
-						itm.parentNode.style.display="none";
-						var chs=ptm.childNodes;
-						if(chs){
-							for(var i=0;i<chs.length;i++){
-								var chtm=chs[i];
-								chtm.style.display="none";
-							}
-						}
-					}
+					parentHide(itm,ptm);
 					break;
 				}
+			}
+		}
+	}
+}
+function parentHide(itm,ptm){
+	if((hostName.indexOf("40yb")>-1||hostName.indexOf("97kp")>-1)&&"body"!=ptm.tagName){
+		itm.parentNode.style.display="none";
+		var chs=ptm.childNodes;
+		if(chs){
+			for(var i=0;i<chs.length;i++){
+				var chtm=chs[i];
+				chtm.style.display="none";
 			}
 		}
 	}
