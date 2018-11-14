@@ -94,13 +94,15 @@ function doFilter(){
 					parentHide(itm,ptm);
 					break;
 				}
+				/**
 				if(atr["transform"]||atr["-webkit-transform"]){
 					itm.style.backgroundImage="url(./null.jpg)";
 					itm.src=" ";
 					itm.style.display="none";
-					//parentHide(itm,ptm);
+					parentHide(itm,ptm);
 					break;
 				}
+				*/
 			}
 		}
 	}
