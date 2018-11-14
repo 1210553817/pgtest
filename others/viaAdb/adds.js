@@ -64,11 +64,10 @@ var uls=[
 var hostName = window.location.host;
 function $Q(e){return document.querySelectorAll(e);}
 function doFilter(){
-	var aps = $Q("div,a,img,iframe,script");
+	var aps = $Q("div,a,img,iframe");
 	if(aps.length>0){
 		for(var i=0;i<aps.length;i++){
 			var itm = aps[i];
-			var atr=window.getComputedStyle(itm);
 			var ptm = itm.parentNode;
 			var dsrc = itm.getAttribute("data-src");
 			for(var j=0;j<uls.length;j++){
@@ -88,6 +87,7 @@ function doFilter(){
 					itm.style.display="none";
 					break;
 				}
+				var atr=window.getComputedStyle(itm);
 				if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
 					itm.style.backgroundImage="url(./null.jpg)";
 					itm.style.display="none";
