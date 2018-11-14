@@ -69,7 +69,7 @@ function doFilter(){
 		for(var i=0;i<aps.length;i++){
 			var itm = aps[i];
 			var ptm = itm.parentNode;
-			var atr=window.getComputedStyle(itm);
+			var atr=window.getComputedStyle(itm,null);
 			for(var j=0;j<uls.length;j++){
 				var itn =  uls[j];
 				if(itm.href&&itm.href.indexOf(itn)>-1){
