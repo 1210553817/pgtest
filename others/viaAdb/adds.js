@@ -69,7 +69,7 @@ function doFilter(){
 		for(var i=0;i<aps.length;i++){
 			var itm = aps[i];
 			var ptm = itm.parentNode;
-			var dsrc = itm.getAttribute("data-src");
+			var atr=window.getComputedStyle(itm);
 			for(var j=0;j<uls.length;j++){
 				var itn =  uls[j];
 				if(itm.href&&itm.href.indexOf(itn)>-1){
@@ -81,37 +81,41 @@ function doFilter(){
 					itm.src=" ";
 					itm.style.display="none";
 					break;
-				}				
-				if(dsrc){
-					itm.setAttribute("data-src","0");
-					itm.style.display="none";
-					parentHide(itm,ptm);
-					break;
 				}
-				var atr=window.getComputedStyle(itm);
-				if(atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
+				if(atr&&atr.backgroundImage&&atr.backgroundImage.indexOf(itn)>-1){
 					itm.style.backgroundImage="url(./null.jpg)";
 					itm.style.display="none";
 					parentHide(itm,ptm);
 					break;
 				}
-				var tsfm0=atr["transform"];
-				if(tsfm0&&(tsfm0.indexOf("matrix")>-1||tsfm0.indexOf("rotate")>-1)){
-					itm.style.backgroundImage="url(./null.jpg)";
-					itm.src=" ";
-					itm.style.display="none";
-					parentHide(itm,ptm);
-					break;
-				}
-				var tsfm1=atr["-webkit-transform"];
-				if(tsfm1&&(tsfm1.indexOf("matrix")>-1||tsfm1.indexOf("rotate")>-1)){
-					itm.style.backgroundImage="url(./null.jpg)";
-					itm.src=" ";
-					itm.style.display="none";
-					parentHide(itm,ptm);
-					break;
-				}
+
 			}
+			elementHide(itm,ptm,atr);
+		}
+	}
+}
+function elementHide(itm,ptm,atr){
+	var dsrc = itm.getAttribute("data-src");
+	if(dsrc){
+		itm.setAttribute("data-src","0");
+		itm.style.display="none";
+	}
+	if(atr){
+		var tsfm0=atr["transform"];
+		if(tsfm0&&(tsfm0.indexOf("matrix")>-1||tsfm0.indexOf("rotate")>-1)){
+			itm.style.backgroundImage="url(./null.jpg)";
+			itm.src=" ";
+			itm.style.display="none";
+			parentHide(itm,ptm);
+			break;
+		}
+		var tsfm1=atr["-webkit-transform"];
+		if(tsfm1&&(tsfm1.indexOf("matrix")>-1||tsfm1.indexOf("rotate")>-1)){
+			itm.style.backgroundImage="url(./null.jpg)";
+			itm.src=" ";
+			itm.style.display="none";
+			parentHide(itm,ptm);
+			break;
 		}
 	}
 }
