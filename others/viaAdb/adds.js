@@ -1,8 +1,10 @@
 var uls=[
-"haofengsuye.com",
+"srdoudizhu",
+"haizirv",
+"haofengsuye",
 "lkflw.com",
 "bxlsl.com",
-"xyxy3638.com",
+"xyxy3638",
 "wanmancn.com",
 "hmcvs.cn",
 "4r3z2ahp8.com",
