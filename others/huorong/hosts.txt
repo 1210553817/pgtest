@@ -57,3 +57,4 @@
 127.0.0.1 wsq.qq.com
 127.0.0.1 www.qq.com
 127.0.0.1 y.qq.com
+127.0.0.1 www.baidu.com
