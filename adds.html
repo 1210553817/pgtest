@@ -499,7 +499,6 @@
 	}
 		
 	/***********common end************/
-	var $PNLOFFY;
 	var PanelCase = (function() {
 		var isdraging = false;
 		var innerCase = function() {
@@ -703,6 +702,7 @@
 			if (options.clazzFour)thiz.mbox_btnd.className = options.clazzFour;
 			thiz.holder.style.display = "block";
 			thiz.backLayer.style.display = "block";
+			thiz.allholder.style.display = "block";
 			this.container["$" + options.suffix] = thiz;
 			pos(thiz);
 			drag(thiz, options.draggable);
@@ -717,11 +717,13 @@
 				var i;
 				for (i in this.container) {
 					var cc = this.container[i];
+					cc.allholder.style.display = "none";
 					cc.holder.style.display = "none";
 					cc.backLayer.style.display = "none";
 					if (cc.options.rmdom && cc.holder) {
-						cc.holder.outerHTML = "";
-						cc.backLayer.outerHTML = "";
+						//cc.holder.outerHTML = "";
+						//cc.backLayer.outerHTML = "";
+						cc.allholder.outerHTML = "";
 					}
 					if (cc.options.closed) {
 						cc.options.closed(i);
@@ -730,11 +732,13 @@
 				this.container = {};
 			} else {
 				var thiz = this.container["$" + suffix];
+				thiz.allholder.style.display = "none";
 				thiz.holder.style.display = "none";
 				thiz.backLayer.style.display = "none";
 				if (thiz.options.rmdom && thiz.holder) {
-					thiz.holder.outerHTML = "";
-					thiz.backLayer.outerHTML = "";
+					//thiz.holder.outerHTML = "";
+					//thiz.backLayer.outerHTML = "";
+					thiz.allholder.outerHTML = "";
 				}
 				delete this.container["$" + suffix];
 				if (thiz.options.closed) {
@@ -790,16 +794,13 @@
 				thiz.mboxbod.style.height = thiz.options.bodyHeight + "px";
 			}
 			var mboxht = parseInt(hd.offsetHeight);
-			if(mboxht>pgh){
-				thiz.mboxbod.style.height=(pgh-132)+"px";
-				mboxht = pgh;
-			}
-			var mboxposy = pgh/2 - mboxht/2;
-			if(_$Ava($PNLOFFY)){
-				if(mboxposy>$PNLOFFY)mboxposy=mboxposy-$PNLOFFY;
-			}else{
-				$PNLOFFY = mboxposy*0.4;
-				mboxposy = mboxposy*0.6
+			var mboxposy = pgh*0.4 - mboxht/2;
+			if(mboxposy<0){
+				mboxposy = (pgh - mboxht)/2;
+				if(mboxposy<0){
+					mboxposy=0;
+					thiz.mboxbod.style.height=(pgh-132)+"px";
+				}
 			}
 			hd.style.top = mboxposy + "px";
 			document.body.style.overflow="hidden";
@@ -932,7 +933,7 @@
 			mctt.style.display = "none";
 			_$SetOpacity(mctt, 100);
 			mctt.style.left = (pgw/2 - mcttw/2) + "px";
-			mctt.style.top = (pgh/2 - mctth/2)*0.6 + "px";
+			mctt.style.top = (pgh*0.4 - mctth/2) + "px";
 			_$FadeIn(mctt);
 			if(_$Null(options.period))options.period=1500;
 			window.setTimeout(function(){
