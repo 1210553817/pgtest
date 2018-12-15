@@ -795,9 +795,9 @@
 			}
 			var mboxht = parseInt(hd.offsetHeight);
 			var mboxposy = pgh*0.4 - mboxht/2;
-			if(mboxposy<0){
+			if(mboxposy<30){
 				mboxposy = (pgh - mboxht)/2;
-				if(mboxposy<0){
+				if(mboxposy<1){
 					mboxposy=0;
 					thiz.mboxbod.style.height=(pgh-132)+"px";
 				}
@@ -812,10 +812,8 @@
 				thiz.allholder.onmouseup = null;
 				return;
 			}
-			var dx,
-				dy;
-			var dialeft,
-				diatop;
+			var dx,dy;
+			var dialeft,diatop;
 			thiz.mboxtit.onmousedown = function(ea) {
 				var eaa = ea;
 				if (!eaa)eaa = window.event;
@@ -934,11 +932,11 @@
 			_$SetOpacity(mctt, 100);
 			mctt.style.left = (pgw/2 - mcttw/2) + "px";
 			mctt.style.top = (pgh*0.4 - mctth/2) + "px";
-			_$FadeIn(mctt);
-			if(_$Null(options.period))options.period=1500;
+			_$FadeIn(mctt,10);
+			if(_$Null(options.period))options.period=2000;
 			window.setTimeout(function(){
 					if(options.afterFunction)options.afterFunction();
-					_$FadeOut(mctt,20,0,function(){mctt.outerHTML="";});
+					_$FadeOut(mctt,10,0,function(){mctt.outerHTML="";});
 					
 				},options.period);
 		};
@@ -964,6 +962,7 @@
 				},
 				btnTwoText:"取消",
 				btnThreeText:"忽略",
+				btnFourText:"关闭",
 				draggable:true,
 				closed:function(){//关闭后回调
 					console.log("closed........");
