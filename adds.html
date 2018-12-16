@@ -724,6 +724,7 @@
 						//cc.holder.outerHTML = "";
 						//cc.backLayer.outerHTML = "";
 						cc.allholder.outerHTML = "";
+						delete this.container[i];
 					}
 					if (cc.options.closed) {
 						cc.options.closed(i);
@@ -739,8 +740,8 @@
 					//thiz.holder.outerHTML = "";
 					//thiz.backLayer.outerHTML = "";
 					thiz.allholder.outerHTML = "";
+					delete this.container["$" + suffix];
 				}
-				delete this.container["$" + suffix];
 				if (thiz.options.closed) {
 					thiz.options.closed(suffix);
 				}
