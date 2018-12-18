@@ -508,21 +508,25 @@
 		 * 参数
 		*options.suffix
 		*options.titleText
-		*options.contentText
-		*options.btnOneText
-		*options.btnOneFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
-		*options.btnTwoText
-		*options.btnTwoFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
-		*options.btnThreeText
-		*options.btnThreeFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
-		*options.btnFourText
-		*options.btnFourFunction(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.content
+		*options.btnOne
+		*options.btnaFun(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.btnbText
+		*options.btnbFun(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.btncText
+		*options.btncFun(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
+		*options.btndText
+		*options.btndFun(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象		
+		*options.btneText
+		*options.btneFun(content,holder)方法参数：content->弹出内容dom对象，holder->整个弹出框dom对象
 		*options.minWidth
 		*options.bodyHeight
 		*options.headColor
-		*options.clazzOne
-		*options.clazzTwo
-		*options.clazzThree
+		*options.clazza
+		*options.clazzb
+		*options.clazzc
+		*options.clazzd
+		*options.clazze
 		*options.draggable是否可拖动，默认false
 		*options.rmdom是否移除dom对象，默认false
 		*options.closed关闭后回调
@@ -564,6 +568,10 @@
 				thiz.mboxmsg.id = "cfmboxMsg";
 				thiz.mbox_fter = _$C("div");
 				thiz.mbox_fter.className = "cfmBox_footer";
+				thiz.mbox_btne = _$C("a");
+				thiz.mbox_btne.id = "cfmBoxbtne";
+				thiz.mbox_btne.className = "btn";
+				thiz.mbox_btne.href = "javaScript:void(0)";	
 				thiz.mbox_btnd = _$C("a");
 				thiz.mbox_btnd.id = "cfmBoxbtnd";
 				thiz.mbox_btnd.className = "btn";
@@ -589,6 +597,7 @@
 				_$A(thiz.mboxclr, thiz.mboxtit);
 				_$A(thiz.tittxt, thiz.mboxtit);
 				_$A(thiz.mboxmsg, thiz.mboxbod);
+				_$A(thiz.mbox_btne, thiz.mbox_fter);
 				_$A(thiz.mbox_btnd, thiz.mbox_fter);
 				_$A(thiz.mbox_btnc, thiz.mbox_fter);
 				_$A(thiz.mbox_btnb, thiz.mbox_fter);
@@ -605,26 +614,27 @@
 				thiz.mbox_btnb = _$Q("#cfmBoxbtnb", thiz.holder);
 				thiz.mbox_btnc = _$Q("#cfmBoxbtnc", thiz.holder);
 				thiz.mbox_btnd = _$Q("#cfmBoxbtnd", thiz.holder);
+				thiz.mbox_btne = _$Q("#cfmBoxbtne", thiz.holder);
 				thiz.mboxbod = _$Q("#cfmBox_body", thiz.holder);
 			}
 			if (options.titleText) {
 				thiz.tittxt.innerHTML = options.titleText;
 			}
-			if (options.contentText) {
-				if("string"==typeof(options.contentText)){
-					thiz.mboxmsg.innerHTML = options.contentText;
+			if (options.content) {
+				if("string"==typeof(options.content)){
+					thiz.mboxmsg.innerHTML = options.content;
 				}else{
-					thiz.mboxmsg.appendChild(options.contentText);
+					thiz.mboxmsg.appendChild(options.content);
 				}
 			}
 			var btnHdShow = false;
-			if (!options.btnOneText) {
+			if (!options.btnaText) {
 				thiz.mbox_btna.style.display = "none";
 			} else {
-				thiz.mbox_btna.innerHTML = options.btnOneText;
+				thiz.mbox_btna.innerHTML = options.btnaText;
 				thiz.mbox_btna.onclick = function() {
-					if (options.btnOneFunction) {
-						if (options.btnOneFunction(thiz.mboxbod,thiz.holder)) {
+					if (options.btnaFun) {
+						if (options.btnaFun.call(this,thiz.mboxbod,thiz.holder)) {
 							thiz.context.close(thiz.options.suffix);
 						}
 					} else {
@@ -633,13 +643,13 @@
 				};
 				btnHdShow = true;
 			}
-			if (!options.btnTwoText) {
+			if (!options.btnbText) {
 				thiz.mbox_btnb.style.display = "none";
 			} else {
-				thiz.mbox_btnb.innerHTML = options.btnTwoText;
+				thiz.mbox_btnb.innerHTML = options.btnbText;
 				thiz.mbox_btnb.onclick = function() {
-					if (options.btnTwoFunction) {
-						if (options.btnTwoFunction(thiz.mboxbod,thiz.holder)) {
+					if (options.btnbFun) {
+						if (options.btnbFun.call(this,thiz.mboxbod,thiz.holder)) {
 							thiz.context.close(thiz.options.suffix);
 						}
 					} else {
@@ -648,13 +658,13 @@
 				};
 				btnHdShow = true;
 			}
-			if (!options.btnThreeText) {
+			if (!options.btncText) {
 				thiz.mbox_btnc.style.display = "none";
 			} else {
-				thiz.mbox_btnc.innerHTML = options.btnThreeText;
+				thiz.mbox_btnc.innerHTML = options.btncText;
 				thiz.mbox_btnc.onclick = function() {
-					if (options.btnThreeFunction) {
-						if (options.btnThreeFunction(thiz.mboxbod,thiz.holder)) {
+					if (options.btncFun) {
+						if (options.btncFun.call(this,thiz.mboxbod,thiz.holder)) {
 							thiz.context.close(thiz.options.suffix);
 						}
 					} else {
@@ -664,13 +674,30 @@
 				btnHdShow = true;
 			}
 			if (_$Ava(thiz.mbox_btnd)) {
-				if (!options.btnFourText) {
+				if (!options.btndText) {
 					thiz.mbox_btnd.style.display = "none";
 				} else {
-					thiz.mbox_btnd.innerHTML = options.btnFourText;
+					thiz.mbox_btnd.innerHTML = options.btndText;
 					thiz.mbox_btnd.onclick = function() {
-						if (options.btnFourFunction) {
-							if (options.btnFourFunction(thiz.mboxbod,thiz.holder)) {
+						if (options.btndFun) {
+							if (options.btndFun.call(this,thiz.mboxbod,thiz.holder)) {
+								thiz.context.close(thiz.options.suffix);
+							}
+						} else {
+							thiz.context.close(thiz.options.suffix);
+						}
+					};
+					btnHdShow = true;
+				}
+			}
+			if (_$Ava(thiz.mbox_btne)) {
+				if (!options.btneText) {
+					thiz.mbox_btne.style.display = "none";
+				} else {
+					thiz.mbox_btne.innerHTML = options.btneText;
+					thiz.mbox_btne.onclick = function() {
+						if (options.btneFun) {
+							if (options.btneFun.call(this,thiz.mboxbod,thiz.holder)) {
 								thiz.context.close(thiz.options.suffix);
 							}
 						} else {
@@ -696,10 +723,11 @@
 			thiz.mboxclr.style.background = "";
 			_$SetOpacity(thiz.mboxclr, 100);
 			if(options.headColor){thiz.mboxtit.style.backgroundColor=options.headColor;thiz.mboxclr.style.backgroundColor=options.headColor;}
-			if (options.clazzOne)thiz.mbox_btna.className = options.clazzOne;
-			if (options.clazzTwo)thiz.mbox_btnb.className = options.clazzTwo;
-			if (options.clazzThree)thiz.mbox_btnc.className = options.clazzThree;
-			if (options.clazzFour)thiz.mbox_btnd.className = options.clazzFour;
+			if (options.clazza)thiz.mbox_btna.className = options.clazza;
+			if (options.clazzb)thiz.mbox_btnb.className = options.clazzb;
+			if (options.clazzc)thiz.mbox_btnc.className = options.clazzc;
+			if (options.clazzd)thiz.mbox_btnd.className = options.clazzd;
+			if (options.clazze)thiz.mbox_btne.className = options.clazze;
 			thiz.holder.style.display = "block";
 			thiz.backLayer.style.display = "block";
 			thiz.allholder.style.display = "block";
@@ -727,7 +755,7 @@
 						delete this.container[i];
 					}
 					if (cc.options.closed) {
-						cc.options.closed(i);
+						cc.options.closed(i.substring(1));
 					}
 				}
 				this.container = {};
@@ -796,8 +824,11 @@
 			}
 			var mboxht = parseInt(hd.offsetHeight);
 			var mboxposy = pgh*0.4 - mboxht/2;
-			if(mboxposy<30){
-				mboxposy = (pgh - mboxht)/2;
+			var mvp = 30;
+			if(mboxposy<mvp){
+				var pv = 0.1/mvp*(mvp-mboxposy);
+				if(pv>0.1)pv=0.1;
+				mboxposy = pgh*(0.4+pv) - mboxht/2;
 				if(mboxposy<1){
 					mboxposy=0;
 					thiz.mboxbod.style.height=(pgh-132)+"px";
@@ -854,9 +885,9 @@
 			minWidth : 400,
 			headColor : "#40c1e5",
 			titleText : "提示",
-			contentText : msg,
-			btnOneText : "确定",
-			btnOneFunction : function() {
+			content : msg,
+			btnaText : "确定",
+			btnaFun : function() {
 				return true;
 			},
 			rmdom : true,
@@ -876,14 +907,14 @@
 			minWidth : 400,
 			headColor : "#40c1e5",
 			titleText : "提示",
-			contentText : msg,
-			btnOneText : "确定",
-			btnOneFunction : function() {
+			content : msg,
+			btnaText : "确定",
+			btnaFun : function() {
 				if (funa) funa();
 				return true;
 			},
-			btnTwoText : "取消",
-			btnTwoFunction : function() {
+			btnbText : "取消",
+			btnbFun : function() {
 				if (funb) funb();
 				return true;
 			},
@@ -953,20 +984,42 @@
 			PanelCase.open({
 				suffix:11,
 				minWidth:"600",//宽度
-				bodyHeight:"200",//高度
+				bodyHeight:"300",//高度
 				titleText:"提示",
-				contentText:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
-				btnOneText:"确定",
-				btnOneFunction:function(){
-					alert("Button one clicked...");
+				content:"确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？确定删除该信息吗？",
+				btnaText:"确定",
+				clazza: "btn btn-black",
+				btnaFun:function(){
+					console.log("aaaaaaaaa:"+this.innerHTML);
 					return true;
 				},
-				btnTwoText:"取消",
-				btnThreeText:"忽略",
-				btnFourText:"关闭",
+				btnbText:"取消",
+				clazzb: "btn btn-red",
+				btnbFun: function(){
+					console.log("bbbbbbbbb:"+this.innerHTML);
+					return true;
+				},
+				btncText:"忽略",
+				clazzc: "btn btn-orange",
+				btncFun: function(){
+					console.log("ccccccccc:"+this.innerHTML);
+					return true;
+				},
+				btndText:"关闭",
+				clazzd: "btn btn-lightBlue",
+				btndFun: function(){
+					console.log("ddddddddd:"+this.innerHTML);
+					return true;
+				},
+				btneText:"移除",
+				clazze: "btn btn-green",
+				btneFun: function(){
+					console.log("eeeeeeeee:"+this.innerHTML);
+					return true;
+				},
 				draggable:true,
-				closed:function(){//关闭后回调
-					console.log("closed........");
+				closed:function(i){//关闭后回调
+					console.log("closed........"+i);
 				}
 			});
 		}
@@ -974,12 +1027,12 @@
 			PanelCase.open({
 				suffix:12,
 				titleText:"提示",
-				contentText:"西北地区东部至江南等地将出现大范围雨雪天气",
-				btnOneText:"确定",
-				btnOneFunction:function(){
+				content:"西北地区东部至江南等地将出现大范围雨雪天气",
+				btnaText:"确定",
+				btnaFun:function(){
 					alert(2222222222222222);
 				},
-				btnTwoText:"取消"
+				btnbText:"取消"
 				
 			});
 		}
@@ -1018,22 +1071,23 @@
 		
 		function test5(){
 			PanelCase.open({
+				suffix:"_testa",
 				titleText:"提示",
-				contentText:"西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气",
-				btnOneText:"确定",
-				btnOneFunction:function(){
+				content:"西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气,西北地区东部至江南等地将出现大范围雨雪天气",
+				btnaText:"确定",
+				btnaFun:function(){
 					PanelCase.open({
 						suffix:1,
 						minWidth:400,
-						headColor:"#99CCFF",
+						//headColor:"#99CCFF",
 						titleText:"A提示",
-						contentText:"A西北地区东部至江南等地将出现大范围雨雪天气",
-						btnOneText:"确定",
-						btnOneFunction:function(){
+						content:"A西北地区东部至江南等地将出现大范围雨雪天气",
+						btnaText:"确定",
+						btnaFun:function(){
 							PanelCase.close("all");
 						},
-						btnTwoText:"取消",
-						btnTwoFunction:function(){
+						btnbText:"取消",
+						btnbFun:function(){
 							//PanelCase.close();
 							TipCase.show({
 								suffix:1111,
@@ -1047,8 +1101,12 @@
 					});
 				
 				},
-				btnTwoText:"取消",
-				rmdom:true
+				btnbText:"取消",
+				rmdom:true,
+				closed: function(i){
+					console.log(i);
+				}
+				
 			});
 				
 		//	window.setTimeout(function(){
