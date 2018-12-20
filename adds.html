@@ -352,11 +352,11 @@
 		try{
 			if(_$Ava(p)){
 				if(typeof p == "object"&&p.tagName){
-					var id = "TMPQUERYID"+new Date().getTime()+p.tagName+p.innerHTML.length;
+					var id = "TMPQUERYID"+p.tagName;
 					oid = p?p.getAttribute("id"):null,nid = oid || id;
 					p.id=nid;
-					if(s) return document.querySelector("[id='"+nid+"'] "+g);
-					else return document.querySelectorAll("[id='"+nid+"'] "+g);
+					if(s) return document.querySelector("#"+nid+" "+g);
+					else return document.querySelectorAll("#"+nid+" "+g);
 				}else{
 					return s?null:[];
 				}
@@ -365,7 +365,7 @@
 				else return document.querySelectorAll(g);
 			}
 		}catch(err){return s?null:[];}finally{
-			if(typeof p == "object"&&p.tagName&&!oid)p.removeAttribute("id");
+			if(p&&typeof p == "object"&&p.tagName&&!oid)p.removeAttribute("id");
 		}
 	};
 	var _$Q=function(g,p){return _$P(g,p,1);}
@@ -1206,7 +1206,7 @@
 			<li class="divider"></li>
 			<li><a href="javaScript:">Separated link</a></li>
 		</ul>
-	</div>
+	</div><a href="javaScript:" class="green_link">Action</a>
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;" class="green_link">
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;" class="green_link">
 	<img src="./img/10.jpg" alt="Image" style="max-width:100px;">
