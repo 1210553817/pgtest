@@ -376,7 +376,7 @@
 			return false;
 	}
 	function _$Ava(a) {
-		if ( typeof(a)=="undefined" || null==a || ""==a || a==undefined) {
+		if (null==a || ""==a || typeof(a)=="undefined") {
 			return false;
 		} else {
 			return true;
@@ -497,7 +497,7 @@
 		else 
 			window.event.cancelBubble = true;
 	}
-		
+
 	/***********common end************/
 	var PanelCase = (function() {
 		var isdraging = false;
