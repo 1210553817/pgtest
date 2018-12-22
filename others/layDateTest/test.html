@@ -131,7 +131,7 @@ function renderSeasonDate(options){
 		var mls=thiz.find(".laydate-month-list");  
 		mls.each(function(i,e){
 			$(this).find("li").each(function(inx,ele){
-				var cx = ele.innerHTML;  
+				var cx = ele.innerHTML; 
 				if(inx<4){
 					ele.innerHTML=cx.replace(/月/g,"季度");
 					ele.style.width="49.6%";
@@ -139,7 +139,7 @@ function renderSeasonDate(options){
 				}else{
 					ele.style.display="none";
 					ele.innerHTML="";					
-				}  
+				} 				
 			});  
 		});  
   }  
