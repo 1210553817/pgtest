@@ -132,13 +132,19 @@ function renderSeasonDate(options){
 		mls.each(function(i,e){
 			$(this).find("li").each(function(inx,ele){
 				var cx = ele.innerHTML; 
+				var csz = getCurSeason();
 				if(inx<4){
 					ele.innerHTML=cx.replace(/月/g,"季度");
 					ele.style.width="49.6%";
 					ele.style.margin="32px 0";
+					if(isNull(dfs)){
+						if(i==0&&csz[0]==inx+1)ele.className="layui-this";
+						else if(i==1&&csz[1]==inx+1)ele.className="layui-this";
+					}
 				}else{
 					ele.style.display="none";
-					ele.innerHTML="";					
+					ele.innerHTML="";
+					ele.className="";
 				} 				
 			});  
 		});  
@@ -327,7 +333,13 @@ function isNull(s){
 	if(s==null||typeof(s)=="undefined"||s=="")return true;
 	return false;
 }
-
+function getCurSeason(){
+	var cm = new Date().getMonth();
+	if(cm>=1&&cm<=3)return [1,2];
+	if(cm>=4&&cm<=6)return [2,3];
+	if(cm>=7&&cm<=9)return [3,4];
+	if(cm>=10&&cm<=12)return [4,1];
+}
 
 function getDateText(){
 	var ele = $("#worldId");
