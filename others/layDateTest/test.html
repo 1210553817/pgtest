@@ -137,14 +137,9 @@ function renderSeasonDate(options){
 					ele.innerHTML=cx.replace(/月/g,"季度");
 					ele.style.width="49.6%";
 					ele.style.margin="32px 0";
-					if(isNull(dfs)){
-						if(i==0&&csz[0]==inx+1)ele.className="layui-this";
-						else if(i==1&&csz[1]==inx+1)ele.className="layui-this";
-					}
 				}else{
 					ele.style.display="none";
 					ele.innerHTML="";
-					ele.className="";
 				} 				
 			});  
 		});  

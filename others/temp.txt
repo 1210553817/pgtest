@@ -2,3 +2,6 @@ adblockPlus£ºhttps://chrome.google.com/webstore/detail/cfhdojbkjhnklbpkdaibdccdd
 C6-5A-6B-7C-8B-9A
 
 https://2wk.com/vip.php?url=
+
+http://localhost:9191/oauth/authorize?client_id=client&client_secret=secret&response_type=code&redirect_uri=http://www.baidu.com
+http://localhost:9191/oauth/token?code=&client_id=client&client_secret=secret&grant_type=authorization_code&redirect_uri=http://www.baidu.com
