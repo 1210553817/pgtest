@@ -94,6 +94,7 @@ function startDown(){
 			'<option value="(.*\.ts.*)" '+("(.*\.ts.*)"==downParam.dwnParseReg?"selected":"")+'>.ts</option>'+
 			'<option value="(.*ts\.php.*)" '+("(.*ts\.php.*)"==downParam.dwnParseReg?"selected":"")+'>ts.php</option>'+
 			'<option value="(.*\.mp4.*)" '+("(.*\.mp4.*)"==downParam.dwnParseReg?"selected":"")+'>.mp4</option>'+
+			'<option value="(.*\.f4v.*)" '+("(.*\.f4v.*)"==downParam.dwnParseReg?"selected":"")+'>.f4v</option>'+
 			'<option value="(.*\.gif.*)" '+("(.*\.gif.*)"==downParam.dwnParseReg?"selected":"")+'>.gif</option>'+
 		'</select>&nbsp;&nbsp;'+
 		'<div style="display:inline-block;width:50px;">类型:</div><select id="beforeDownType" type="text" style="width:80px;">'+
