@@ -86,20 +86,22 @@ function initDatas(){
 }
 
 function startDown(){
-	var ctt = '<div style="display:inline-block;width:50px;">文件夹:</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">序号:</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'+
-		'<div style="display:inline-block;width:50px;">去头数:</div><input id="beforeDownStart" type="text" value="'+downParam.dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">去尾数:</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/><br/><br/>'+
-		'<div style="display:inline-block;width:50px;">匹配:</div><select id="beforeParseReg" type="text" style="width:80px;">'+
+	var ctt = '<div style="display:inline-block;width:50px;text-align:right;">文件夹:&nbsp;</div></div><input id="beforeDownName" type="text" value="'+downParam.dwnFolder+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;">序号:&nbsp;</div><input id="beforeDownIndx" type="text" value="'+downParam.dwnSubFolder+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;text-align:right;">去头数:&nbsp;</div><input id="beforeDownStart" type="text" value="'+downParam.dwnStartIndx+'" style="width:80px;"/>&nbsp;&nbsp;'+
+		'<div style="display:inline-block;width:50px;text-align:right;">去尾数:&nbsp;</div><input id="beforeDownEnd" type="text" value="'+downParam.dwnEndIndx+'" style="width:80px;"/><br/><br/>'+
+		'<div style="display:inline-block;width:50px;text-align:right;">匹配:&nbsp;</div><select id="beforeParseReg" type="text" style="width:80px;">'+
 			'<option value="(.*\.ts.*)" '+("(.*\.ts.*)"==downParam.dwnParseReg?"selected":"")+'>.ts</option>'+
 			'<option value="(.*ts\.php.*)" '+("(.*ts\.php.*)"==downParam.dwnParseReg?"selected":"")+'>ts.php</option>'+
 			'<option value="(.*\.mp4.*)" '+("(.*\.mp4.*)"==downParam.dwnParseReg?"selected":"")+'>.mp4</option>'+
 			'<option value="(.*\.f4v.*)" '+("(.*\.f4v.*)"==downParam.dwnParseReg?"selected":"")+'>.f4v</option>'+
-			'<option value="(.*\.gif.*)" '+("(.*\.gif.*)"==downParam.dwnParseReg?"selected":"")+'>.gif</option>'+
+			'<option value="(.*\.jpg.*)" '+("(.*\.jpg.*)"==downParam.dwnParseReg?"selected":"")+'>.jpg</option>'+
 		'</select>&nbsp;&nbsp;'+
-		'<div style="display:inline-block;width:50px;">类型:</div><select id="beforeDownType" type="text" style="width:80px;">'+
-			'<option value="0" '+("0"==downParam.dwnDownType?"selected":"")+'>直接下载</option>'+
-			'<option value="1" '+("1"==downParam.dwnDownType?"selected":"")+'>页面下载</option>'+
+		'<div style="display:inline-block;width:50px;text-align:right;">类型:&nbsp;</div><select id="beforeDownType" type="text" style="width:80px;">'+
+			'<option value=".ts" '+(".ts"==downParam.dwnDownType?"selected":"")+'>.ts</option>'+
+			'<option value=".mp4" '+(".mp4"==downParam.dwnDownType?"selected":"")+'>.mp4</option>'+
+			'<option value=".f4v" '+(".f4v"==downParam.dwnDownType?"selected":"")+'>.f4v</option>'+
+			'<option value=".jpg" '+(".jpg"==downParam.dwnDownType?"selected":"")+'>.jpg</option>'+
 		'</select>';
 	panelCaseA({ title: '文件下载', content:ctt, btn1:"开始", btn2: "取消",
 		fun1: function(mbdy){
@@ -127,18 +129,6 @@ function startDown(){
 				downParam.dwnEndIndx = dnen;
 				_setStorage("dwnEndIndx", downParam.dwnEndIndx);
 			}
-			/**
-			directDowner(parr,0,
-				function(indx,len){
-					downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
-					downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
-					return downParam.dwnFolder+"/"+downParam.dwnSubFolder+"/"+downParam.dwnFname;
-				},
-				function(){
-					downbtn.onclick=startDown;
-					downbtn.innerHTML="开始下载";
-				});
-			*/
 			downbtn.onclick=null;
 			downParam.pathArray = parseUrls();
 			downParam.currDownIndex = 0;
@@ -150,7 +140,7 @@ function startDown(){
 }
 function onBeforeDownloadPerFile(indx,len){
 	downbtn.innerHTML=(indx+1)+" / "+len+" ( "+downParam.dwnStartIndx+" ~ "+downParam.dwnEndIndx+" )";
-	downParam.dwnFname = prefixInteger(indx+1,4)+".ts";
+	downParam.dwnFname = prefixInteger(indx+1,4)+downParam.dwnDownType;
 	return downParam.dwnFolder+"/"+downParam.dwnSubFolder+"/"+downParam.dwnFname;
 }
 function onAfterDownloadAllFile(indx,len){
@@ -174,7 +164,7 @@ function directDowner(urls,indx,ing,bkf){
 	},function(){
 		window.setTimeout(function(){
 			directDowner(urls,indx+1,ing,bkf);
-		},400);
+		},1000);
 	});
 }
 function parseUrls(){
