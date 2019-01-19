@@ -1,17 +1,31 @@
 ﻿$PageReqs="";
-chrome.webRequest.onBeforeRequest.addListener (
-    function(dtl) {
-        $PageReqs+="\n----------"+dtl.type+"----------\n"+dtl.url+"\n";
-    },
-    {urls:["*://*/*"]},
-    ["blocking"]
-);
+function onBeforeSendRequest(dtl){
+	$PageReqs+="\n----------"+dtl.type+"----------\n"+dtl.url+"\n";
+	
+	/**
+	if(dtl.url.indexOf("qq.com")>-1){
+		return {cancel: true};
+	}
+	*/
+}
+
 function clearPageReqs(){
     $PageReqs="";
 }
 function getPageReqs(){
     return $PageReqs;
 }
+function enableNetFlag(){
+    chrome.webRequest.onBeforeRequest.addListener(
+		onBeforeSendRequest,
+		{urls:["*://*/*"]},
+		["blocking"]
+	);
+}
+function disableNetFlag(){
+     chrome.webRequest.onBeforeRequest.removeListener(onBeforeSendRequest);
+}
+
 /**flvcd parse**/
 function onPageMenu(info, tab) {
       var a = encodeURIComponent(info.pageUrl);

@@ -7,4 +7,4 @@ http://localhost:9191/oauth/authorize?client_id=client&client_secret=secret&resp
 http://localhost:9191/oauth/token?code=&client_id=client&client_secret=secret&grant_type=authorization_code&redirect_uri=http://www.baidu.com
 http://localhost:9191/oauth/check_token?token=c087b4af-abd9-43c9-bf30-1e9fdb1ec3c9
 http://localhost:9191/product/1
-http://localhost:9191/order/2?access_token=c087b4af-abd9-43c9-bf30-1e9fdb1ec3c9
+http://localhost:9191/order/2?access_token=c087b4af-abd9-43c9-bf30-1e9fdb1ec3c9s

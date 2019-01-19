@@ -39,6 +39,18 @@ function _$Ava(a) {
 function _$Null(a) {
 	return !_$Ava(a);
 }
+function isPercent(str) {
+	var reg = new RegExp("^\\d+\\.?\\d*%$");
+	return reg.test(str);
+}
+function isInt(str) {
+	var reg = new RegExp("^[1-9][0-9]*$");
+	return reg.test(str);
+}
+function isNum(str) {
+	var reg = new RegExp("^\\d+\\.?\\d*$");
+	return reg.test(str);
+}
 function _getStorage (key) {
 	if(localStorage&&localStorage.getItem(key)){
 		return localStorage.getItem(key);
