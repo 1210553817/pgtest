@@ -1,8 +1,10 @@
 adblockPlus£ºhttps://chrome.google.com/webstore/detail/cfhdojbkjhnklbpkdaibdccddilifddb
-C6-5A-6B-7C-8B-9A
-
 https://2wk.com/vip.php?url=
 
+rmMac: 94-04-9C-E0-84-B8 94-04-9C-E0-84-B8 94-04-9C-E0-84-B8
+		94-04-9c-e0-84-b8 94-04-9c-e0-84-b8 94-04-9c-e0-84-b8
+myMac: EA-5A-31-7C-8B-E1 FE-1C-C3-17-67-DD BE-CC-E4-2C-5F-B8
+		DE-2B-F1-FA-8B-08 FA-29-FB-4C-11-8D CA-C7-70-27-E4-3C
 http://localhost:9191/oauth/authorize?client_id=client&client_secret=secret&response_type=code&redirect_uri=http://www.baidu.com
 http://localhost:9191/oauth/token?code=&client_id=client&client_secret=secret&grant_type=authorization_code&redirect_uri=http://www.baidu.com
 http://localhost:9191/oauth/check_token?token=c087b4af-abd9-43c9-bf30-1e9fdb1ec3c9

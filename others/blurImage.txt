@@ -1,0 +1,9 @@
+  <div id="blur-img" style="opacity: 1;">
+   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="2304" height="974" id="blurred_l6nndalyf" class="blured-img" viewbox="0 0 2304 974" preserveaspectratio="none">
+    <filter id="blur_l6nndalyf">
+     <fegaussianblur in="SourceGraphic" stddeviation="50"></fegaussianblur>
+    </filter>
+    <img x="0" y="0" width="2304" height="974" externalresourcesrequired="true" xlink:href="http://p1.music.126.net/9kZl6NRj3HxmQQ8DqTjZ4Q==/17729624997966923.jpg?param=300y300" style="filter:url(#blur_l6nndalyf)" preserveaspectratio="none" />
+   </svg>
+   <div class="blur-mask" style="display: block;"></div>
+  </div>
